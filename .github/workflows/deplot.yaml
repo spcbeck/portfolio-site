@@ -1,0 +1,38 @@
+name: Deploy Lit Site to Droplet
+
+on:
+  push:
+    branches:
+      - main # Trigger on pushes to the main branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20' # Match this to your local development version
+
+    - name: Install Dependencies
+      run: npm ci
+
+    - name: Build Lit Project
+      run: npm run build
+      # Note: Ensure your package.json build script outputs to the directory specified below.
+
+    - name: Deploy to DigitalOcean Droplet
+      uses: appleboy/scp-action@v0.1.7
+      with:
+        host: ${{ secrets.DROPLET_IP }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        # Most Lit bundlers output to 'dist'. Adjust if yours uses 'build' or another folder.
+        source: "dist/*" 
+        target: "/var/www/lit-site"
+        # strip_components removes the 'dist/' folder structure so files land directly in the root of the target
+        strip_components: 1
