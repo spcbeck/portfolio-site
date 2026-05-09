@@ -35,7 +35,7 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         # Most Lit bundlers output to 'dist'. Adjust if yours uses 'build' or another folder.
-        source: "/*" 
-        target: "/var/www/"
+        source: "." 
+        target: "/var/www/html"
         # strip_components removes the 'dist/' folder structure so files land directly in the root of the target
         # strip_components: 1
