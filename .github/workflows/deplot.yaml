@@ -34,6 +34,7 @@ jobs:
         host: ${{ secrets.DROPLET_IP }}
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
+        passphrase: ${{ secrets.SSH_PASSPHRASE }}
         # Most Lit bundlers output to 'dist'. Adjust if yours uses 'build' or another folder.
         source: "." 
         target: "/var/www/html"
