@@ -3,59 +3,98 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Lit Starter Kit</title>
+    <title>Sean Beck - Software Engineer person</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://kit.fontawesome.com/d11d8ec619.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/d11d8ec619.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="
+https://cdn.jsdelivr.net/npm/modern-normalize@3.0.1/modern-normalize.min.css
+"
+      rel="stylesheet"
+    />
+
+    <link href="main.css" rel="stylesheet" />
   </head>
   <body>
-    <main>
+    <main-container>
       <header>
         <h1>Sean Beck</h1>
+        <p>Software Engineer</p>
         <address>Somerville, Massachusetts</address>
+        <div class="theme-selector">
+          <label for="theme">theme:</label>
+          <select id="theme">
+            <option>brutalist</option>
+            <option>i'll add more later sorry!!</option>
+          </select>
+        </div>
       </header>
 
-      <section>
+      <section class="about">
         <h2>About Me</h2>
         <p>
           I am a freelance and professional software engineer and designer
           living in Somerville, MA. My interests lie in making the web a better
           place. I also enjoy film photography, playing guitar, and doing the
-          crossword. Please contact me below to discuss building something great
-          together.
+          crossword. No AI was used in the creation of this website. But I could
+          have if I wanted to.
         </p>
 
-        <p>I have a lot of experience with</p>
+        <div class="three-col-grid">
+          <div>
+            <p>I have a lot of experience with</p>
 
-        <ul>
-          <li><i class="fa-brands fa-js"></i> JavaScript/<i class="fa-brands fa-typescript"></i> Typescript</li>
-          <li><i class="fa-brands fa-html5"></i> HTML<i class="fa-brands fa-css"></i> CSS</li>
-          <li><i class="fa-brands fa-react"></i> React</li>
-          <li><i class="fa-brands fa-vuejs"></i> VueJS</li>
-          <li>Playwright/Cypress</li>
-          <li>Vite/Webpack</li>
-          <li>Vitest/Jest</li>
-          <li><i class="fa-brands fa-node"></i> NodeJS</li>
-          <li><i class="fa-brands fa-aws"></i> AWS Services - S3, Lambda, CloudFront, etc.</li>
-          <li>Mono-repos/NX</li>
-          <li><i class="fa-brands fa-jenkins"></i>Jenkins &amp; CI/CD</li>
-        </ul>
+            <ul>
+              <li>
+                <i aria-hidden="true" class="fa-brands fa-js"></i> JavaScript/<i
+                  class="fa-brands fa-typescript"
+                ></i>
+                Typescript
+              </li>
+              <li>
+                <i aria-hidden="true" class="fa-brands fa-html5"></i> HTML<i
+                  class="fa-brands fa-css"
+                ></i>
+                CSS
+              </li>
+              <li><i aria-hidden="true" class="fa-brands fa-react"></i> React</li>
+              <li><i aria-hidden="true" class="fa-brands fa-vuejs"></i> VueJS</li>
+              <li>Playwright/Cypress</li>
+              <li>Vite/Webpack</li>
+              <li>Vitest/Jest</li>
+              <li><i aria-hidden="true" class="fa-brands fa-node"></i> NodeJS</li>
+              <li><i aria-hidden="true" class="fa-brands fa-aws"></i> AWS Services</li>
+              <li>Mono-repos/NX</li>
+              <li><i aria-hidden="true" class="fa-brands fa-jenkins"></i>Jenkins</li>
+            </ul>
+          </div>
 
-        <p>I'm professionally interested in</p>
+          <div>
+            <p>I'm professionally interested in</p>
 
-        <ul>
-          <li>UX/UI</li>
-          <li>Web Development</li>
-          <li>Product Design/Development</li>
-        </ul>
+            <ul>
+              <li>UX/UI</li>
+              <li>Web Development</li>
+              <li>Product Design/Development</li>
+              <li>Design Systems</li>
+              <li>JSON:API</li>
+            </ul>
+          </div>
 
-        <p>I'm personally interested in</p>
+          <div>
+            <p>I'm personally interested in</p>
 
-        <ul>
-          <li>Web Components/Lit</li>
-          <li>WASM</li>
-          <li>WebGL</li>
-          <li>Entity Component System Architecture</li>
-        </ul>
+            <ul>
+              <li>Web Components/Lit</li>
+              <li>WASM</li>
+              <li>WebGL</li>
+              <li>Entity Component System Architecture</li>
+            </ul>
+          </div>
+        </div>
       </section>
 
       <section>
@@ -63,8 +102,14 @@
 
         <div>
           <h3>The Washington Post</h3>
-          <p>Senior Software Engineer</p>
-          <p>December 2021 - Present</p>
+          <p>
+            <i aria-hidden="true" class="fa-sharp-duotone fa-light fa-briefcase"></i> Senior
+            Software Engineer
+          </p>
+          <p>
+            <i aria-hidden="true" class="fa-sharp-duotone fa-regular fa-timeline"></i> December
+            2021 - Present
+          </p>
           <p>
             I work on the Discovery team helping design and build the gaming
             platform and the games themselves, including the second most played
@@ -73,7 +118,8 @@
             to the Washington Post home page and article pages, building Python
             Lambdas for site functionality like creating and updating sitemaps
             when articles are published or updated.
-            <br />
+          </p>
+          <p>
             Previously, I worked with the Subscriptions' authentication/identity
             and payments teams maintaining and developing new shared
             JavaScript/TypeScript and React component libraries used across many
@@ -87,22 +133,38 @@
           </p>
         </div>
 
+        <hr />
+
         <div>
           <h3>Openbay</h3>
-          <p>Software Engineer</p>
-          <p>September 2019 to December 2021</p>
+          <p>
+            <i aria-hidden="true" class="fa-sharp-duotone fa-light fa-briefcase"></i> Software
+            Engineer
+          </p>
+          <p>
+            <i aria-hidden="true" class="fa-sharp-duotone fa-regular fa-timeline"></i> September
+            2019 to December 2021
+          </p>
           <p>
             Designed and built Vue.js SPA with JSON:API-spec Ruby on Rails API.
             Integrated into existing deployment pipeline in Ansible and served
             by an AWS S3 bucket.
           </p>
-          <a href="https://app.openbay.com/">https://app.openbay.com/</a>
+          <a href="https://app.openbay.com/" rel="noopener noreferrer">https://app.openbay.com/</a>
         </div>
+
+        <hr />
 
         <div>
           <h3>Harvard University</h3>
-          <p>Front End Developer and Designer</p>
-          <p>October 2015 to September 2019</p>
+          <p>
+            <i aria-hidden="true" class="fa-sharp-duotone fa-light fa-briefcase"></i> Front End
+            Developer and Designer
+          </p>
+          <p>
+            <i aria-hidden="true" class="fa-sharp-duotone fa-regular fa-timeline"></i> October 2015
+            to September 2019
+          </p>
           <p>
             I worked with the Marketing and Strategy team in the Department of
             Continuing Education to gather requirements, designed wireframes,
@@ -115,10 +177,18 @@
           </p>
         </div>
 
+        <hr />
+
         <div>
-          <h4>erecruit</h4>
-          <p>Lead UX Engineer</p>
-          <p>October 2013 to October 2015</p>
+          <h3>erecruit</h3>
+          <p>
+            <i aria-hidden="true" class="fa-sharp-duotone fa-light fa-briefcase"></i> Lead UX
+            Engineer
+          </p>
+          <p>
+            <i aria-hidden="true" class="fa-sharp-duotone fa-regular fa-timeline"></i> October 2013
+            to October 2015
+          </p>
           <p>
             I lead a small UX team developing a design vision for an enterprise
             level web application. Responsibilities include setting priorities
@@ -131,7 +201,22 @@
 
       <section>
         <h2>Other Activities</h2>
-        <h3>
+        <h3>Photography</h3>
+        <ul>
+          <li>
+            <a
+              href="https://www.flickr.com/photos/120427816@N08/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Flickr</a
+            >
+          </li>
+          <li>
+            <a href="https://www.instagram.com/seanscoolphotos/" target="_blank" rel="noopener noreferrer"
+              >Instagram</a
+            >
+          </li>
+        </ul>
       </section>
 
       <section>
@@ -141,6 +226,6 @@
           <a href="mailto:spcbeck@gmail.com">spcbeck@gmail.com</a>
         </p>
       </section>
-    </main>
+    </main-container>
   </body>
 </html>
