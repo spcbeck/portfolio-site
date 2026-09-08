@@ -112,6 +112,19 @@ select {
   --aqua-leather-top: #874f29;
   --aqua-leather-bot: #583115;
   --aqua-leather-gold: #f7d294;
+
+  /* Dieter Rams / Braun Industrial Modernist Design Tokens */
+  --rams-bg: #d8d4cb;
+  --rams-chassis: #ece8de;
+  --rams-chassis-border: #cfc9be;
+  --rams-card-bg: #f4f0e7;
+  --rams-card-border: #d4cebf;
+  --rams-tray-bg: #e3ded2;
+  --rams-tray-border: #cfc8ba;
+  --rams-ink: #161514;
+  --rams-muted: #635e55;
+  --rams-orange: #ff5722;
+  --rams-orange-deep: #e64a19;
 }
 
 /* Base states for theme-specific elements */
@@ -132,6 +145,11 @@ select {
 }
 
 .brass-rivet {
+  display: none;
+}
+
+.braun-speaker-grille,
+.braun-control-panel {
   display: none;
 }
 
@@ -1555,5 +1573,542 @@ html[data-theme="aqua"] section:last-of-type a {
   html[data-theme="aqua"] section {
     margin: 0 1rem 1.5rem;
     padding: 1.5rem;
+  }
+}
+
+/* ==========================================================================
+   Dieter Rams / Braun Theme (Industrial Modernist Functionalism)
+   Inspired by ET66 Calculator, T3 Pocket Radio, and Vitsoe Systems
+   ========================================================================== */
+
+html[data-theme="rams"] {
+  counter-reset: rams-section;
+  background-color: var(--rams-bg);
+}
+
+html[data-theme="rams"] body {
+  background-color: var(--rams-bg);
+  background-image:
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.6) 0%, transparent 75%),
+    repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.012) 0px, rgba(0, 0, 0, 0.012) 2px, transparent 2px, transparent 4px);
+  color: var(--rams-ink);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  margin: 0;
+  padding: 1.5rem 1rem 5rem;
+  min-height: 100vh;
+}
+
+/* Molded Ivory ABS Plastic Chassis */
+html[data-theme="rams"] main-container {
+  display: block;
+  max-width: 1040px;
+  margin: 1.5rem auto 3rem;
+  background: var(--rams-chassis);
+  border-radius: 28px;
+  padding: 3rem;
+  box-shadow:
+    0 24px 48px -12px rgba(45, 38, 30, 0.35),
+    0 6px 14px rgba(0, 0, 0, 0.1),
+    inset 0 1px 2px rgba(255, 255, 255, 0.9),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.12),
+    inset 1px 0 2px rgba(255, 255, 255, 0.6),
+    inset -1px 0 2px rgba(0, 0, 0, 0.08);
+  position: relative;
+  border: 1px solid var(--rams-chassis-border);
+  width: auto;
+}
+
+/* Acoustic Speaker Dot Perforation Matrix */
+html[data-theme="rams"] .braun-speaker-grille {
+  display: grid;
+  grid-template-columns: repeat(18, 9px);
+  gap: 8px;
+  margin-bottom: 2.25rem;
+}
+
+html[data-theme="rams"] .braun-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #2a2824;
+  box-shadow:
+    inset 0 2px 3px rgba(0, 0, 0, 0.8),
+    0 1px 1px rgba(255, 255, 255, 0.6);
+}
+
+/* Hardware Header Unit */
+html[data-theme="rams"] header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid #dcd6cb;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+  text-align: left;
+}
+
+html[data-theme="rams"] h1 {
+  font-size: clamp(2.5rem, 5vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: #111111;
+  line-height: 1.05;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+  margin-bottom: 0.5rem;
+  padding: 0;
+}
+
+html[data-theme="rams"] .profession {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #4a4742;
+  letter-spacing: -0.01em;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 0.5rem;
+}
+
+html[data-theme="rams"] .profession::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background: var(--rams-orange);
+  border-radius: 50%;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(255, 255, 255, 0.8);
+  flex-shrink: 0;
+}
+
+html[data-theme="rams"] address {
+  font-style: normal;
+  font-size: 0.85rem;
+  color: var(--rams-muted);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* Mechanical Switch Panel */
+html[data-theme="rams"] .braun-control-panel {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+html[data-theme="rams"] .braun-model-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #767064;
+  letter-spacing: 0.08em;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+html[data-theme="rams"] .braun-switch-tray {
+  background: #ded9cd;
+  border-radius: 30px;
+  padding: 4px;
+  display: flex;
+  box-shadow:
+    inset 0 3px 6px rgba(0, 0, 0, 0.25),
+    inset 0 -1px 2px rgba(255, 255, 255, 0.6),
+    0 1px 1px rgba(255, 255, 255, 0.9);
+  border: 1px solid #c4beaf;
+}
+
+html[data-theme="rams"] .braun-switch-pill {
+  width: 44px;
+  height: 24px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #f9f7f2 0%, #e2ded4 100%);
+  box-shadow:
+    0 3px 6px rgba(0, 0, 0, 0.2),
+    0 1px 2px rgba(0, 0, 0, 0.15),
+    inset 0 1px 1px #ffffff,
+    inset 0 -1px 1px rgba(0, 0, 0, 0.15);
+  border: 1px solid #cfc9bd;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.18s cubic-bezier(0.2, 0.9, 0.3, 1.2), background 0.18s ease;
+  outline: none;
+}
+
+html[data-theme="rams"] .braun-switch-pill:focus-visible {
+  box-shadow: 0 0 0 2px var(--rams-orange);
+}
+
+html[data-theme="rams"] .braun-switch-pill::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  left: 50%;
+  width: 4px;
+  margin-left: -2px;
+  background: repeating-linear-gradient(90deg, #888277 0px, #888277 1px, transparent 1px, transparent 3px);
+}
+
+html[data-theme="rams"] .braun-switch-pill.is-on {
+  transform: translateX(20px);
+  background: linear-gradient(180deg, #ff7a45 0%, #e64a19 100%);
+  border-color: #bf360c;
+  box-shadow:
+    0 3px 6px rgba(230, 74, 25, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+html[data-theme="rams"] .braun-switch-pill.is-on::after {
+  background: repeating-linear-gradient(90deg, #ffffff 0px, #ffffff 1px, transparent 1px, transparent 3px);
+}
+
+/* Precision Theme Selector Control */
+html[data-theme="rams"] .theme-selector {
+  position: fixed;
+  right: 2rem;
+  top: 1rem;
+  z-index: 10000;
+  background: #ded9cd;
+  border-radius: 10px;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid #c4beaf;
+  box-shadow:
+    0 6px 14px rgba(45, 38, 30, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+html[data-theme="rams"] .theme-stripe-indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--rams-orange);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3), 0 0 6px rgba(255, 87, 34, 0.6);
+}
+
+html[data-theme="rams"] .theme-selector label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #5a554c;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+html[data-theme="rams"] select {
+  background: linear-gradient(180deg, #f9f7f2 0%, #e2ded4 100%);
+  color: #161514;
+  border: 1px solid #cfc9bd;
+  border-radius: 6px;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), inset 0 1px 0 #ffffff;
+  cursor: pointer;
+  outline: none;
+}
+
+html[data-theme="rams"] select:focus-visible {
+  border-color: var(--rams-orange);
+}
+
+/* Recessed Section Cards */
+html[data-theme="rams"] section {
+  background: var(--rams-card-bg);
+  border-radius: 18px;
+  padding: 2.25rem;
+  margin-bottom: 2rem;
+  border: 1px solid var(--rams-card-border);
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.06),
+    0 2px 5px rgba(0, 0, 0, 0.04),
+    0 1px 0 rgba(255, 255, 255, 0.8);
+  max-width: none;
+}
+
+html[data-theme="rams"] section.about {
+  padding-top: 2.25rem;
+}
+
+/* Numbered Structural Section Headers */
+html[data-theme="rams"] section h2 {
+  counter-increment: rams-section;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--rams-ink);
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #dcd6cb;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+html[data-theme="rams"] section h2::before {
+  content: "0" counter(rams-section) " //";
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--rams-orange);
+  letter-spacing: 0.04em;
+}
+
+html[data-theme="rams"] section p {
+  font-size: 1.02rem;
+  color: #383531;
+  line-height: 1.65;
+  margin-bottom: 1rem;
+}
+
+/* Three-Column Modular Component Trays (Skills) */
+html[data-theme="rams"] .three-col-grid {
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+html[data-theme="rams"] .three-col-grid > div {
+  background: var(--rams-tray-bg);
+  border-radius: 14px;
+  padding: 1.35rem;
+  box-shadow:
+    inset 0 3px 6px rgba(0, 0, 0, 0.1),
+    0 1px 1px rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--rams-tray-border);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+html[data-theme="rams"] .three-col-grid > div:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.08),
+    0 4px 12px rgba(45, 38, 30, 0.15),
+    0 1px 1px rgba(255, 255, 255, 0.9);
+}
+
+html[data-theme="rams"] .three-col-grid > div > p {
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--rams-muted);
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid #cfc8ba;
+}
+
+html[data-theme="rams"] .three-col-grid ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+html[data-theme="rams"] .three-col-grid li {
+  padding: 0.35rem 0;
+  font-size: 0.92rem;
+  color: #262422;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+html[data-theme="rams"] .three-col-grid li:not(:has(i))::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: #8e887d;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+html[data-theme="rams"] .three-col-grid li i {
+  color: var(--rams-orange);
+  width: 16px;
+  text-align: center;
+}
+
+/* Work Experience Entries */
+html[data-theme="rams"] section:nth-of-type(2) > div {
+  background: #ece8de;
+  border: 1px solid #cfc9be;
+  border-radius: 14px;
+  padding: 1.75rem;
+  margin-bottom: 1.5rem;
+  box-shadow:
+    0 2px 6px rgba(45, 38, 30, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+html[data-theme="rams"] section:nth-of-type(2) > div:hover {
+  border-color: #b0a99c;
+  box-shadow:
+    0 4px 14px rgba(45, 38, 30, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+html[data-theme="rams"] h3 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--rams-ink);
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.02em;
+}
+
+html[data-theme="rams"] h3 + p {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--rams-orange);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+html[data-theme="rams"] h3 + p + p {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--rams-muted);
+  font-weight: 600;
+  margin-bottom: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+html[data-theme="rams"] hr {
+  display: none;
+}
+
+/* Activities Section */
+html[data-theme="rams"] section:nth-of-type(3) ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+html[data-theme="rams"] section:nth-of-type(3) li {
+  margin: 0;
+}
+
+/* ET66 Calculator Spherical Beveled Pill Buttons */
+html[data-theme="rams"] a {
+  background: linear-gradient(180deg, #f5f2eb 0%, #ded9ce 100%);
+  color: #161514;
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 0.65rem 1.4rem;
+  border-radius: 30px;
+  border: 1px solid #c9c3b5;
+  cursor: pointer;
+  box-shadow:
+    0 4px 8px rgba(40, 32, 20, 0.16),
+    0 1px 2px rgba(0, 0, 0, 0.08),
+    inset 0 2px 2px #ffffff,
+    inset 0 -2px 2px rgba(0, 0, 0, 0.1);
+  transition: all 0.1s ease;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  margin-top: 0.5rem;
+}
+
+html[data-theme="rams"] a:hover {
+  background: linear-gradient(180deg, #ffffff 0%, #e8e3d8 100%);
+  transform: translateY(-1px);
+  box-shadow:
+    0 6px 12px rgba(40, 32, 20, 0.2),
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    inset 0 2px 2px #ffffff,
+    inset 0 -2px 2px rgba(0, 0, 0, 0.1);
+  color: var(--rams-ink);
+}
+
+html[data-theme="rams"] a:active {
+  transform: translateY(2px);
+  background: linear-gradient(180deg, #d3cec3 0%, #e2ddd2 100%);
+  box-shadow:
+    inset 0 3px 5px rgba(0, 0, 0, 0.25),
+    inset 0 1px 2px rgba(0, 0, 0, 0.2),
+    0 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+/* Contact Button Signal Orange Accent */
+html[data-theme="rams"] section:last-of-type a {
+  background: linear-gradient(180deg, #ff7a45 0%, #e64a19 100%);
+  color: #ffffff;
+  border-color: #bf360c;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+  box-shadow:
+    0 6px 12px rgba(230, 74, 25, 0.35),
+    inset 0 2px 3px rgba(255, 255, 255, 0.4),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.3);
+}
+
+html[data-theme="rams"] section:last-of-type a:hover {
+  background: linear-gradient(180deg, #ff8a50 0%, #f4511e 100%);
+  color: #ffffff;
+}
+
+html[data-theme="rams"] section:last-of-type a:active {
+  background: linear-gradient(180deg, #d84315 0%, #bf360c 100%);
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.45);
+}
+
+/* Responsive Scaling */
+@media (max-width: 768px) {
+  html[data-theme="rams"] body {
+    padding: 0.75rem 0.5rem 3rem;
+  }
+
+  html[data-theme="rams"] main-container {
+    padding: 1.5rem 1.25rem;
+    border-radius: 18px;
+    margin: 1rem auto;
+  }
+
+  html[data-theme="rams"] .braun-speaker-grille {
+    grid-template-columns: repeat(12, 7px);
+    gap: 6px;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  html[data-theme="rams"] .theme-selector {
+    right: 1rem;
+    top: 0.75rem;
+  }
+
+  html[data-theme="rams"] .braun-dot {
+    width: 7px;
+    height: 7px;
+  }
+
+  html[data-theme="rams"] section {
+    padding: 1.5rem 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  html[data-theme="rams"] header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
   }
 }

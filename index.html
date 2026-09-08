@@ -5,16 +5,11 @@
     <meta charset="utf-8" />
     <title>Sean Beck - Software Engineer person</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script>
-      (function () {
-        var savedTheme = localStorage.getItem('theme') || 'brutalist';
-        document.documentElement.setAttribute('data-theme', savedTheme);
-      })();
-    </script>
+    <script type="module" src="main.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap"
       rel="stylesheet"
     />
     <script
@@ -57,6 +52,12 @@
         <span class="window-title">Sean Beck — Software Engineer — Somerville, MA</span>
         <div class="traffic-spacer"></div>
       </div>
+      <!-- Braun & Dieter Rams Speaker Perforation Matrix -->
+      <div class="braun-speaker-grille" aria-hidden="true">
+        <div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div>
+        <div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div>
+        <div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div>
+      </div>
       <header>
         <span class="brass-rivet tl" aria-hidden="true"></span>
         <span class="brass-rivet tr" aria-hidden="true"></span>
@@ -65,6 +66,18 @@
         <h1>Sean Beck</h1>
         <p class="profession">Software Engineer</p>
         <address>Somerville, Massachusetts</address>
+        <div class="braun-control-panel">
+          <span class="braun-model-badge">BRAUN &bull; SB-2026</span>
+          <div class="braun-switch-tray" title="Tactile mechanical power switch">
+            <div
+              class="braun-switch-pill"
+              id="braunPowerSwitch"
+              role="button"
+              tabindex="0"
+              aria-label="Toggle mechanical power switch"
+            ></div>
+          </div>
+        </div>
         <div class="theme-selector">
           <span class="theme-stripe-indicator" aria-hidden="true"></span>
           <label for="theme">theme:</label>
@@ -73,6 +86,7 @@
             <option value="supergraphics">02 // supergraphics (70s)</option>
             <option value="suprematism">03 // suprematism (1915)</option>
             <option value="aqua">04 // cupertino aqua (2000s)</option>
+            <option value="rams">05 // dieter rams (braun)</option>
           </select>
         </div>
       </header>
@@ -271,93 +285,6 @@
         </p>
       </section>
     </main-container>
-    <script>
-      (function () {
-        const themeSelect = document.getElementById('theme');
-        if (themeSelect) {
-          const currentTheme = localStorage.getItem('theme') || 'brutalist';
-          themeSelect.value = currentTheme;
-          themeSelect.addEventListener('change', function (e) {
-            const newTheme = e.target.value;
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-          });
-        }
-      })();
 
-      // Malevich Kinetic Parallax Engine (Differential Vector Motion)
-      (function () {
-        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (prefersReduced) return;
-
-        let ticking = false;
-        function updateParallax() {
-          if (document.documentElement.getAttribute('data-theme') === 'suprematism') {
-            const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-            const beam = document.querySelector('.sup-vec-beam');
-            const redBar = document.querySelector('.sup-vec-red-bar');
-            const yellowWedge = document.querySelector('.sup-vec-yellow-wedge');
-            const blueRect = document.querySelector('.sup-vec-blue-rect');
-            const redCircle = document.querySelector('.sup-vec-red-circle');
-            const cross = document.querySelector('.sup-vec-cross');
-
-            if (beam) beam.style.transform = `translate3d(0, ${scrollY * 0.18}px, 0) rotate(24deg)`;
-            if (redBar) redBar.style.transform = `translate3d(0, ${scrollY * -0.12}px, 0) rotate(-18deg)`;
-            if (yellowWedge) yellowWedge.style.transform = `translate3d(0, ${scrollY * 0.28}px, 0) rotate(14deg)`;
-            if (blueRect) blueRect.style.transform = `translate3d(0, ${scrollY * -0.2}px, 0) rotate(-8deg)`;
-            if (redCircle) redCircle.style.transform = `translate3d(0, ${scrollY * 0.1}px, 0)`;
-            if (cross) cross.style.transform = `translate3d(0, ${scrollY * -0.15}px, 0) rotate(32deg)`;
-          }
-          ticking = false;
-        }
-
-        window.addEventListener('scroll', function () {
-          if (!ticking) {
-            ticking = true;
-            requestAnimationFrame(updateParallax);
-          }
-        }, { passive: true });
-
-        // Update when theme changes
-        const themeSelect = document.getElementById('theme');
-        if (themeSelect) {
-          themeSelect.addEventListener('change', function () {
-            requestAnimationFrame(updateParallax);
-          });
-        }
-
-        updateParallax();
-      })();
-
-      // Cupertino Aqua Web Audio Plink FX
-      (function () {
-        let audioCtx = null;
-        function playAquaPlink() {
-          if (document.documentElement.getAttribute('data-theme') !== 'aqua') return;
-          try {
-            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            if (audioCtx.state === 'suspended') audioCtx.resume();
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(420, audioCtx.currentTime);
-            osc.frequency.exponentialRampToValueAtTime(1350, audioCtx.currentTime + 0.08);
-            gain.gain.setValueAtTime(0.22, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            osc.start();
-            osc.stop(audioCtx.currentTime + 0.12);
-          } catch(e) {}
-        }
-
-        document.addEventListener('click', function (e) {
-          if (document.documentElement.getAttribute('data-theme') !== 'aqua') return;
-          if (e.target.closest('a, button, select, .traffic-btn')) {
-            playAquaPlink();
-          }
-        });
-      })();
-    </script>
   </body>
 </html>
