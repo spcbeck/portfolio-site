@@ -131,7 +131,11 @@ select {
   display: none;
 }
 
-.aqua-dock-footer {
+.aqua-desktop-dock {
+  display: none;
+}
+
+.aqua-restore-banner {
   display: none;
 }
 
@@ -1111,6 +1115,43 @@ html[data-theme="aqua"] main-container {
   position: relative;
   width: auto;
   padding: 0;
+  transform-origin: 50% 90%;
+  transition:
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.35s ease,
+    max-width 0.35s ease,
+    filter 0.35s ease;
+}
+
+html[data-theme="aqua"] main-container.aqua-zoomed {
+  max-width: 95vw;
+  width: 95vw;
+}
+
+html[data-theme="aqua"] main-container.aqua-minimized {
+  transform: translateY(calc(100vh - 80px)) scale(0.08) scaleY(0.03);
+  opacity: 0;
+  pointer-events: none;
+  filter: blur(2px);
+}
+
+html[data-theme="aqua"] main-container.mac-shake {
+  animation: macWindowShake 0.4s ease;
+}
+
+@keyframes macWindowShake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-9px); }
+  40%, 80% { transform: translateX(9px); }
+}
+
+html[data-theme="aqua"] main-container.aqua-windowshade {
+  overflow: hidden;
+  height: auto;
+}
+
+html[data-theme="aqua"] main-container.aqua-windowshade > *:not(.aqua-window-chrome) {
+  display: none !important;
 }
 
 /* Window Chrome Titlebar & Traffic Lights */
@@ -1134,6 +1175,10 @@ html[data-theme="aqua"] .traffic-btn {
   width: 13px;
   height: 13px;
   border-radius: 50%;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
   box-shadow: inset 0 1px 1px rgba(255,255,255,0.85), 0 1px 2px rgba(0,0,0,0.35);
   display: flex;
   align-items: center;
@@ -1546,81 +1591,270 @@ html[data-theme="aqua"] section:last-of-type a {
   }
 }
 
-/* QuickTime / Finder Transport Control Dock Footer */
-html[data-theme="aqua"] .aqua-dock-footer {
-  display: flex;
+
+
+/* Floating Restore Banner on Desktop (when window is minimized) */
+html[data-theme="aqua"] .aqua-restore-banner {
+  display: none;
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  background: linear-gradient(180deg, rgba(240, 245, 255, 0.95) 0%, rgba(195, 215, 245, 0.9) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 24px;
+  padding: 0.65rem 1.4rem;
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+  color: #1a3050;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Lucida Grande", sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
   align-items: center;
-  justify-content: space-between;
-  background: linear-gradient(180deg, #d3d7de 0%, #b8bec9 100%);
-  border-top: 1px solid #949ba7;
-  padding: 0.85rem 1.75rem;
-  box-shadow: inset 0 1px 0 #ffffff;
-  border-radius: 0 0 12px 12px;
+  gap: 10px;
+  cursor: pointer;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  animation: restoreBannerPulse 2.5s infinite ease-in-out;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-html[data-theme="aqua"] .dock-transport {
-  display: flex;
-  align-items: center;
-  background: linear-gradient(180deg, #c0c5ce 0%, #abb1bd 100%);
-  border-radius: 20px;
-  padding: 4px 12px;
-  border: 1px solid #828a96;
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.25), 0 1px 0 rgba(255,255,255,0.7);
-  gap: 0.85rem;
+html[data-theme="aqua"] .aqua-restore-banner:hover {
+  transform: translateX(-50%) scale(1.04);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
 }
 
-html[data-theme="aqua"] .dock-btn {
+html[data-theme="aqua"] body.aqua-has-minimized-window .aqua-restore-banner {
+  display: inline-flex;
+}
+
+@keyframes restoreBannerPulse {
+  0%, 100% { box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35); }
+  50% { box-shadow: 0 10px 28px rgba(13, 98, 208, 0.45), 0 0 12px rgba(90, 160, 255, 0.5); }
+}
+
+html[data-theme="aqua"] .restore-shortcut {
+  background: rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Mac OS X Tiger Desktop Dock */
+html[data-theme="aqua"] .aqua-desktop-dock {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  justify-content: center;
+  z-index: 9998;
+  pointer-events: none;
+}
+
+html[data-theme="aqua"] .dock-shelf {
+  pointer-events: auto;
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  padding: 6px 16px 4px;
+  background: linear-gradient(180deg, rgba(245, 248, 252, 0.82) 0%, rgba(200, 208, 220, 0.9) 100%);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-bottom: none;
+  border-radius: 16px 16px 0 0;
+  box-shadow:
+    0 -8px 25px rgba(0, 0, 0, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.95);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html[data-theme="aqua"] .dock-item {
+  position: relative;
   background: transparent;
   border: none;
-  color: #3d434e;
+  padding: 4px 2px;
   cursor: pointer;
-  font-size: 0.9rem;
-  padding: 4px 6px;
-  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
-  transition: color 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-html[data-theme="aqua"] .dock-btn:hover {
-  color: #0277bd;
+html[data-theme="aqua"] .dock-item:hover {
+  transform: translateY(-8px) scale(1.15);
 }
 
-html[data-theme="aqua"] .dock-slider {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 120px;
-  height: 6px;
-  background: #737b88;
-  border-radius: 3px;
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.6);
-  outline: none;
+html[data-theme="aqua"] .dock-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  position: relative;
+  overflow: hidden;
 }
 
-html[data-theme="aqua"] .dock-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 16px;
-  height: 16px;
+html[data-theme="aqua"] .dock-icon::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.1) 100%);
+  border-radius: 10px 10px 40% 40%;
+  pointer-events: none;
+}
+
+html[data-theme="aqua"] .finder-icon {
+  background: linear-gradient(135deg, #4da4e4 0%, #1f6cb6 100%);
+  color: #ffffff;
+}
+
+html[data-theme="aqua"] .safari-icon {
+  background: linear-gradient(135deg, #ffffff 0%, #dbe3ee 100%);
+  color: #0b61cd;
+}
+
+html[data-theme="aqua"] .trash-icon {
+  background: linear-gradient(135deg, #bac0cc 0%, #858c99 100%);
+  color: #2b303a;
+}
+
+html[data-theme="aqua"] .dock-separator {
+  width: 1px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.2);
+  border-right: 1px solid rgba(255, 255, 255, 0.65);
+  margin: 0 4px 6px;
+}
+
+html[data-theme="aqua"] .dock-indicator {
+  display: block;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #b9bec7 60%, #767d8a 100%);
-  border: 1px solid #5a606d;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.35);
-  cursor: pointer;
+  background: #1b212c;
+  margin-top: 3px;
+  opacity: 0;
 }
 
-html[data-theme="aqua"] .dock-edition-text {
+html[data-theme="aqua"] .dock-indicator.active {
+  opacity: 1;
+}
+
+html[data-theme="aqua"] .dock-indicator.glow {
+  background: #0288d1;
+  box-shadow: 0 0 6px #0288d1;
+}
+
+/* Minimized Window Dock Item */
+html[data-theme="aqua"] .dock-minimized-window {
+  display: none;
+  animation: dockWindowBounce 0.6s ease;
+}
+
+html[data-theme="aqua"] .dock-minimized-window.visible {
+  display: flex;
+}
+
+@keyframes dockWindowBounce {
+  0% { transform: translateY(0); }
+  35% { transform: translateY(-16px); }
+  65% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+html[data-theme="aqua"] .minimized-preview {
+  width: 50px;
+  height: 38px;
+  background: #eef1f6;
+  border: 1px solid #7e8796;
+  border-radius: 6px;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 #ffffff;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+html[data-theme="aqua"] .mini-titlebar {
+  height: 10px;
+  background: linear-gradient(180deg, #ededed 0%, #cacaca 100%);
+  border-bottom: 1px solid #999999;
+  display: flex;
+  align-items: center;
+  padding: 0 3px;
+  gap: 2px;
+}
+
+html[data-theme="aqua"] .mini-traffic-dots {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #ffbe2e;
+  box-shadow: 6px 0 0 #2ac769, -6px 0 0 #ff5f56;
+  margin-left: 6px;
+}
+
+html[data-theme="aqua"] .mini-body {
+  flex: 1;
+  background:
+    repeating-linear-gradient(90deg, #d3d7de 0px, #e3e6ec 1px, #d3d7de 2px);
+  padding: 2px 3px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+html[data-theme="aqua"] .mini-leather-badge {
+  height: 6px;
+  background: #6a3410;
+  border-radius: 2px;
+  border: 0.5px solid #d4af37;
+}
+
+html[data-theme="aqua"] .mini-card {
+  height: 5px;
+  background: #ffffff;
+  border-radius: 2px;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
+}
+
+html[data-theme="aqua"] .dock-tooltip {
+  display: none;
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(240, 243, 248, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 4px 10px;
   font-size: 0.75rem;
-  font-weight: 700;
-  color: #525a66;
-  text-shadow: 0 1px 0 rgba(255,255,255,0.8);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-weight: 600;
+  color: #1a1d24;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
 }
 
-html[data-theme="aqua"] .window-resize-hatch {
-  width: 14px;
-  height: 14px;
-  background: repeating-linear-gradient(-45deg, #7b8390 0px, #7b8390 1.5px, transparent 1.5px, transparent 4px);
-  opacity: 0.7;
+html[data-theme="aqua"] .dock-item:hover .dock-tooltip {
+  display: block;
 }
 
 @media (max-width: 768px) {
@@ -1636,9 +1870,5 @@ html[data-theme="aqua"] .window-resize-hatch {
   html[data-theme="aqua"] section {
     margin: 0 1rem 1.5rem;
     padding: 1.5rem;
-  }
-
-  html[data-theme="aqua"] .dock-edition-text {
-    display: none;
   }
 }
