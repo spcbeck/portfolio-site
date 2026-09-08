@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Suprematism in Web Design — 3 Architectural Prototypes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --c-canvas: #f4f0e8;
+        --c-canvas-alt: #ebe5d8;
+        --c-black: #0d0d0d;
+        --c-red: #de2b18;
+        --c-blue: #1339b8;
+        --c-yellow: #f6b800;
+        --c-border: #0d0d0d;
+        --c-muted: #6b665c;
+        --font-sans: "Space Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
+        --font-display: "Syne", sans-serif;
+        --font-mono: "JetBrains Mono", monospace;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: var(--c-canvas);
+        color: var(--c-black);
+        font-family: var(--font-sans);
+        line-height: 1.5;
+        overflow-x: hidden;
+        min-height: 100vh;
+      }
+
+      /* Navigation & Prototype Mode Bar */
+      .sup-nav {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: var(--c-canvas);
+        border-bottom: 2px solid var(--c-black);
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem 1.5rem;
+      }
+
+      .sup-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .black-square-icon {
+        width: 18px;
+        height: 18px;
+        background: var(--c-black);
+        display: inline-block;
+      }
+
+      .red-circle-icon {
+        width: 14px;
+        height: 14px;
+        background: var(--c-red);
+        border-radius: 50%;
+        display: inline-block;
+      }
+
+      .prototype-switcher {
+        display: flex;
+        gap: 0.5rem;
+        background: var(--c-canvas-alt);
+        padding: 0.35rem;
+        border: 2px solid var(--c-black);
+      }
+
+      .tab-btn {
+        background: transparent;
+        border: none;
+        padding: 0.4rem 0.9rem;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        cursor: pointer;
+        letter-spacing: 0.05em;
+        transition: all 0.15s ease;
+      }
+
+      .tab-btn:hover {
+        background: var(--c-black);
+        color: var(--c-canvas);
+      }
+
+      .tab-btn.active {
+        background: var(--c-black);
+        color: #ffffff;
+      }
+
+      .tab-btn.active[data-target="archetype-1"] {
+        background: var(--c-red);
+        color: #ffffff;
+      }
+
+      .tab-btn.active[data-target="archetype-2"] {
+        background: var(--c-blue);
+        color: #ffffff;
+      }
+
+      .tab-btn.active[data-target="archetype-3"] {
+        background: var(--c-black);
+        color: #ffffff;
+      }
+
+      /* Main Exhibition Canvas Container */
+      .prototype-view {
+        display: none;
+        animation: fadeIn 0.3s ease forwards;
+        position: relative;
+        min-height: calc(100vh - 65px);
+      }
+
+      .prototype-view.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Utility classes */
+      .mono-meta {
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .lead-text {
+        font-size: 1.15rem;
+        line-height: 1.6;
+        max-width: 640px;
+      }
+
+      /* =========================================================================
+         ARCHETYPE 1: THE DYNAMIC VECTOR (Malevich 1915 / Avant-Garde Portfolio)
+         ========================================================================= */
+      .arch-1 {
+        background-color: #f7f3ec;
+        position: relative;
+        overflow: hidden;
+        padding-bottom: 6rem;
+      }
+
+      /* Floating Composition Elements (Malevich Geometry) */
+      .arch-1 .vector-beam-diagonal {
+        position: absolute;
+        top: -120px;
+        right: -80px;
+        width: 140px;
+        height: 900px;
+        background: var(--c-black);
+        transform: rotate(24deg);
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .arch-1 .vector-red-bar {
+        position: absolute;
+        top: 240px;
+        right: 180px;
+        width: 480px;
+        height: 28px;
+        background: var(--c-red);
+        transform: rotate(-18deg);
+        z-index: 2;
+        pointer-events: none;
+      }
+
+      .arch-1 .vector-yellow-wedge {
+        position: absolute;
+        top: 480px;
+        right: 40px;
+        width: 90px;
+        height: 220px;
+        background: var(--c-yellow);
+        transform: rotate(12deg);
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .arch-1 .vector-blue-rect {
+        position: absolute;
+        top: 140px;
+        left: -40px;
+        width: 180px;
+        height: 48px;
+        background: var(--c-blue);
+        transform: rotate(-8deg);
+        z-index: 1;
+        will-change: transform;
+      }
+
+      .arch-1 .vector-red-circle {
+        position: absolute;
+        top: 550px;
+        left: 3vw;
+        width: 78px;
+        height: 78px;
+        background: var(--c-red);
+        border-radius: 50%;
+        z-index: 1;
+        will-change: transform;
+      }
+
+      .arch-1 .vector-cross {
+        position: absolute;
+        top: 750px;
+        right: 8vw;
+        width: 130px;
+        height: 18px;
+        background: var(--c-black);
+        transform: rotate(32deg);
+        z-index: 1;
+        will-change: transform;
+      }
+
+      .arch-1 .vector-cross::after {
+        content: "";
+        position: absolute;
+        top: -40px;
+        left: 50px;
+        width: 18px;
+        height: 98px;
+        background: var(--c-red);
+      }
+
+      .arch-1 .hero-container {
+        position: relative;
+        z-index: 10;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 5rem 2rem 3rem;
+      }
+
+      .arch-1 .manifesto-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: var(--c-black);
+        color: #ffffff;
+        padding: 0.4rem 1rem;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        margin-bottom: 2rem;
+      }
+
+      .arch-1 h1 {
+        font-family: var(--font-display);
+        font-size: clamp(3.2rem, 9vw, 7.5rem);
+        font-weight: 800;
+        line-height: 0.9;
+        text-transform: uppercase;
+        letter-spacing: -0.04em;
+        margin-bottom: 2rem;
+        max-width: 900px;
+      }
+
+      .arch-1 h1 .highlight-red {
+        color: var(--c-red);
+        display: inline-block;
+        transform: skewX(-6deg);
+      }
+
+      .arch-1 .sub-split {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        margin-top: 3rem;
+        max-width: 980px;
+      }
+
+      @media (min-width: 768px) {
+        .arch-1 .sub-split {
+          grid-template-columns: 1.2fr 1fr;
+        }
+      }
+
+      .arch-1 .statement-box {
+        background: #ffffff;
+        border: 3px solid var(--c-black);
+        box-shadow: 8px 8px 0 var(--c-black);
+        padding: 2rem;
+        position: relative;
+      }
+
+      .arch-1 .statement-box::before {
+        content: "";
+        position: absolute;
+        top: -14px;
+        left: -14px;
+        width: 28px;
+        height: 28px;
+        background: var(--c-red);
+      }
+
+      .arch-1 .action-cluster {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        gap: 1.25rem;
+      }
+
+      .btn-suprematist-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        background: var(--c-black);
+        color: #ffffff;
+        text-decoration: none;
+        padding: 1.25rem 2rem;
+        font-family: var(--font-mono);
+        font-weight: 700;
+        font-size: 0.95rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        border: 2px solid var(--c-black);
+        position: relative;
+        transition: transform 0.15s ease, background-color 0.15s ease;
+      }
+
+      .btn-suprematist-primary:hover {
+        background: var(--c-red);
+        color: #ffffff;
+        transform: translate(-3px, -3px);
+        box-shadow: 6px 6px 0 var(--c-black);
+      }
+
+      .btn-suprematist-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        color: var(--c-black);
+        text-decoration: none;
+        font-family: var(--font-mono);
+        font-weight: 700;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .btn-suprematist-secondary:hover {
+        color: var(--c-blue);
+      }
+
+      /* Work Cards - Asymmetric Dynamic Grid */
+      .arch-1 .works-section {
+        max-width: 1200px;
+        margin: 4rem auto 0;
+        padding: 0 2rem;
+        position: relative;
+        z-index: 10;
+      }
+
+      .section-header-malevich {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .section-header-malevich h2 {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        text-transform: uppercase;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+      }
+
+      .section-header-malevich .bar {
+        flex: 1;
+        height: 4px;
+        background: var(--c-black);
+      }
+
+      .cards-vector-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      @media (min-width: 768px) {
+        .cards-vector-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .vector-card {
+        background: #ffffff;
+        border: 3px solid var(--c-black);
+        padding: 1.75rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 280px;
+        position: relative;
+        transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+      }
+
+      .vector-card:hover {
+        transform: translateY(-6px) rotate(-0.5deg);
+        box-shadow: 8px 8px 0 var(--c-black);
+      }
+
+      .vector-card:nth-child(2) {
+        border-top: 8px solid var(--c-red);
+      }
+
+      .vector-card:nth-child(3) {
+        border-top: 8px solid var(--c-blue);
+      }
+
+      .card-numeral {
+        font-family: var(--font-display);
+        font-size: 2.5rem;
+        font-weight: 800;
+        line-height: 1;
+        margin-bottom: 1rem;
+      }
+
+      .vector-card h3 {
+        font-family: var(--font-display);
+        font-size: 1.4rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        margin-bottom: 0.75rem;
+      }
+
+      .vector-card p {
+        font-size: 0.95rem;
+        color: #333;
+        margin-bottom: 1.5rem;
+      }
+
+      /* =========================================================================
+         ARCHETYPE 2: THE PROUN CONSTRUCT (El Lissitzky Spatial Architecture)
+         ========================================================================= */
+      .arch-2 {
+        background-color: #ede9df;
+        position: relative;
+        padding: 4rem 2rem 6rem;
+      }
+
+      /* Blueprint Coordinate Grid Overlay */
+      .arch-2::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: 
+          linear-gradient(to right, rgba(13, 13, 13, 0.05) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(13, 13, 13, 0.05) 1px, transparent 1px);
+        background-size: 40px 40px;
+        pointer-events: none;
+      }
+
+      .arch-2-container {
+        max-width: 1240px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 5;
+      }
+
+      .proun-header {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        border-bottom: 3px solid var(--c-black);
+        padding-bottom: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      @media (min-width: 900px) {
+        .proun-header {
+          grid-template-columns: 2fr 1fr;
+          align-items: flex-end;
+        }
+      }
+
+      .proun-title-block {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .proun-axis-label {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .proun-axis-label .axis-badge {
+        background: var(--c-blue);
+        color: #ffffff;
+        padding: 0.15rem 0.5rem;
+      }
+
+      .proun-header h1 {
+        font-family: var(--font-display);
+        font-size: clamp(2.8rem, 7vw, 5.5rem);
+        font-weight: 800;
+        text-transform: uppercase;
+        line-height: 0.95;
+        letter-spacing: -0.03em;
+      }
+
+      .proun-coordinate-widget {
+        background: #ffffff;
+        border: 2px solid var(--c-black);
+        padding: 1.5rem;
+        font-family: var(--font-mono);
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .coord-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.8rem;
+        border-bottom: 1px dotted #ccc;
+        padding-bottom: 0.25rem;
+      }
+
+      .coord-val {
+        font-weight: 700;
+      }
+
+      /* Proun 3-Column Spatial Matrix */
+      .proun-matrix {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      @media (min-width: 850px) {
+        .proun-matrix {
+          grid-template-columns: 1.4fr 1fr 1fr;
+        }
+      }
+
+      .proun-block-major {
+        background: var(--c-black);
+        color: #ffffff;
+        padding: 2.5rem 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+      }
+
+      .proun-block-major h2 {
+        font-family: var(--font-display);
+        font-size: 2.2rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+      }
+
+      .proun-block-major p {
+        font-size: 1rem;
+        color: #d0d0d0;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+      }
+
+      .proun-block-accent {
+        background: #ffffff;
+        border: 2px solid var(--c-black);
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+      }
+
+      .proun-block-accent.highlight-blue {
+        border-top: 12px solid var(--c-blue);
+      }
+
+      .proun-block-accent.highlight-yellow {
+        border-top: 12px solid var(--c-yellow);
+      }
+
+      .spatial-diagram {
+        width: 100%;
+        height: 140px;
+        background: var(--c-canvas);
+        border: 1px solid var(--c-black);
+        position: relative;
+        margin: 1.5rem 0;
+        overflow: hidden;
+      }
+
+      .spatial-diagram .shape-rect-1 {
+        position: absolute;
+        top: 30px;
+        left: 20px;
+        width: 90px;
+        height: 40px;
+        background: var(--c-black);
+      }
+
+      .spatial-diagram .shape-circle-1 {
+        position: absolute;
+        top: 45px;
+        right: 40px;
+        width: 50px;
+        height: 50px;
+        background: var(--c-red);
+        border-radius: 50%;
+      }
+
+      .spatial-diagram .shape-line-1 {
+        position: absolute;
+        top: 65px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--c-blue);
+        transform: rotate(-12deg);
+      }
+
+      /* Architectural Spec Matrix */
+      .spec-matrix-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 3rem;
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        background: #ffffff;
+        border: 2px solid var(--c-black);
+      }
+
+      .spec-matrix-table th,
+      .spec-matrix-table td {
+        border: 1px solid var(--c-black);
+        padding: 1rem;
+        text-align: left;
+      }
+
+      .spec-matrix-table th {
+        background: var(--c-canvas-alt);
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+
+      /* =========================================================================
+         ARCHETYPE 3: ZERO DEGREE / WHITE ON WHITE (Malevich 1918 Meditation)
+         ========================================================================= */
+      .arch-3 {
+        background-color: #ffffff;
+        color: #1a1a1a;
+        padding: 5rem 2rem 7rem;
+        position: relative;
+      }
+
+      .arch-3-container {
+        max-width: 960px;
+        margin: 0 auto;
+      }
+
+      .zero-header {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 5rem;
+      }
+
+      .zero-square-mark {
+        width: 64px;
+        height: 64px;
+        background: #000000;
+        margin-bottom: 2.5rem;
+        box-shadow: 0 0 0 1px #000000;
+      }
+
+      .zero-catalogue-no {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: #777;
+        margin-bottom: 1.5rem;
+      }
+
+      .zero-header h1 {
+        font-family: var(--font-sans);
+        font-size: clamp(2.6rem, 6.5vw, 4.8rem);
+        font-weight: 400;
+        line-height: 1.05;
+        letter-spacing: -0.03em;
+        margin-bottom: 1.5rem;
+      }
+
+      .zero-header h1 strong {
+        font-weight: 700;
+      }
+
+      .zero-lead {
+        font-size: 1.25rem;
+        line-height: 1.6;
+        color: #444;
+        max-width: 680px;
+      }
+
+      .zero-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        border-top: 1px solid #1a1a1a;
+        padding-top: 3.5rem;
+      }
+
+      @media (min-width: 768px) {
+        .zero-grid {
+          grid-template-columns: 1fr 2fr;
+        }
+      }
+
+      .zero-meta-column {
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        line-height: 2;
+        color: #555;
+      }
+
+      .zero-meta-column dt {
+        color: #999;
+        font-size: 0.7rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        margin-top: 1rem;
+      }
+
+      .zero-meta-column dd {
+        font-weight: 600;
+        color: #111;
+      }
+
+      .zero-manifesto-column p {
+        font-size: 1.15rem;
+        line-height: 1.8;
+        color: #222;
+        margin-bottom: 2rem;
+      }
+
+      .zero-manifesto-column blockquote {
+        border-left: 3px solid #000000;
+        padding-left: 1.5rem;
+        margin: 2.5rem 0;
+        font-size: 1.35rem;
+        line-height: 1.5;
+        font-style: italic;
+        color: #000000;
+      }
+
+      .zero-action-row {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px dotted #ccc;
+      }
+
+      .zero-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: #000000;
+        color: #ffffff;
+        padding: 0.85rem 1.75rem;
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        text-decoration: none;
+        transition: background 0.2s ease;
+      }
+
+      .zero-btn:hover {
+        background: var(--c-red);
+      }
+
+      /* Inspector / Comparison Footer Bar */
+      .inspector-footer {
+        background: var(--c-black);
+        color: #ffffff;
+        padding: 2.5rem 2rem;
+        border-top: 4px solid var(--c-red);
+      }
+
+      .inspector-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      @media (min-width: 800px) {
+        .inspector-content {
+          grid-template-columns: 1.5fr 1fr 1fr;
+        }
+      }
+
+      .inspector-content h4 {
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--c-yellow);
+        margin-bottom: 0.75rem;
+      }
+
+      .inspector-content p {
+        font-size: 0.85rem;
+        color: #aaa;
+        line-height: 1.5;
+      }
+
+      .inspector-content ul {
+        list-style: none;
+        font-size: 0.85rem;
+        color: #ccc;
+      }
+
+      .inspector-content li {
+        margin-bottom: 0.4rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .dot-red {
+        width: 8px;
+        height: 8px;
+        background: var(--c-red);
+        display: inline-block;
+      }
+      .dot-blue {
+        width: 8px;
+        height: 8px;
+        background: var(--c-blue);
+        display: inline-block;
+      }
+      .dot-yellow {
+        width: 8px;
+        height: 8px;
+        background: var(--c-yellow);
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation & Archetype Switcher -->
+    <nav class="sup-nav">
+      <div class="sup-brand">
+        <span class="black-square-icon" title="The Black Square (Malevich 1915)"></span>
+        <span class="red-circle-icon" title="Dynamic Vermilion Vector"></span>
+        <span>Suprematism // Web Prototypes</span>
+      </div>
+
+      <div class="prototype-switcher">
+        <button class="tab-btn active" data-target="archetype-1">
+          01 // The Dynamic Vector
+        </button>
+        <button class="tab-btn" data-target="archetype-2">
+          02 // The Spatial Proun
+        </button>
+        <button class="tab-btn" data-target="archetype-3">
+          03 // Zero Degree
+        </button>
+      </div>
+    </nav>
+
+    <!-- =====================================================================
+         ARCHETYPE 1: THE DYNAMIC VECTOR (1915 Malevich Dynamic Equilibrium)
+         ===================================================================== -->
+    <main id="archetype-1" class="prototype-view active arch-1">
+      <!-- Background Non-Objective Floating Geometry -->
+      <div class="vector-beam-diagonal" aria-hidden="true"></div>
+      <div class="vector-red-bar" aria-hidden="true"></div>
+      <div class="vector-yellow-wedge" aria-hidden="true"></div>
+      <div class="vector-blue-rect" aria-hidden="true"></div>
+      <div class="vector-red-circle" aria-hidden="true"></div>
+      <div class="vector-cross" aria-hidden="true"></div>
+
+      <div class="hero-container">
+        <div class="manifesto-tag">
+          <span>0,10 Petrograd</span>
+          <span>//</span>
+          <span>Vector Form 1915</span>
+        </div>
+
+        <h1>
+          Non-Objective <br />
+          <span class="highlight-red">Engineering</span> &amp; <br />
+          Pure Feeling.
+        </h1>
+
+        <div class="sub-split">
+          <div class="statement-box">
+            <p class="lead-text">
+              We liberate the digital canvas from skeuomorphic imitation and decorative noise. 
+              Interfaces structured purely through weight, primary geometry, off-axis tension, 
+              and deliberate typographic thrust.
+            </p>
+          </div>
+
+          <div class="action-cluster">
+            <a href="#explore" class="btn-suprematist-primary">
+              <span>Enter Workspace</span>
+              <span>&rarr;</span>
+            </a>
+            <a href="#manifesto" class="btn-suprematist-secondary">
+              <span class="red-circle-icon"></span>
+              <span>Read The 1915 Manifesto</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Asymmetric Works Showcase -->
+      <section class="works-section" id="explore">
+        <div class="section-header-malevich">
+          <h2>Selected Systems</h2>
+          <div class="bar"></div>
+          <span class="mono-meta">ARCH-01 / DISCIPLINE</span>
+        </div>
+
+        <div class="cards-vector-grid">
+          <div class="vector-card">
+            <div>
+              <div class="card-numeral">01</div>
+              <h3>Wridges Engine</h3>
+              <p>
+                A high-concurrency crossword dictionary &amp; game state machine delivered to millions of daily solvers.
+              </p>
+            </div>
+            <div class="mono-meta">&Delta; 60fps &middot; Zero Latency</div>
+          </div>
+
+          <div class="vector-card">
+            <div>
+              <div class="card-numeral">02</div>
+              <h3>Component Core</h3>
+              <p>
+                Strictly-typed Web Components built with Lit, headless primitives, and zero runtime overhead.
+              </p>
+            </div>
+            <div class="mono-meta">&Delta; Modern DOM &middot; Custom Elements</div>
+          </div>
+
+          <div class="vector-card">
+            <div>
+              <div class="card-numeral">03</div>
+              <h3>Lambda Vector</h3>
+              <p>
+                Autonomous edge image synthesis and real-time sitemap automation for enterprise media delivery.
+              </p>
+            </div>
+            <div class="mono-meta">&Delta; Serverless &middot; AWS Architecture</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- =====================================================================
+         ARCHETYPE 2: THE SPATIAL PROUN (El Lissitzky Spatial Architecture)
+         ===================================================================== -->
+    <section id="archetype-2" class="prototype-view arch-2">
+      <div class="arch-2-container">
+        <header class="proun-header">
+          <div class="proun-title-block">
+            <div class="proun-axis-label">
+              <span class="axis-badge">Proun 1A</span>
+              <span>Station Between Painting &amp; Architecture</span>
+            </div>
+            <h1>Spatial Construct</h1>
+          </div>
+
+          <div class="proun-coordinate-widget">
+            <div class="coord-row">
+              <span>PROJECTION:</span>
+              <span class="coord-val">Axonometric 30&deg;</span>
+            </div>
+            <div class="coord-row">
+              <span>COLOR DENSITY:</span>
+              <span class="coord-val">CMYK / Ultramarine</span>
+            </div>
+            <div class="coord-row">
+              <span>EQUILIBRIUM:</span>
+              <span class="coord-val">Dynamic Counterweight</span>
+            </div>
+          </div>
+        </header>
+
+        <div class="proun-matrix">
+          <!-- Dominant Black Mass Card -->
+          <div class="proun-block-major">
+            <div>
+              <span class="mono-meta">SYSTEM SPEC // 01</span>
+              <h2>Architectural Foundation</h2>
+              <p>
+                The Proun serves as a launching pad for new forms. In digital architecture, 
+                it treats DOM hierarchies as interlocking spatial planes rather than passive text flows.
+              </p>
+            </div>
+            <a href="#spec" class="btn-suprematist-primary" style="background: var(--c-blue); border-color: var(--c-blue);">
+              <span>Inspect Matrix &darr;</span>
+            </a>
+          </div>
+
+          <!-- Blue Vector Plane -->
+          <div class="proun-block-accent highlight-blue">
+            <div>
+              <span class="mono-meta">PLANE &beta; &middot; COBALT</span>
+              <h3 style="font-family: var(--font-display); text-transform: uppercase; margin: 1rem 0;">Spatial Balance</h3>
+              <p style="font-size: 0.9rem; color: #444;">
+                Heavy black anchor masses are counterbalanced by vivid cobalt planes positioned along the diagonal axis.
+              </p>
+              <div class="spatial-diagram">
+                <div class="shape-rect-1"></div>
+                <div class="shape-circle-1"></div>
+                <div class="shape-line-1"></div>
+              </div>
+            </div>
+            <div class="mono-meta">X: 120px &middot; Y: 340px</div>
+          </div>
+
+          <!-- Cadmium Yellow Wedge -->
+          <div class="proun-block-accent highlight-yellow">
+            <div>
+              <span class="mono-meta">PLANE &gamma; &middot; CADMIUM</span>
+              <h3 style="font-family: var(--font-display); text-transform: uppercase; margin: 1rem 0;">Dynamic Tension</h3>
+              <p style="font-size: 0.9rem; color: #444;">
+                Acute geometric wedges pierce structural boundaries, directing user focus toward interactive triggers.
+              </p>
+            </div>
+            <div style="margin-top: 2rem;">
+              <button class="tab-btn active" style="background: var(--c-black); color: #fff; width: 100%;">
+                Trigger Vector Shift
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Technical Spec Matrix Table -->
+        <table class="spec-matrix-table" id="spec">
+          <thead>
+            <tr>
+              <th>Vector ID</th>
+              <th>Geometric Form</th>
+              <th>Chromatic Weight</th>
+              <th>Interaction Physics</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>VEC-001</td>
+              <td>Square (Primary Anchor)</td>
+              <td>Black #0D0D0D (100%)</td>
+              <td>Static Root Datum</td>
+              <td>LOCKED</td>
+            </tr>
+            <tr>
+              <td>VEC-002</td>
+              <td>Angled Beam (24&deg;)</td>
+              <td>Vermilion Red #DE2B18</td>
+              <td>Translate on Hover (4px)</td>
+              <td>ACTIVE</td>
+            </tr>
+            <tr>
+              <td>VEC-003</td>
+              <td>Equilateral Wedge</td>
+              <td>Cadmium Yellow #F6B800</td>
+              <td>Skew -6&deg; on Focus</td>
+              <td>RESONATING</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         ARCHETYPE 3: ZERO DEGREE / WHITE ON WHITE (1918 Malevich Meditation)
+         ===================================================================== -->
+    <section id="archetype-3" class="prototype-view arch-3">
+      <div class="arch-3-container">
+        <div class="zero-header">
+          <div class="zero-square-mark" title="The Black Square / Zero Degree"></div>
+          <div class="zero-catalogue-no">No. 79 // White on White // 1918</div>
+          <h1>
+            The <strong>Zero Degree</strong> <br />
+            of Digital Space.
+          </h1>
+          <p class="zero-lead">
+            When all imitation of the physical world is dissolved, what remains is 
+            pure space, pure contrast, and pure typographic intent.
+          </p>
+        </div>
+
+        <div class="zero-grid">
+          <dl class="zero-meta-column">
+            <dt>Origin</dt>
+            <dd>Petrograd, 1915&ndash;1918</dd>
+
+            <dt>Philosophy</dt>
+            <dd>Non-Objective Art</dd>
+
+            <dt>Chromatic Scale</dt>
+            <dd>Bone, Chalk, Pure Black</dd>
+
+            <dt>Grid Ratio</dt>
+            <dd>1.618 Asymmetric Offset</dd>
+
+            <dt>Execution</dt>
+            <dd>Zero Skeuomorphism</dd>
+          </dl>
+
+          <div class="zero-manifesto-column">
+            <p>
+              Suprematism does not illustrate. It does not decorate. It creates a new reality where 
+              a black square on a field of white is not an icon of a box—it is the birth of autonomous form.
+            </p>
+
+            <blockquote>
+              &ldquo;I have broken the blue boundary of color limits, I have come out into the white; 
+              beside me, comrade pilots, swim in this infinity.&rdquo;
+              <cite style="display: block; font-size: 0.85rem; font-style: normal; margin-top: 0.75rem; color: #666;">
+                &mdash; Kazimir Malevich, Suprematist Manifesto
+              </cite>
+            </blockquote>
+
+            <p>
+              In practical web UI, the Zero Degree translates into uncompromised negative space, 
+              strict monospaced data readouts, hairline 1px bounding lines, and a solitary black or red anchor 
+              that commands the entire viewport.
+            </p>
+
+            <div class="zero-action-row">
+              <a href="mailto:spcbeck@gmail.com" class="zero-btn">
+                <span>Initiate Contact</span>
+                <span>&rarr;</span>
+              </a>
+              <span class="mono-meta" style="color: #888;">Somerville, Massachusetts</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Educational Footer: The Principles of Suprematist Web Design -->
+    <footer class="inspector-footer">
+      <div class="inspector-content">
+        <div>
+          <h4>Suprematist Design System</h4>
+          <p>
+            Unlike Supergraphics (which relies on warm earthy stripes and 70s corporate nostalgia) or Brutalism (which embraces intentional roughness and raw HTML default forms), Suprematism is an avant-garde pursuit of non-objective geometric purity and dynamic spatial equilibrium.
+          </p>
+        </div>
+
+        <div>
+          <h4>Chromatic Trinity</h4>
+          <ul>
+            <li><span class="dot-red"></span> Vermilion Red: Dynamic Vector</li>
+            <li><span class="dot-blue"></span> Cobalt Blue: Spatial Counterweight</li>
+            <li><span class="dot-yellow"></span> Cadmium Yellow: Focal Tension</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Core Principles</h4>
+          <ul>
+            <li>&bull; Non-objective geometry</li>
+            <li>&bull; Dynamic diagonal balance</li>
+            <li>&bull; Infinite negative space</li>
+            <li>&bull; Typography as architecture</li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Interactive Archetype Switcher
+      const buttons = document.querySelectorAll('.tab-btn');
+      const views = document.querySelectorAll('.prototype-view');
+
+      buttons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const targetId = btn.getAttribute('data-target');
+          if (!targetId) return;
+
+          buttons.forEach((b) => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          views.forEach((view) => {
+            if (view.id === targetId) {
+              view.classList.add('active');
+            } else {
+              view.classList.remove('active');
+            }
+          });
+        });
+      });
+
+      // Malevich Kinetic Parallax Engine
+      (function () {
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReduced) return;
+
+        let ticking = false;
+        function updateParallax() {
+          const activeArch = document.getElementById('archetype-1');
+          if (activeArch && activeArch.classList.contains('active')) {
+            const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+            const beam = activeArch.querySelector('.vector-beam-diagonal');
+            const redBar = activeArch.querySelector('.vector-red-bar');
+            const yellowWedge = activeArch.querySelector('.vector-yellow-wedge');
+            const blueRect = activeArch.querySelector('.vector-blue-rect');
+            const redCircle = activeArch.querySelector('.vector-red-circle');
+            const cross = activeArch.querySelector('.vector-cross');
+
+            if (beam) beam.style.transform = `translate3d(0, ${scrollY * 0.18}px, 0) rotate(24deg)`;
+            if (redBar) redBar.style.transform = `translate3d(0, ${scrollY * -0.12}px, 0) rotate(-18deg)`;
+            if (yellowWedge) yellowWedge.style.transform = `translate3d(0, ${scrollY * 0.28}px, 0) rotate(12deg)`;
+            if (blueRect) blueRect.style.transform = `translate3d(0, ${scrollY * -0.2}px, 0) rotate(-8deg)`;
+            if (redCircle) redCircle.style.transform = `translate3d(0, ${scrollY * 0.1}px, 0)`;
+            if (cross) cross.style.transform = `translate3d(0, ${scrollY * -0.15}px, 0) rotate(32deg)`;
+          }
+          ticking = false;
+        }
+
+        window.addEventListener('scroll', function () {
+          if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(updateParallax);
+          }
+        }, { passive: true });
+
+        updateParallax();
+      })();
+    </script>
+  </body>
+</html>

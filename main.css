@@ -91,6 +91,16 @@ select {
   --sg-stripe-2: #e05822; /* Tangerine */
   --sg-stripe-3: #b9311f; /* Rust Vermilion */
   --sg-stripe-4: #5a1e17; /* Mahogany */
+
+  /* Suprematism Design Tokens (Malevich 1915) */
+  --sup-canvas: #f4f0e8;
+  --sup-canvas-card: #ffffff;
+  --sup-ink: #0d0d0d;
+  --sup-red: #de2b18;
+  --sup-blue: #1339b8;
+  --sup-yellow: #f6b800;
+  --sup-border: #0d0d0d;
+  --sup-muted: #666055;
 }
 
 /* Base states for theme-specific elements */
@@ -99,6 +109,10 @@ select {
 }
 
 .theme-stripe-indicator {
+  display: none;
+}
+
+.suprematist-canvas-vectors {
   display: none;
 }
 
@@ -465,4 +479,573 @@ html[data-theme="supergraphics"] select {
 html[data-theme="supergraphics"] select:focus-visible {
   border-color: var(--sg-stripe-2);
   box-shadow: 0 0 0 2px var(--sg-stripe-2);
+}
+
+/* ==========================================================================
+   Suprematism Theme (Kazimir Malevich 1915 / 0,10 Non-Objective Avant-Garde)
+   ========================================================================== */
+
+html[data-theme="suprematism"] {
+  counter-reset: sup-section;
+}
+
+html[data-theme="suprematism"] body {
+  background-color: var(--sup-canvas);
+  color: var(--sup-ink);
+  font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  overflow-x: hidden;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Background floating non-objective geometric composition */
+html[data-theme="suprematism"] .suprematist-canvas-vectors {
+  display: block;
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* The Black Square — High Corner Anchor (0,10 Petrograd 'Krasny Ugol') */
+html[data-theme="suprematism"] .sup-corner-square {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  background: var(--sup-ink);
+  z-index: 999;
+  box-shadow: 5px 5px 0 var(--sup-red);
+  cursor: pointer;
+  transform-origin: top left;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+
+html[data-theme="suprematism"] .sup-corner-square:hover {
+  transform: rotate(45deg) scale(1.15);
+  box-shadow: 8px 8px 0 var(--sup-blue);
+}
+
+html[data-theme="suprematism"] .sup-vec-beam {
+  position: absolute;
+  top: -100px;
+  right: -60px;
+  width: 100px;
+  height: 950px;
+  background: var(--sup-ink);
+  transform: rotate(24deg);
+  opacity: 0.88;
+  will-change: transform;
+}
+
+html[data-theme="suprematism"] .sup-vec-red-bar {
+  position: absolute;
+  top: 260px;
+  right: 100px;
+  width: 420px;
+  height: 26px;
+  background: var(--sup-red);
+  transform: rotate(-18deg);
+  opacity: 0.95;
+  will-change: transform;
+}
+
+html[data-theme="suprematism"] .sup-vec-yellow-wedge {
+  position: absolute;
+  top: 580px;
+  right: 25px;
+  width: 75px;
+  height: 200px;
+  background: var(--sup-yellow);
+  transform: rotate(14deg);
+  will-change: transform;
+}
+
+html[data-theme="suprematism"] .sup-vec-blue-rect {
+  position: absolute;
+  top: 180px;
+  left: -40px;
+  width: 190px;
+  height: 48px;
+  background: var(--sup-blue);
+  transform: rotate(-8deg);
+  opacity: 0.9;
+  will-change: transform;
+}
+
+html[data-theme="suprematism"] .sup-vec-red-circle {
+  position: absolute;
+  top: 600px;
+  left: 4vw;
+  width: 76px;
+  height: 76px;
+  background: var(--sup-red);
+  border-radius: 50%;
+  opacity: 0.95;
+  will-change: transform;
+}
+
+html[data-theme="suprematism"] .sup-vec-cross {
+  position: absolute;
+  top: 1150px;
+  right: 6vw;
+  width: 140px;
+  height: 18px;
+  background: var(--sup-ink);
+  transform: rotate(32deg);
+  opacity: 0.9;
+  will-change: transform;
+}
+
+html[data-theme="suprematism"] .sup-vec-cross::after {
+  content: "";
+  position: absolute;
+  top: -42px;
+  left: 55px;
+  width: 18px;
+  height: 102px;
+  background: var(--sup-red);
+}
+
+@media (max-width: 768px) {
+  html[data-theme="suprematism"] .sup-vec-beam,
+  html[data-theme="suprematism"] .sup-vec-cross {
+    display: none;
+  }
+}
+
+/* Native CSS Scroll-Driven Parallax Drift */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    html[data-theme="suprematism"] .sup-vec-beam {
+      animation: driftBeam linear both;
+      animation-timeline: scroll(root);
+    }
+    html[data-theme="suprematism"] .sup-vec-red-bar {
+      animation: driftRedBar linear both;
+      animation-timeline: scroll(root);
+    }
+    html[data-theme="suprematism"] .sup-vec-yellow-wedge {
+      animation: driftYellowWedge linear both;
+      animation-timeline: scroll(root);
+    }
+    html[data-theme="suprematism"] .sup-vec-blue-rect {
+      animation: driftBlueRect linear both;
+      animation-timeline: scroll(root);
+    }
+    html[data-theme="suprematism"] .sup-vec-red-circle {
+      animation: driftRedCircle linear both;
+      animation-timeline: scroll(root);
+    }
+    html[data-theme="suprematism"] .sup-vec-cross {
+      animation: driftCross linear both;
+      animation-timeline: scroll(root);
+    }
+  }
+}
+
+@keyframes driftBeam {
+  from { transform: translateY(0px) rotate(24deg); }
+  to { transform: translateY(220px) rotate(24deg); }
+}
+@keyframes driftRedBar {
+  from { transform: translateY(0px) rotate(-18deg); }
+  to { transform: translateY(-160px) rotate(-18deg); }
+}
+@keyframes driftYellowWedge {
+  from { transform: translateY(0px) rotate(14deg); }
+  to { transform: translateY(300px) rotate(14deg); }
+}
+@keyframes driftBlueRect {
+  from { transform: translateY(0px) rotate(-8deg); }
+  to { transform: translateY(-180px) rotate(-8deg); }
+}
+@keyframes driftRedCircle {
+  from { transform: translateY(0px); }
+  to { transform: translateY(140px); }
+}
+@keyframes driftCross {
+  from { transform: translateY(0px) rotate(32deg); }
+  to { transform: translateY(-180px) rotate(32deg); }
+}
+
+/* Header & Identity */
+html[data-theme="suprematism"] header {
+  padding-top: 4rem;
+  position: relative;
+  z-index: 10;
+}
+
+html[data-theme="suprematism"] header::before {
+  content: "";
+  display: block;
+  width: 28px;
+  height: 28px;
+  background: var(--sup-ink);
+  margin: 0 auto 1.5rem;
+  box-shadow: 4px 4px 0 var(--sup-red);
+}
+
+html[data-theme="suprematism"] h1 {
+  font-family: "Syne", sans-serif;
+  font-weight: 800;
+  font-size: clamp(3.2rem, 8vw, 6.2rem);
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  color: var(--sup-ink);
+  margin-bottom: 1.25rem;
+}
+
+html[data-theme="suprematism"] .profession {
+  font-family: monospace;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--sup-ink);
+  padding: 0.4rem 1.25rem;
+  border: 2px solid var(--sup-ink);
+  margin-bottom: 0.75rem;
+}
+
+html[data-theme="suprematism"] .profession::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--sup-red);
+}
+
+html[data-theme="suprematism"] address {
+  font-family: monospace;
+  font-style: normal;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sup-muted);
+}
+
+/* Section Architecture & Dynamic Numerals */
+html[data-theme="suprematism"] section {
+  position: relative;
+  z-index: 10;
+}
+
+html[data-theme="suprematism"] section h2 {
+  counter-increment: sup-section;
+  font-family: "Syne", sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  color: var(--sup-ink);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 3px solid var(--sup-ink);
+}
+
+html[data-theme="suprematism"] section h2::before {
+  content: "0" counter(sup-section);
+  font-family: "Syne", sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  color: var(--sup-red);
+  line-height: 1;
+}
+
+/* Section Content Blocks */
+html[data-theme="suprematism"] section.about > p {
+  background: #ffffff;
+  border: 2px solid var(--sup-ink);
+  padding: 2rem 2.25rem;
+  box-shadow: 6px 6px 0 var(--sup-ink);
+  font-size: 1.15rem;
+  line-height: 1.65;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+html[data-theme="suprematism"] section.about > p::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: 20px;
+  height: 20px;
+  background: var(--sup-red);
+  box-shadow: 2px 2px 0 var(--sup-ink);
+}
+
+/* Three-Column Grid with Suprematist Accents */
+html[data-theme="suprematism"] .three-col-grid > div {
+  background: #ffffff;
+  border: 2px solid var(--sup-ink);
+  padding: 1.5rem;
+  box-shadow: 4px 4px 0 var(--sup-ink);
+  position: relative;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+html[data-theme="suprematism"] .three-col-grid > div:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 7px 7px 0 var(--sup-ink);
+}
+
+html[data-theme="suprematism"] .three-col-grid > div:nth-child(1) {
+  border-top: 6px solid var(--sup-red);
+}
+
+html[data-theme="suprematism"] .three-col-grid > div:nth-child(2) {
+  border-top: 6px solid var(--sup-blue);
+}
+
+html[data-theme="suprematism"] .three-col-grid > div:nth-child(3) {
+  border-top: 6px solid var(--sup-yellow);
+}
+
+html[data-theme="suprematism"] .three-col-grid p {
+  font-family: monospace;
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--sup-ink);
+  margin-bottom: 1rem;
+}
+
+html[data-theme="suprematism"] ul {
+  list-style: none;
+  padding: 0;
+}
+
+html[data-theme="suprematism"] li {
+  padding: 0.35rem 0;
+  font-size: 0.95rem;
+  border-bottom: 1px dashed #dedede;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Work Experience Entries — Suprematist Dynamic Modular Cards */
+html[data-theme="suprematism"] section:nth-of-type(2) > div {
+  background: #ffffff;
+  border: 2px solid var(--sup-ink);
+  padding: 2.25rem 2rem;
+  margin-bottom: 2.5rem;
+  box-shadow: 6px 6px 0 var(--sup-ink);
+  position: relative;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease;
+}
+
+html[data-theme="suprematism"] section:nth-of-type(2) > div:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 12px 12px 0 var(--sup-ink);
+}
+
+html[data-theme="suprematism"] section:nth-of-type(2) > div::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  right: 1.5rem;
+  width: 16px;
+  height: 16px;
+  background: var(--sup-ink);
+  transform: rotate(45deg);
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html[data-theme="suprematism"] section:nth-of-type(2) > div:hover::before {
+  opacity: 1;
+  transform: rotate(45deg) scale(1.2);
+}
+
+/* Primary Color Accents per Experience Datum */
+html[data-theme="suprematism"] section:nth-of-type(2) > div:nth-of-type(1) {
+  border-left: 8px solid var(--sup-red);
+}
+
+html[data-theme="suprematism"] section:nth-of-type(2) > div:nth-of-type(2) {
+  border-left: 8px solid var(--sup-blue);
+}
+
+html[data-theme="suprematism"] section:nth-of-type(2) > div:nth-of-type(3) {
+  border-left: 8px solid var(--sup-yellow);
+}
+
+html[data-theme="suprematism"] section:nth-of-type(2) > div:nth-of-type(4) {
+  border-left: 8px solid var(--sup-ink);
+}
+
+html[data-theme="suprematism"] section:nth-of-type(2) hr {
+  display: none;
+}
+
+html[data-theme="suprematism"] section > div > h3 {
+  font-family: "Syne", sans-serif;
+  font-weight: 800;
+  font-size: 1.75rem;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: var(--sup-ink);
+  margin-bottom: 0.5rem;
+}
+
+html[data-theme="suprematism"] section:nth-of-type(2) > div > p:first-of-type {
+  font-family: monospace;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--sup-red);
+  margin-bottom: 0.25rem;
+}
+
+html[data-theme="suprematism"] section:nth-of-type(2) > div > p:nth-of-type(2) {
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: var(--sup-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px dashed #dedede;
+}
+
+html[data-theme="suprematism"] hr {
+  border: none;
+  height: 3px;
+  background: var(--sup-ink);
+  margin: 3.5rem 0;
+  position: relative;
+}
+
+html[data-theme="suprematism"] hr::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -6px;
+  width: 15px;
+  height: 15px;
+  background: var(--sup-red);
+}
+
+/* Links and Interactive Elements */
+html[data-theme="suprematism"] a {
+  color: var(--sup-ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--sup-red);
+  text-underline-offset: 4px;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+html[data-theme="suprematism"] a:hover {
+  background: var(--sup-red);
+  color: #ffffff;
+  text-decoration: none;
+  padding: 1px 4px;
+}
+/* Activities Section */
+html[data-theme="suprematism"] section:nth-of-type(3) ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+html[data-theme="suprematism"] section:nth-of-type(3) li {
+  background: #ffffff;
+  border: 2px solid var(--sup-ink);
+  padding: 0.65rem 1.4rem;
+  box-shadow: 4px 4px 0 var(--sup-ink);
+  border-bottom: 2px solid var(--sup-ink);
+  font-family: monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+html[data-theme="suprematism"] section:nth-of-type(3) li:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--sup-ink);
+}
+
+/* Contact Section Callout */
+html[data-theme="suprematism"] section:last-of-type > p {
+  background: #ffffff;
+  border: 2px solid var(--sup-ink);
+  padding: 1.75rem 2.25rem;
+  box-shadow: 8px 8px 0 var(--sup-ink);
+  font-size: 1.15rem;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem;
+  position: relative;
+}
+
+html[data-theme="suprematism"] section:last-of-type > p::before {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--sup-red);
+  box-shadow: 0 0 0 3px var(--sup-ink);
+  flex-shrink: 0;
+}
+
+/* Suprematism Theme Selector Widget */
+html[data-theme="suprematism"] .theme-selector {
+  background: #ffffff;
+  border: 2px solid var(--sup-ink);
+  padding: 0.35rem 0.75rem;
+  box-shadow: 4px 4px 0 var(--sup-ink);
+}
+
+html[data-theme="suprematism"] .theme-stripe-indicator {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  background: var(--sup-ink);
+  border: 2px solid var(--sup-red);
+  flex-shrink: 0;
+}
+
+html[data-theme="suprematism"] .theme-selector label {
+  font-family: monospace;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--sup-ink);
+}
+
+html[data-theme="suprematism"] select {
+  font-family: monospace;
+  font-weight: 700;
+  font-size: 0.75rem;
+  background: transparent;
+  color: var(--sup-ink);
+  border: 1px solid var(--sup-ink);
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  outline: none;
 }

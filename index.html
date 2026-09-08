@@ -30,6 +30,15 @@
   </head>
   <body>
     <div class="supergraphics-edge-ribbon" aria-hidden="true"></div>
+    <div class="suprematist-canvas-vectors" aria-hidden="true">
+      <div class="sup-corner-square" title="The Black Square (0,10 Petrograd)"></div>
+      <div class="sup-vec-beam"></div>
+      <div class="sup-vec-red-bar"></div>
+      <div class="sup-vec-yellow-wedge"></div>
+      <div class="sup-vec-blue-rect"></div>
+      <div class="sup-vec-red-circle"></div>
+      <div class="sup-vec-cross"></div>
+    </div>
     <main-container>
       <header>
         <h1>Sean Beck</h1>
@@ -41,6 +50,7 @@
           <select id="theme">
             <option value="brutalist">01 // brutalist</option>
             <option value="supergraphics">02 // supergraphics (70s)</option>
+            <option value="suprematism">03 // suprematism (1915)</option>
           </select>
         </div>
       </header>
@@ -251,6 +261,50 @@
             localStorage.setItem('theme', newTheme);
           });
         }
+      })();
+
+      // Malevich Kinetic Parallax Engine (Differential Vector Motion)
+      (function () {
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReduced) return;
+
+        let ticking = false;
+        function updateParallax() {
+          if (document.documentElement.getAttribute('data-theme') === 'suprematism') {
+            const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+            const beam = document.querySelector('.sup-vec-beam');
+            const redBar = document.querySelector('.sup-vec-red-bar');
+            const yellowWedge = document.querySelector('.sup-vec-yellow-wedge');
+            const blueRect = document.querySelector('.sup-vec-blue-rect');
+            const redCircle = document.querySelector('.sup-vec-red-circle');
+            const cross = document.querySelector('.sup-vec-cross');
+
+            if (beam) beam.style.transform = `translate3d(0, ${scrollY * 0.18}px, 0) rotate(24deg)`;
+            if (redBar) redBar.style.transform = `translate3d(0, ${scrollY * -0.12}px, 0) rotate(-18deg)`;
+            if (yellowWedge) yellowWedge.style.transform = `translate3d(0, ${scrollY * 0.28}px, 0) rotate(14deg)`;
+            if (blueRect) blueRect.style.transform = `translate3d(0, ${scrollY * -0.2}px, 0) rotate(-8deg)`;
+            if (redCircle) redCircle.style.transform = `translate3d(0, ${scrollY * 0.1}px, 0)`;
+            if (cross) cross.style.transform = `translate3d(0, ${scrollY * -0.15}px, 0) rotate(32deg)`;
+          }
+          ticking = false;
+        }
+
+        window.addEventListener('scroll', function () {
+          if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(updateParallax);
+          }
+        }, { passive: true });
+
+        // Update when theme changes
+        const themeSelect = document.getElementById('theme');
+        if (themeSelect) {
+          themeSelect.addEventListener('change', function () {
+            requestAnimationFrame(updateParallax);
+          });
+        }
+
+        updateParallax();
       })();
     </script>
   </body>
