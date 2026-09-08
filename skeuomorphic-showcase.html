@@ -1,0 +1,1927 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Skeuomorphic Design Prototypes — 3 Tactile Directions | Sean Beck</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chivo+Mono:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/d11d8ec619.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/modern-normalize@3.0.1/modern-normalize.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --c-hud-bg: #18191c;
+        --c-hud-border: #2f3238;
+        --c-hud-text: #e0e4eb;
+        --c-hud-muted: #88909d;
+        --c-hud-accent: #f26522;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: #121316;
+        color: #e5e5e5;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        line-height: 1.5;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* Control Deck / Archetype Switcher Topbar */
+      .skeuo-nav-deck {
+        position: sticky;
+        top: 0;
+        z-index: 9999;
+        background: linear-gradient(180deg, #24262b 0%, #17181c 100%);
+        border-bottom: 2px solid #0f1013;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.12);
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem 1.5rem;
+        gap: 1rem;
+      }
+
+      .deck-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .deck-badge {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        background: #0f1013;
+        color: #ff9800;
+        padding: 0.35rem 0.65rem;
+        border-radius: 4px;
+        border: 1px solid #363940;
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.6);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .deck-badge::before {
+        content: '';
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #ff5722;
+        box-shadow: 0 0 8px #ff5722;
+        animation: pulseLed 2s infinite ease-in-out;
+      }
+
+      @keyframes pulseLed {
+        0%, 100% { opacity: 0.8; box-shadow: 0 0 6px #ff5722; }
+        50% { opacity: 1; box-shadow: 0 0 12px #ff7043; }
+      }
+
+      .deck-title {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: #f0f2f5;
+        letter-spacing: -0.01em;
+      }
+
+      .prototype-tabs {
+        display: flex;
+        background: #111215;
+        border-radius: 8px;
+        padding: 0.3rem;
+        border: 1px solid #282a30;
+        box-shadow: inset 0 2px 5px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.06);
+        gap: 0.25rem;
+      }
+
+      .proto-btn {
+        background: transparent;
+        border: none;
+        color: #9299a6;
+        font-family: 'Chivo Mono', monospace;
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      .proto-btn:hover {
+        color: #ffffff;
+        background: rgba(255,255,255,0.05);
+      }
+
+      .proto-btn.active {
+        color: #ffffff;
+        background: linear-gradient(180deg, #383b42 0%, #23252a 100%);
+        border: 1px solid #484b54;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.25);
+      }
+
+      .proto-btn.active[data-target="archetype-braun"] {
+        border-bottom: 2px solid #ff7043;
+      }
+
+      .proto-btn.active[data-target="archetype-audio"] {
+        border-bottom: 2px solid #ffb300;
+      }
+
+      .proto-btn.active[data-target="archetype-aqua"] {
+        border-bottom: 2px solid #00b4d8;
+      }
+
+      .audio-toggle-btn {
+        background: linear-gradient(180deg, #2a2c33 0%, #1c1d22 100%);
+        border: 1px solid #3c404a;
+        color: #cbd3e0;
+        font-size: 0.75rem;
+        font-family: 'JetBrains Mono', monospace;
+        padding: 0.45rem 0.85rem;
+        border-radius: 6px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+      }
+
+      .audio-toggle-btn:hover {
+        color: #fff;
+        border-color: #555b68;
+      }
+
+      .audio-toggle-btn.muted {
+        color: #6d7482;
+      }
+
+      .prototype-container {
+        display: none;
+        min-height: calc(100vh - 65px);
+        animation: fadeIn 0.3s ease forwards;
+      }
+
+      .prototype-container.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(4px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* Archetype Description Banner */
+      .archetype-banner {
+        padding: 1.25rem 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .banner-info h2 {
+        font-size: 1.4rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin-bottom: 0.25rem;
+      }
+
+      .banner-info p {
+        font-size: 0.9rem;
+        opacity: 0.85;
+        max-width: 800px;
+        line-height: 1.4;
+      }
+
+      .banner-tags {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+
+      .spec-tag {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.75rem;
+        padding: 0.25rem 0.6rem;
+        border-radius: 4px;
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+
+      /* =========================================================================
+         ARCHETYPE 1: BRAUN & DIETER RAMS (Tactile Industrial Bauhaus)
+         Inspired by ET66 Calculator, T3 Pocket Radio, and Vitsoe Systems
+         ========================================================================= */
+      .braun-theme {
+        background-color: #d8d4cb;
+        background-image:
+          radial-gradient(circle at 50% 0%, rgba(255,255,255,0.6) 0%, transparent 75%),
+          repeating-linear-gradient(45deg, rgba(0,0,0,0.012) 0px, rgba(0,0,0,0.012) 2px, transparent 2px, transparent 4px);
+        color: #1a1a1a;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        padding-bottom: 5rem;
+      }
+
+      .braun-theme .archetype-banner {
+        background: #c8c3b7;
+        border-bottom: 1px solid #b2aca0;
+        box-shadow: inset 0 -1px 0 rgba(255,255,255,0.4);
+      }
+
+      .braun-theme .spec-tag {
+        background: #1c1c1c;
+        color: #f5f3ef;
+      }
+
+      .braun-chassis {
+        max-width: 1040px;
+        margin: 2.5rem auto;
+        background: #ece8de;
+        border-radius: 28px;
+        padding: 3rem;
+        box-shadow:
+          0 24px 48px -12px rgba(45, 38, 30, 0.35),
+          0 6px 14px rgba(0,0,0,0.1),
+          inset 0 1px 2px rgba(255,255,255,0.9),
+          inset 0 -2px 4px rgba(0,0,0,0.12),
+          inset 1px 0 2px rgba(255,255,255,0.6),
+          inset -1px 0 2px rgba(0,0,0,0.08);
+        position: relative;
+        border: 1px solid #cfc9be;
+      }
+
+      /* Speaker Perforation Matrix */
+      .braun-speaker-grille {
+        display: grid;
+        grid-template-columns: repeat(18, 9px);
+        gap: 8px;
+        margin-bottom: 2rem;
+      }
+
+      .braun-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: #2a2824;
+        box-shadow:
+          inset 0 2px 3px rgba(0,0,0,0.8),
+          0 1px 1px rgba(255,255,255,0.6);
+      }
+
+      /* Header Hardware Unit */
+      .braun-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 2rem;
+        padding-bottom: 2.5rem;
+        border-bottom: 1px solid #dcd6cb;
+        margin-bottom: 2.5rem;
+        box-shadow: 0 1px 0 rgba(255,255,255,0.8);
+      }
+
+      .braun-identity h1 {
+        font-size: 3.25rem;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        color: #111111;
+        line-height: 1;
+        text-shadow: 0 1px 1px rgba(255,255,255,0.8);
+        margin-bottom: 0.5rem;
+      }
+
+      .braun-identity .profession {
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: #4a4742;
+        letter-spacing: -0.01em;
+        text-shadow: 0 1px 0 rgba(255,255,255,0.7);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .braun-identity .profession::before {
+        content: '';
+        width: 10px;
+        height: 10px;
+        background: #ff5722;
+        border-radius: 50%;
+        box-shadow: inset 0 1px 2px rgba(0,0,0,0.3), 0 1px 1px rgba(255,255,255,0.8);
+      }
+
+      .braun-identity address {
+        font-style: normal;
+        font-size: 0.85rem;
+        color: #7a756c;
+        margin-top: 0.35rem;
+        font-weight: 500;
+      }
+
+      /* Mechanical Switch Widget */
+      .braun-control-panel {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      .braun-switch-tray {
+        background: #ded9cd;
+        border-radius: 30px;
+        padding: 5px;
+        display: flex;
+        box-shadow:
+          inset 0 3px 6px rgba(0,0,0,0.25),
+          inset 0 -1px 2px rgba(255,255,255,0.6),
+          0 1px 1px rgba(255,255,255,0.9);
+        border: 1px solid #c4beaF;
+      }
+
+      .braun-switch-pill {
+        width: 46px;
+        height: 26px;
+        border-radius: 14px;
+        background: linear-gradient(180deg, #f9f7f2 0%, #e2ded4 100%);
+        box-shadow:
+          0 3px 6px rgba(0,0,0,0.2),
+          0 1px 2px rgba(0,0,0,0.15),
+          inset 0 1px 1px #ffffff,
+          inset 0 -1px 1px rgba(0,0,0,0.15);
+        border: 1px solid #cfc9bd;
+        cursor: pointer;
+        position: relative;
+        transition: transform 0.15s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+      }
+
+      .braun-switch-pill::after {
+        content: '';
+        position: absolute;
+        top: 6px;
+        bottom: 6px;
+        left: 50%;
+        width: 4px;
+        margin-left: -2px;
+        background: repeating-linear-gradient(90deg, #888277 0px, #888277 1px, transparent 1px, transparent 3px);
+      }
+
+      /* Tactile Concave Buttons (ET66 Calculator Style) */
+      .braun-btn-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .braun-btn {
+        background: linear-gradient(180deg, #f5f2eb 0%, #ded9ce 100%);
+        color: #222222;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 700;
+        padding: 0.85rem 1.6rem;
+        border-radius: 40px;
+        border: 1px solid #c9c3b5;
+        cursor: pointer;
+        box-shadow:
+          0 5px 10px rgba(40,32,20,0.16),
+          0 2px 3px rgba(0,0,0,0.08),
+          inset 0 2px 3px #ffffff,
+          inset 0 -2px 3px rgba(0,0,0,0.12);
+        transition: all 0.1s ease;
+        text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        position: relative;
+      }
+
+      .braun-btn:hover {
+        background: linear-gradient(180deg, #ffffff 0%, #e8e3d8 100%);
+        transform: translateY(-1px);
+        box-shadow:
+          0 7px 14px rgba(40,32,20,0.2),
+          0 2px 4px rgba(0,0,0,0.1),
+          inset 0 2px 3px #ffffff,
+          inset 0 -2px 3px rgba(0,0,0,0.12);
+      }
+
+      .braun-btn:active {
+        transform: translateY(2px);
+        background: linear-gradient(180deg, #d3cec3 0%, #e2ddd2 100%);
+        box-shadow:
+          inset 0 3px 5px rgba(0,0,0,0.25),
+          inset 0 1px 2px rgba(0,0,0,0.2),
+          0 1px 1px rgba(255,255,255,0.8);
+      }
+
+      .braun-btn.accent-orange {
+        background: linear-gradient(180deg, #ff7a45 0%, #e64a19 100%);
+        color: #ffffff;
+        border-color: #bf360c;
+        text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+        box-shadow:
+          0 6px 12px rgba(230,74,25,0.35),
+          inset 0 2px 3px rgba(255,255,255,0.4),
+          inset 0 -2px 3px rgba(0,0,0,0.3);
+      }
+
+      .braun-btn.accent-orange:hover {
+        background: linear-gradient(180deg, #ff8a50 0%, #f4511e 100%);
+      }
+
+      .braun-btn.accent-orange:active {
+        background: linear-gradient(180deg, #d84315 0%, #bf360c 100%);
+        box-shadow: inset 0 3px 6px rgba(0,0,0,0.45);
+      }
+
+      .braun-btn.accent-dark {
+        background: linear-gradient(180deg, #3a3733 0%, #201e1b 100%);
+        color: #f7f5f0;
+        border-color: #171513;
+        text-shadow: 0 -1px 0 rgba(0,0,0,0.8);
+        box-shadow:
+          0 6px 12px rgba(0,0,0,0.25),
+          inset 0 1px 2px rgba(255,255,255,0.2),
+          inset 0 -2px 3px rgba(0,0,0,0.5);
+      }
+
+      /* Recessed Modular Cards */
+      .braun-card {
+        background: #f4f0e7;
+        border-radius: 18px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        border: 1px solid #d4cebf;
+        box-shadow:
+          inset 0 2px 4px rgba(0,0,0,0.06),
+          0 2px 5px rgba(0,0,0,0.04),
+          0 1px 0 rgba(255,255,255,0.8);
+      }
+
+      .braun-card h3 {
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: #161514;
+        margin-bottom: 0.6rem;
+        letter-spacing: -0.02em;
+      }
+
+      .braun-card .meta-row {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.8rem;
+        color: #ff5722;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        display: flex;
+        gap: 1.25rem;
+      }
+
+      .braun-card .date-badge {
+        color: #736d63;
+        font-weight: 500;
+      }
+
+      .braun-card p {
+        font-size: 1rem;
+        color: #383531;
+        line-height: 1.6;
+        margin-bottom: 0.75rem;
+      }
+
+      .braun-grid-3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      .braun-tray-box {
+        background: #e3ded2;
+        border-radius: 14px;
+        padding: 1.25rem;
+        box-shadow:
+          inset 0 3px 6px rgba(0,0,0,0.12),
+          0 1px 1px rgba(255,255,255,0.7);
+        border: 1px solid #cfc8ba;
+      }
+
+      .braun-tray-box h4 {
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #635e55;
+        margin-bottom: 0.75rem;
+        padding-bottom: 0.4rem;
+        border-bottom: 1px solid #cfc8ba;
+      }
+
+      .braun-tray-box ul {
+        list-style: none;
+      }
+
+      .braun-tray-box li {
+        padding: 0.35rem 0;
+        font-size: 0.9rem;
+        color: #262422;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .braun-tray-box li::before {
+        content: '';
+        width: 5px;
+        height: 5px;
+        background: #8e887d;
+        border-radius: 50%;
+      }
+
+      /* =========================================================================
+         ARCHETYPE 2: AUDIO RACK & STUDIO SYNTHESIZER
+         Inspired by Neve consoles, Moog synthesizers, Marshall amp faceplates
+         ========================================================================= */
+      .audio-theme {
+        background-color: #141518;
+        background-image:
+          linear-gradient(90deg, #1b1c20 0%, #111215 50%, #1b1c20 100%),
+          repeating-linear-gradient(0deg, rgba(0,0,0,0.2) 0px, rgba(0,0,0,0.2) 1px, transparent 1px, transparent 2px);
+        color: #e2e6ed;
+        font-family: 'Inter', -apple-system, sans-serif;
+        padding-bottom: 5rem;
+      }
+
+      .audio-theme .archetype-banner {
+        background: #1e2025;
+        border-bottom: 1px solid #2e323b;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+      }
+
+      .audio-theme .spec-tag {
+        background: #2b2e36;
+        color: #ffb300;
+        border: 1px solid #444955;
+      }
+
+      .rack-frame {
+        max-width: 1060px;
+        margin: 2.5rem auto;
+        background: #1d1e22;
+        border: 14px solid #101114;
+        border-radius: 6px;
+        box-shadow:
+          0 25px 50px -10px rgba(0,0,0,0.8),
+          inset 0 0 15px rgba(0,0,0,0.9),
+          0 0 0 1px #33363f;
+        position: relative;
+      }
+
+      /* Corner Rack Screws */
+      .rack-screw {
+        width: 18px;
+        height: 18px;
+        background: radial-gradient(circle, #8a919e 0%, #464a52 70%, #202227 100%);
+        border-radius: 50%;
+        border: 1px solid #22242a;
+        box-shadow: inset 0 1px 1px rgba(255,255,255,0.6), 0 2px 4px rgba(0,0,0,0.6);
+        position: relative;
+        display: inline-block;
+      }
+
+      .rack-screw::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 3px;
+        right: 3px;
+        height: 2px;
+        background: #141517;
+        transform: translateY(-50%) rotate(35deg);
+        box-shadow: 0 1px 0 rgba(255,255,255,0.3);
+      }
+
+      .rack-panel {
+        background: linear-gradient(180deg, #33363e 0%, #24262c 4%, #282a30 96%, #18191d 100%);
+        border-bottom: 4px solid #0f1012;
+        padding: 2.25rem 2.5rem;
+        position: relative;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -1px 0 rgba(255,255,255,0.06);
+      }
+
+      .rack-panel-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        border-bottom: 2px solid #1c1d22;
+        padding-bottom: 1rem;
+        box-shadow: 0 1px 0 rgba(255,255,255,0.08);
+      }
+
+      .rack-mount-ears {
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        top: 14px;
+        bottom: 14px;
+        left: 12px;
+        right: 12px;
+        pointer-events: none;
+      }
+
+      .rack-panel h1 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 2.75rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: #f0f3f8;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.8), 0 -1px 0 rgba(255,255,255,0.2);
+      }
+
+      .rack-panel .profession {
+        font-family: 'Chivo Mono', monospace;
+        font-size: 1rem;
+        color: #ffb300;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        text-shadow: 0 0 10px rgba(255, 179, 0, 0.4);
+      }
+
+      /* Glowing Analog VU Meter */
+      .vu-meter-box {
+        background: #141517;
+        border: 2px solid #0a0a0c;
+        border-radius: 8px;
+        padding: 10px;
+        box-shadow:
+          inset 0 4px 10px rgba(0,0,0,0.9),
+          0 1px 0 rgba(255,255,255,0.1);
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .vu-glass {
+        width: 140px;
+        height: 70px;
+        background: radial-gradient(ellipse at 50% 100%, #ffdf94 0%, #e6a72e 60%, #b2730d 100%);
+        border-radius: 6px;
+        position: relative;
+        overflow: hidden;
+        box-shadow:
+          inset 0 0 12px rgba(0,0,0,0.4),
+          0 0 16px rgba(230, 167, 46, 0.4);
+        border: 1px solid #946006;
+      }
+
+      .vu-scale {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        display: flex;
+        justify-content: space-between;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.6rem;
+        font-weight: 700;
+        color: #3b2400;
+      }
+
+      .vu-needle {
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        width: 2px;
+        height: 60px;
+        background: #2b1700;
+        transform-origin: bottom center;
+        transform: rotate(-15deg);
+        transition: transform 0.2s cubic-bezier(0.1, 0.9, 0.3, 1.2);
+        box-shadow: 0 0 2px rgba(0,0,0,0.5);
+      }
+
+      .vu-meter-box:hover .vu-needle {
+        transform: rotate(25deg);
+      }
+
+      .vu-label {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.65rem;
+        font-weight: 700;
+        color: #ffb300;
+        margin-top: 6px;
+        letter-spacing: 0.1em;
+      }
+
+      /* Rotary Knurled Aluminum Knob */
+      .potentiometer-group {
+        display: flex;
+        gap: 1.5rem;
+        align-items: center;
+      }
+
+      .knob-unit {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      .audio-knob {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        background:
+          radial-gradient(circle, #525660 0%, #2b2e35 70%, #1a1b1f 100%);
+        border: 2px solid #141518;
+        box-shadow:
+          0 8px 16px rgba(0,0,0,0.6),
+          inset 0 1px 1px rgba(255,255,255,0.4),
+          inset 0 -2px 3px rgba(0,0,0,0.8);
+        position: relative;
+        cursor: grab;
+        transform: rotate(-30deg);
+        transition: transform 0.15s ease-out;
+      }
+
+      .audio-knob:hover {
+        transform: rotate(15deg);
+      }
+
+      .audio-knob:active {
+        cursor: grabbing;
+        transform: rotate(45deg);
+      }
+
+      .audio-knob::before {
+        content: '';
+        position: absolute;
+        top: 4px;
+        left: 50%;
+        width: 3px;
+        height: 12px;
+        background: #ffffff;
+        margin-left: -1.5px;
+        border-radius: 2px;
+        box-shadow: 0 0 4px #ffffff;
+      }
+
+      .knob-label {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.65rem;
+        font-weight: 700;
+        color: #9da5b3;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      /* Physical Chrome Toggle Switches with Glowing Jewels */
+      .toggle-bank {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin: 1.5rem 0;
+      }
+
+      .toggle-switch-module {
+        background: #1a1b1f;
+        border: 1px solid #30333b;
+        border-radius: 6px;
+        padding: 0.75rem 1.25rem;
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.06);
+        cursor: pointer;
+      }
+
+      .toggle-bat {
+        width: 14px;
+        height: 30px;
+        background: linear-gradient(90deg, #d2d6dc 0%, #ffffff 50%, #878e99 100%);
+        border-radius: 6px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+        position: relative;
+        transition: transform 0.1s ease;
+      }
+
+      .toggle-switch-module.active .toggle-bat {
+        transform: translateY(-4px) scaleY(0.9);
+      }
+
+      .jewel-indicator {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #252830;
+        border: 1px solid #141518;
+        box-shadow: inset 0 1px 2px rgba(0,0,0,0.8);
+      }
+
+      .jewel-indicator.on-amber {
+        background: #ffab00;
+        box-shadow: 0 0 12px #ffab00, inset 0 1px 2px #fff;
+      }
+
+      .jewel-indicator.on-green {
+        background: #00e676;
+        box-shadow: 0 0 12px #00e676, inset 0 1px 2px #fff;
+      }
+
+      /* Audio Modular Experience Slots */
+      .rack-entry {
+        background: #1a1b1f;
+        border-radius: 6px;
+        border: 1px solid #2e313a;
+        padding: 1.5rem;
+        margin-bottom: 1.25rem;
+        box-shadow:
+          0 4px 10px rgba(0,0,0,0.4),
+          inset 0 1px 0 rgba(255,255,255,0.08);
+      }
+
+      .rack-entry h3 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #f4f6fa;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .rack-entry .channel-badge {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.7rem;
+        background: #2d3038;
+        color: #ffab00;
+        padding: 0.2rem 0.5rem;
+        border-radius: 3px;
+        border: 1px solid #434752;
+      }
+
+      .rack-entry p {
+        color: #bcc3cf;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-top: 0.6rem;
+      }
+
+      /* =========================================================================
+         ARCHETYPE 3: CUPERTINO AQUA & BRUSHED METAL (Peak 2000s OS X)
+         Inspired by OS X 10.4 Tiger, QuickTime 7, and Brushed Aluminum iMacs
+         ========================================================================= */
+      .aqua-theme {
+        background-color: #6d7889;
+        background-image:
+          radial-gradient(ellipse at 50% 0%, #9ca7b8 0%, #545e6f 100%);
+        color: #1a1d24;
+        font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Lucida Grande', 'Inter', sans-serif;
+        padding-bottom: 5rem;
+      }
+
+      .aqua-theme .archetype-banner {
+        background: #4e5766;
+        border-bottom: 1px solid #3d4452;
+        color: #ffffff;
+      }
+
+      .aqua-theme .spec-tag {
+        background: rgba(255,255,255,0.15);
+        color: #ffffff;
+        border: 1px solid rgba(255,255,255,0.25);
+        backdrop-filter: blur(4px);
+      }
+
+      .aqua-window {
+        max-width: 1040px;
+        margin: 2.5rem auto;
+        background:
+          repeating-linear-gradient(90deg, #d3d7de 0px, #e3e6ec 1px, #d3d7de 2px),
+          linear-gradient(180deg, #f0f2f5 0%, #c8cdd6 100%);
+        border-radius: 12px;
+        box-shadow:
+          0 35px 70px rgba(12, 17, 28, 0.55),
+          0 10px 25px rgba(0,0,0,0.25),
+          inset 0 1px 0 rgba(255,255,255,0.95),
+          inset 0 -1px 0 rgba(0,0,0,0.2),
+          0 0 0 1px #8c929e;
+        overflow: hidden;
+      }
+
+      /* Mac Titlebar with Traffic Lights & Realistic Glyphs */
+      .mac-titlebar {
+        background: linear-gradient(180deg, #ededed 0%, #cacaca 100%);
+        border-bottom: 1px solid #999999;
+        padding: 0.85rem 1.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: inset 0 1px 0 #ffffff;
+        cursor: grab;
+      }
+
+      .traffic-lights {
+        display: flex;
+        gap: 8px;
+      }
+
+      .traffic-btn {
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        box-shadow: inset 0 1px 1px rgba(255,255,255,0.85), 0 1px 2px rgba(0,0,0,0.35);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: -apple-system, sans-serif;
+        font-size: 9px;
+        font-weight: 800;
+        cursor: pointer;
+        line-height: 1;
+        transition: transform 0.05s ease;
+      }
+
+      .traffic-btn:active {
+        transform: scale(0.92);
+        filter: brightness(0.85);
+      }
+
+      .traffic-btn.close {
+        background: radial-gradient(circle at 35% 35%, #ff8585 0%, #ff5252 40%, #c41010 100%);
+        border: 1px solid #8e0a0a;
+      }
+
+      .traffic-btn.min {
+        background: radial-gradient(circle at 35% 35%, #ffe685 0%, #ffc629 40%, #c28400 100%);
+        border: 1px solid #946500;
+      }
+
+      .traffic-btn.max {
+        background: radial-gradient(circle at 35% 35%, #88ea88 0%, #29cf6e 40%, #118239 100%);
+        border: 1px solid #0e6b2e;
+      }
+
+      .traffic-lights:hover .traffic-btn.close::after {
+        content: '×';
+        color: #4a0000;
+      }
+
+      .traffic-lights:hover .traffic-btn.min::after {
+        content: '−';
+        color: #5c3b00;
+        margin-top: -1px;
+      }
+
+      .traffic-lights:hover .traffic-btn.max::after {
+        content: '+';
+        color: #054013;
+      }
+
+      .window-title {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #3b3d42;
+        text-shadow: 0 1px 0 rgba(255,255,255,0.9);
+        letter-spacing: -0.01em;
+      }
+
+      .aqua-body {
+        padding: 2.5rem;
+      }
+
+      /* Refined Stitched Leather Badge with Brass Corner Screws */
+      .leather-badge-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
+      }
+
+      .leather-badge {
+        background:
+          radial-gradient(circle at 50% 30%, rgba(255,255,255,0.08) 0%, transparent 70%),
+          linear-gradient(180deg, #874f29 0%, #583115 100%);
+        border: 1px solid #3b1d0a;
+        border-radius: 12px;
+        padding: 1.5rem 3.5rem;
+        box-shadow:
+          0 8px 18px rgba(0,0,0,0.45),
+          inset 0 1px 1px rgba(255,255,255,0.35),
+          inset 0 -2px 6px rgba(0,0,0,0.6);
+        position: relative;
+        text-align: center;
+      }
+
+      .leather-badge::before {
+        content: '';
+        position: absolute;
+        top: 6px;
+        bottom: 6px;
+        left: 6px;
+        right: 6px;
+        border: 1.5px dashed rgba(255, 222, 185, 0.5);
+        border-radius: 8px;
+        box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+        pointer-events: none;
+      }
+
+      .brass-rivet {
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 35% 35%, #ffe694 0%, #d4a034 60%, #754b08 100%);
+        border: 1px solid #4d3005;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.6), inset 0 1px 1px rgba(255,255,255,0.8);
+      }
+
+      .brass-rivet::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 3px;
+        right: 3px;
+        height: 1.5px;
+        background: #382002;
+        transform: translateY(-50%) rotate(40deg);
+        box-shadow: 0 1px 0 rgba(255,255,255,0.5);
+      }
+
+      .brass-rivet.tl { top: 10px; left: 10px; }
+      .brass-rivet.tr { top: 10px; right: 10px; }
+      .brass-rivet.bl { bottom: 10px; left: 10px; }
+      .brass-rivet.br { bottom: 10px; right: 10px; }
+
+      .leather-badge h1 {
+        font-family: 'Times New Roman', 'Baskerville', 'Playfair Display', serif;
+        font-size: 2.6rem;
+        font-weight: 700;
+        color: #f7d294;
+        text-shadow:
+          0 2px 4px rgba(0,0,0,0.85),
+          0 -1px 0 rgba(255,255,255,0.25),
+          0 1px 0 #704018;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        line-height: 1.1;
+      }
+
+      .leather-badge p {
+        font-size: 0.85rem;
+        color: #e5b982;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        text-shadow: 0 -1px 0 rgba(0,0,0,0.8), 0 1px 0 rgba(255,255,255,0.2);
+        margin-top: 0.25rem;
+      }
+
+      /* Segmented Controller (Classic Mac OS X View Switcher) */
+      .aqua-segmented-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
+      }
+
+      .aqua-segmented-bar {
+        display: inline-flex;
+        background: linear-gradient(180deg, #b0b5be 0%, #c9ced7 100%);
+        border-radius: 8px;
+        padding: 2px;
+        border: 1px solid #757c8a;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,0.3), 0 1px 0 rgba(255,255,255,0.8);
+        gap: 1px;
+      }
+
+      .aqua-seg-item {
+        padding: 0.5rem 1.4rem;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #3b404b;
+        border-radius: 6px;
+        border: 1px solid transparent;
+        cursor: pointer;
+        background: transparent;
+        text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+        transition: all 0.15s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      .aqua-seg-item:hover {
+        color: #111;
+        background: rgba(255,255,255,0.2);
+      }
+
+      .aqua-seg-item.active {
+        background: linear-gradient(180deg, #f2f4f7 0%, #d8dde6 100%);
+        color: #11141a;
+        border-color: #838a97;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.22), inset 0 1px 0 #ffffff;
+      }
+
+      /* Glossy Candy Aqua Gel Pill Buttons with Specular Curvature */
+      .aqua-gel-bar {
+        display: flex;
+        justify-content: center;
+        gap: 1.25rem;
+        margin-bottom: 2.5rem;
+        flex-wrap: wrap;
+      }
+
+      .aqua-gel-btn {
+        background:
+          radial-gradient(ellipse at 50% 15%, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.3) 38%, transparent 40%),
+          linear-gradient(180deg,
+            rgba(255,255,255,0.6) 0%,
+            rgba(255,255,255,0.1) 48%,
+            rgba(0,140,255,0.2) 50%,
+            rgba(0,119,230,0.8) 100%),
+          #1e88e5;
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 0.95rem;
+        padding: 0.75rem 2.2rem;
+        border-radius: 30px;
+        border: 1px solid #0d47a1;
+        box-shadow:
+          0 5px 12px rgba(13, 71, 161, 0.45),
+          inset 0 1px 0 rgba(255,255,255,0.95),
+          inset 0 -2px 4px rgba(0,0,0,0.35);
+        text-shadow: 0 -1px 1px rgba(0, 30, 80, 0.75);
+        cursor: pointer;
+        transition: all 0.15s ease;
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .aqua-gel-btn:hover {
+        box-shadow:
+          0 7px 16px rgba(13, 71, 161, 0.6),
+          inset 0 1px 0 #ffffff;
+        transform: translateY(-1px);
+      }
+
+      .aqua-gel-btn:active {
+        background:
+          linear-gradient(180deg,
+            rgba(0,80,180,0.7) 0%,
+            rgba(0,120,230,0.95) 100%);
+        box-shadow: inset 0 3px 6px rgba(0,0,0,0.55), 0 1px 2px rgba(0,0,0,0.2);
+        transform: translateY(1px);
+      }
+
+      /* Pulsating Default Aqua Glow Effect */
+      .aqua-gel-btn.pulse {
+        animation: aquaGlowPulse 2.4s infinite ease-in-out;
+      }
+
+      @keyframes aquaGlowPulse {
+        0%, 100% {
+          box-shadow:
+            0 5px 12px rgba(13, 71, 161, 0.45),
+            0 0 0 0 rgba(0, 180, 255, 0),
+            inset 0 1px 0 rgba(255,255,255,0.95),
+            inset 0 -2px 4px rgba(0,0,0,0.35);
+        }
+        50% {
+          box-shadow:
+            0 6px 20px rgba(0, 160, 255, 0.75),
+            0 0 14px 2px rgba(0, 190, 255, 0.6),
+            inset 0 1px 0 #ffffff,
+            inset 0 -2px 4px rgba(0,0,0,0.35);
+        }
+      }
+
+      .aqua-gel-btn.graphite {
+        background:
+          radial-gradient(ellipse at 50% 15%, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.25) 38%, transparent 40%),
+          linear-gradient(180deg,
+            rgba(255,255,255,0.5) 0%,
+            rgba(255,255,255,0.08) 48%,
+            rgba(50,50,50,0.25) 50%,
+            rgba(30,30,30,0.85) 100%),
+          #484f5c;
+        border-color: #2b303a;
+        box-shadow:
+          0 5px 12px rgba(0,0,0,0.35),
+          inset 0 1px 0 rgba(255,255,255,0.85);
+        text-shadow: 0 -1px 1px rgba(0,0,0,0.8);
+      }
+
+      /* Inset Pinstripe Cards */
+      .aqua-inset-card {
+        background: #f8f9fa;
+        background-image: repeating-linear-gradient(0deg, #f8f9fa 0px, #f8f9fa 2px, #edf0f5 2px, #edf0f5 4px);
+        border: 1px solid #b5bac4;
+        border-radius: 8px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow:
+          inset 0 2px 6px rgba(0,0,0,0.14),
+          0 1px 0 #ffffff;
+      }
+
+      .aqua-inset-card h3 {
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: #20242c;
+        text-shadow: 0 1px 0 #ffffff;
+        margin-bottom: 0.4rem;
+      }
+
+      .aqua-inset-card .org-role {
+        font-weight: 600;
+        color: #0277bd;
+        font-size: 0.9rem;
+        margin-bottom: 0.6rem;
+      }
+
+      .aqua-inset-card p {
+        color: #40444d;
+        line-height: 1.6;
+        font-size: 0.95rem;
+      }
+
+      /* Bottom QuickTime / Finder Transport Control Dock */
+      .mac-dock-footer {
+        background: linear-gradient(180deg, #d3d7de 0%, #b8bec9 100%);
+        border-top: 1px solid #949ba7;
+        padding: 0.85rem 1.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: inset 0 1px 0 #ffffff;
+        border-radius: 0 0 12px 12px;
+      }
+
+      .dock-transport {
+        display: flex;
+        align-items: center;
+        background: linear-gradient(180deg, #c0c5ce 0%, #abb1bd 100%);
+        border-radius: 20px;
+        padding: 4px 12px;
+        border: 1px solid #828a96;
+        box-shadow: inset 0 1px 2px rgba(0,0,0,0.25), 0 1px 0 rgba(255,255,255,0.7);
+        gap: 0.85rem;
+      }
+
+      .dock-btn {
+        background: transparent;
+        border: none;
+        color: #3d434e;
+        cursor: pointer;
+        font-size: 0.9rem;
+        padding: 4px 6px;
+        text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+        transition: color 0.15s ease;
+      }
+
+      .dock-btn:hover {
+        color: #0277bd;
+      }
+
+      .dock-slider {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 130px;
+        height: 6px;
+        background: #737b88;
+        border-radius: 3px;
+        box-shadow: inset 0 1px 2px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.6);
+        outline: none;
+      }
+
+      .dock-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 35% 35%, #ffffff 0%, #b9bec7 60%, #767d8a 100%);
+        border: 1px solid #5a606d;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.35);
+        cursor: pointer;
+      }
+
+      .window-resize-hatch {
+        width: 14px;
+        height: 14px;
+        background: repeating-linear-gradient(-45deg, #7b8390 0px, #7b8390 1.5px, transparent 1.5px, transparent 4px);
+        opacity: 0.7;
+      }
+
+      /* Interactive Audio Synthesizer Script Hook */
+      @media (max-width: 768px) {
+        .braun-chassis, .rack-frame, .aqua-window {
+          margin: 1rem auto;
+          padding: 1.5rem;
+        }
+        .braun-speaker-grille {
+          grid-template-columns: repeat(12, 8px);
+        }
+        .skeuo-nav-deck {
+          padding: 0.5rem 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Tactical Topbar Control Deck -->
+    <header class="skeuo-nav-deck">
+      <div class="deck-brand">
+        <div class="deck-badge">Skeuomorphic Prototypes</div>
+        <span class="deck-title">Tactile Theme Exploration</span>
+      </div>
+
+      <nav class="prototype-tabs">
+        <button class="proto-btn active" data-target="archetype-braun">
+          <i class="fa-solid fa-calculator"></i> 01 // Braun / Rams
+        </button>
+        <button class="proto-btn" data-target="archetype-audio">
+          <i class="fa-solid fa-sliders"></i> 02 // Studio Audio Rack
+        </button>
+        <button class="proto-btn" data-target="archetype-aqua">
+          <i class="fa-solid fa-compact-disc"></i> 03 // Cupertino Aqua
+        </button>
+      </nav>
+
+      <button id="audioClickToggle" class="audio-toggle-btn" title="Toggle tactile mechanical relay click audio">
+        <i class="fa-solid fa-volume-high"></i> Tactile Sound: ON
+      </button>
+    </header>
+
+    <!-- =======================================================================
+         ARCHETYPE 1: BRAUN & DIETER RAMS (INDUSTRIAL MODERNIST SKEUOMORPHISM)
+         ======================================================================= -->
+    <main id="archetype-braun" class="prototype-container active braun-theme">
+      <div class="archetype-banner">
+        <div class="banner-info">
+          <h2>Archetype 01: Braun & Dieter Rams (Industrial Modernist Skeuomorphism)</h2>
+          <p>
+            Honest material physics meets Bauhaus functionalism. Warm textured ivory ABS casing, concave ET66 spherical pushbuttons, stamped debossed typography, and tactile slider triggers.
+          </p>
+        </div>
+        <div class="banner-tags">
+          <span class="spec-tag">Ivory ABS Plastic</span>
+          <span class="spec-tag">ET66 Spherical Bevels</span>
+          <span class="spec-tag">Braun Orange (#FF5722)</span>
+        </div>
+      </div>
+
+      <div class="braun-chassis">
+        <!-- Dot matrix speaker grille -->
+        <div class="braun-speaker-grille" aria-hidden="true">
+          <div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div>
+          <div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div>
+          <div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div><div class="braun-dot"></div>
+        </div>
+
+        <header class="braun-header">
+          <div class="braun-identity">
+            <h1>Sean Beck</h1>
+            <p class="profession">Senior Software Engineer & Systems Architect</p>
+            <address><i class="fa-solid fa-location-dot"></i> Somerville, Massachusetts</address>
+          </div>
+
+          <div class="braun-control-panel">
+            <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #767064;">Power / State</span>
+            <div class="braun-switch-tray">
+              <div class="braun-switch-pill" id="braunPowerSwitch" role="button" tabindex="0" title="Click to toggle tactile mechanical switch"></div>
+            </div>
+          </div>
+        </header>
+
+        <!-- Spherical Beveled Buttons -->
+        <div class="braun-btn-row">
+          <button class="braun-btn accent-orange"><i class="fa-solid fa-terminal"></i> About Engineering</button>
+          <button class="braun-btn"><i class="fa-solid fa-briefcase"></i> Work Experience</button>
+          <button class="braun-btn"><i class="fa-solid fa-layer-group"></i> Architecture & Systems</button>
+          <button class="braun-btn accent-dark"><i class="fa-solid fa-envelope"></i> spcbeck@gmail.com</button>
+        </div>
+
+        <!-- Recessed Content Container -->
+        <section class="braun-card">
+          <h3>About Me</h3>
+          <p>
+            I am a freelance and professional software engineer and designer living in Somerville, MA. My interests lie in making the web a better place. I also enjoy film photography, playing guitar, and doing the crossword. No AI was used in the creation of this website. But I could have if I wanted to.
+          </p>
+
+          <div class="braun-grid-3">
+            <div class="braun-tray-box">
+              <h4>Core Languages</h4>
+              <ul>
+                <li>JavaScript / TypeScript</li>
+                <li>HTML5 & Modern CSS</li>
+                <li>Python & Node.js</li>
+                <li>C++ / WebAssembly</li>
+              </ul>
+            </div>
+            <div class="braun-tray-box">
+              <h4>Frameworks & UI</h4>
+              <ul>
+                <li>React & Next.js</li>
+                <li>Vue.js & Pinia</li>
+                <li>Lit & Web Components</li>
+                <li>Design Systems</li>
+              </ul>
+            </div>
+            <div class="braun-tray-box">
+              <h4>Tooling & Cloud</h4>
+              <ul>
+                <li>Playwright & Vitest</li>
+                <li>AWS Cloud Architecture</li>
+                <li>Ansible & CI/CD Pipelines</li>
+                <li>JSON:API Specification</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Work Experience Cards -->
+        <section>
+          <div class="braun-card">
+            <div class="meta-row">
+              <span>SENIOR SOFTWARE ENGINEER</span>
+              <span class="date-badge">DECEMBER 2021 – PRESENT</span>
+            </div>
+            <h3>The Washington Post</h3>
+            <p>
+              Discovery team designing and building gaming platform systems and high-traffic games, including the second most played crossword in the world, Wridges, and Keyword. Contributing to core homepage APIs and Python AWS Lambda microservices for dynamic asset generation.
+            </p>
+          </div>
+
+          <div class="braun-card">
+            <div class="meta-row">
+              <span>SOFTWARE ENGINEER</span>
+              <span class="date-badge">SEPTEMBER 2019 – DECEMBER 2021</span>
+            </div>
+            <h3>Openbay</h3>
+            <p>
+              Designed and engineered Vue.js Single Page Applications backed by JSON:API-spec Ruby on Rails architectures. Automated deployments via Ansible and AWS S3 infrastructure.
+            </p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- =======================================================================
+         ARCHETYPE 2: AUDIO RACK & STUDIO SYNTHESIZER
+         ======================================================================= -->
+    <main id="archetype-audio" class="prototype-container audio-theme">
+      <div class="archetype-banner">
+        <div class="banner-info">
+          <h2>Archetype 02: Studio Audio Rack & Modular Synth Module</h2>
+          <p>
+            Anodized dark brushed titanium panels, knurled aluminum rotary potentiometer dials, glowing dual-needle analog VU meters, hex cap screws, and heavy toggle switches with warm jewel LEDs.
+          </p>
+        </div>
+        <div class="banner-tags">
+          <span class="spec-tag">Brushed Titanium</span>
+          <span class="spec-tag">Backlit VU Meters</span>
+          <span class="spec-tag">Amber Jewel LEDs</span>
+        </div>
+      </div>
+
+      <div class="rack-frame">
+        <!-- Top Master Control Faceplate -->
+        <section class="rack-panel">
+          <div class="rack-panel-header">
+            <div>
+              <span class="profession">// MODEL SB-2026 AUDIO & SYSTEMS MODULE</span>
+              <h1>Sean Beck</h1>
+              <p style="font-size: 0.85rem; color: #8c95a6; font-family: 'JetBrains Mono', monospace; margin-top: 0.25rem;">
+                Somerville, MA &bull; 42.3876&deg; N, 71.0995&deg; W
+              </p>
+            </div>
+
+            <!-- Glowing Analog VU Meter -->
+            <div class="vu-meter-box" title="Analog VU Signal Meter — Hover to sweep needle">
+              <div class="vu-glass">
+                <div class="vu-scale">
+                  <span>-20</span><span>-10</span><span>-5</span><span>0</span><span style="color:#d50000;">+3</span>
+                </div>
+                <div class="vu-needle" id="audioNeedle"></div>
+              </div>
+              <span class="vu-label">SYSTEM THROUGHPUT</span>
+            </div>
+
+            <!-- Potentiometers -->
+            <div class="potentiometer-group">
+              <div class="knob-unit">
+                <div class="audio-knob" id="filterKnob" title="Click to rotate filter frequency"></div>
+                <span class="knob-label">Drive</span>
+              </div>
+              <div class="knob-unit">
+                <div class="audio-knob" id="levelKnob" title="Click to rotate master volume"></div>
+                <span class="knob-label">Master</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Physical Chrome Toggle Switch Bank -->
+          <div class="toggle-bank">
+            <div class="toggle-switch-module active" data-toggle="typescript">
+              <div class="toggle-bat"></div>
+              <div class="jewel-indicator on-amber"></div>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 700;">TypeScript / JS</span>
+            </div>
+            <div class="toggle-switch-module active" data-toggle="react">
+              <div class="toggle-bat"></div>
+              <div class="jewel-indicator on-green"></div>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 700;">React / WebComp</span>
+            </div>
+            <div class="toggle-switch-module active" data-toggle="aws">
+              <div class="toggle-bat"></div>
+              <div class="jewel-indicator on-amber"></div>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 700;">AWS / Cloud</span>
+            </div>
+            <div class="toggle-switch-module active" data-toggle="audio">
+              <div class="toggle-bat"></div>
+              <div class="jewel-indicator on-green"></div>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 700;">Guitar & Analog</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Work Experience Track Unit -->
+        <section class="rack-panel">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; color: #f4f6fa; font-weight: 700;">
+              Signal Routing & Experience Units
+            </h2>
+            <div style="display: flex; gap: 0.5rem;">
+              <span class="rack-screw"></span>
+              <span class="rack-screw"></span>
+            </div>
+          </div>
+
+          <div class="rack-entry">
+            <h3>
+              <span>The Washington Post // Discovery Systems</span>
+              <span class="channel-badge">CH 01 [LIVE]</span>
+            </h3>
+            <p style="color: #ffb300; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; margin-top: 0.25rem;">
+              SENIOR SOFTWARE ENGINEER &bull; 2021 – PRESENT
+            </p>
+            <p>
+              Engineering high-scale puzzle engines and gaming platform infrastructure. Creator of custom Python Lambda pipelines for real-time sitemaps and dynamic image rendering.
+            </p>
+          </div>
+
+          <div class="rack-entry">
+            <h3>
+              <span>Openbay // Platform Architecture</span>
+              <span class="channel-badge">CH 02</span>
+            </h3>
+            <p style="color: #ffb300; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; margin-top: 0.25rem;">
+              SOFTWARE ENGINEER &bull; 2019 – 2021
+            </p>
+            <p>
+              Engineered Vue.js client apps adhering to JSON:API specs with Ruby on Rails APIs and automated Ansible deployment orchestration.
+            </p>
+          </div>
+
+          <div class="rack-entry">
+            <h3>
+              <span>Harvard University // DCE Brand Platforms</span>
+              <span class="channel-badge">CH 03</span>
+            </h3>
+            <p style="color: #ffb300; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; margin-top: 0.25rem;">
+              FRONT END DEVELOPER & DESIGNER &bull; 2015 – 2019
+            </p>
+            <p>
+              Designed consumer-facing web ecosystems and course catalog architectures for Harvard Extension School and Summer School brands.
+            </p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- =======================================================================
+         ARCHETYPE 3: CUPERTINO AQUA & BRUSHED STEEL (PEAK OS X TIGER)
+         ======================================================================= -->
+    <main id="archetype-aqua" class="prototype-container aqua-theme">
+      <div class="archetype-banner">
+        <div class="banner-info">
+          <h2>Archetype 03: Cupertino Aqua & Brushed Metal (Peak 2000s OS X)</h2>
+          <p>
+            Golden-era Apple skeuomorphism. Brushed silver aluminum casing, liquid glossy Aqua pill buttons, stitched leather emblem, traffic light controls, and subtle pinstriped canvas backing.
+          </p>
+        </div>
+        <div class="banner-tags">
+          <span class="spec-tag">Aqua Gel Pill Buttons</span>
+          <span class="spec-tag">Brushed Metal</span>
+          <span class="spec-tag">Stitched Leather</span>
+        </div>
+      </div>
+
+      <div class="aqua-window">
+        <!-- Aqua Titlebar with Traffic Lights -->
+        <div class="mac-titlebar">
+          <div class="traffic-lights">
+            <div class="traffic-btn close" title="Close Window"></div>
+            <div class="traffic-btn min" title="Minimize Window"></div>
+            <div class="traffic-btn max" title="Zoom Window"></div>
+          </div>
+          <span class="window-title">Sean Beck — Software Engineer — Somerville, MA</span>
+          <div style="width: 52px;"></div>
+        </div>
+
+        <div class="aqua-body">
+          <!-- Refined Stitched Leather Identity Badge with Brass Rivets -->
+          <div class="leather-badge-container">
+            <div class="leather-badge">
+              <span class="brass-rivet tl" aria-hidden="true"></span>
+              <span class="brass-rivet tr" aria-hidden="true"></span>
+              <span class="brass-rivet bl" aria-hidden="true"></span>
+              <span class="brass-rivet br" aria-hidden="true"></span>
+              <h1>Sean Beck</h1>
+              <p>Craftsman &bull; Software Engineer</p>
+            </div>
+          </div>
+
+          <!-- Segmented View Controller -->
+          <div class="aqua-segmented-container">
+            <div class="aqua-segmented-bar" role="tablist">
+              <button class="aqua-seg-item active" data-filter="all"><i class="fa-solid fa-layer-group"></i> All Sections</button>
+              <button class="aqua-seg-item" data-filter="experience"><i class="fa-solid fa-briefcase"></i> Experience</button>
+              <button class="aqua-seg-item" data-filter="skills"><i class="fa-solid fa-code"></i> Engineering</button>
+              <button class="aqua-seg-item" data-filter="contact"><i class="fa-solid fa-envelope"></i> Contact</button>
+            </div>
+          </div>
+
+          <!-- Glossy Aqua Gel Pill Buttons with Specular Curvature & Breathing Pulse -->
+          <div class="aqua-gel-bar">
+            <button class="aqua-gel-btn pulse"><i class="fa-solid fa-address-card"></i> About</button>
+            <button class="aqua-gel-btn"><i class="fa-solid fa-code-fork"></i> Work Experience</button>
+            <button class="aqua-gel-btn graphite"><i class="fa-solid fa-camera"></i> Photography</button>
+            <button class="aqua-gel-btn graphite"><i class="fa-solid fa-paper-plane"></i> Contact</button>
+          </div>
+
+          <!-- Pinstriped Inset Content Cards -->
+          <div class="aqua-inset-card">
+            <h3>About Sean Beck</h3>
+            <div class="org-role">Software Engineer & Designer &bull; Somerville, MA</div>
+            <p>
+              I am a freelance and professional software engineer and designer living in Somerville, MA. My interests lie in making the web a better place. I also enjoy film photography, playing guitar, and doing the crossword. No AI was used in the creation of this website. But I could have if I wanted to.
+            </p>
+          </div>
+
+          <div class="aqua-inset-card">
+            <h3>The Washington Post</h3>
+            <div class="org-role">Senior Software Engineer &bull; December 2021 – Present</div>
+            <p>
+              Discovery team designing and building gaming platform systems, including the second most played crossword in the world, Wridges, and Keyword. Built dynamic Lambda generation pipelines and scalable frontend architectures.
+            </p>
+          </div>
+
+          <div class="aqua-inset-card">
+            <h3>Openbay</h3>
+            <div class="org-role">Software Engineer &bull; September 2019 – December 2021</div>
+            <p>
+              Designed and built Vue.js SPA with JSON:API-spec Ruby on Rails backend. Automated continuous deployments via Ansible and AWS S3 infrastructure.
+            </p>
+          </div>
+        </div>
+
+        <!-- Brushed Metal QuickTime / Finder Transport Footer -->
+        <footer class="mac-dock-footer">
+          <div class="dock-transport">
+            <button class="dock-btn prev-track" title="Previous Track"><i class="fa-solid fa-backward-step"></i></button>
+            <button class="dock-btn play-pause-btn" title="Play / Pause"><i class="fa-solid fa-play"></i></button>
+            <button class="dock-btn next-track" title="Next Track"><i class="fa-solid fa-forward-step"></i></button>
+            <input type="range" min="0" max="100" value="70" class="dock-slider" title="Volume / Gain" />
+          </div>
+          <span style="font-size: 0.75rem; font-weight: 700; color: #525a66; text-shadow: 0 1px 0 rgba(255,255,255,0.8); letter-spacing: 0.08em; text-transform: uppercase;">
+            Mac OS X &bull; Tiger 10.4 Edition
+          </span>
+          <div class="window-resize-hatch" title="Resize window grip" aria-hidden="true"></div>
+        </footer>
+      </div>
+    </main>
+
+    <!-- Interactive Tactile Audio & Switch Engine -->
+    <script>
+      (function () {
+        // Tab switching logic
+        const tabs = document.querySelectorAll('.proto-btn');
+        const containers = document.querySelectorAll('.prototype-container');
+
+        tabs.forEach((tab) => {
+          tab.addEventListener('click', () => {
+            tabs.forEach((t) => t.classList.remove('active'));
+            containers.forEach((c) => c.classList.remove('active'));
+
+            tab.classList.add('active');
+            const targetId = tab.getAttribute('data-target');
+            const targetEl = document.getElementById(targetId);
+            if (targetEl) targetEl.classList.add('active');
+            playTactileClick(600, 0.04);
+          });
+        });
+
+        // Web Audio Tactile Relay Click Generator
+        let audioCtx = null;
+        let isMuted = false;
+
+        function initAudio() {
+          if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          }
+        }
+
+        function playTactileClick(freq = 450, duration = 0.03) {
+          if (isMuted) return;
+          try {
+            initAudio();
+            if (audioCtx.state === 'suspended') {
+              audioCtx.resume();
+            }
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(120, audioCtx.currentTime + duration);
+
+            gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + duration);
+          } catch (e) {
+            // AudioContext autoplay restriction fallback
+          }
+        }
+
+        // Mute button
+        const audioClickToggle = document.getElementById('audioClickToggle');
+        if (audioClickToggle) {
+          audioClickToggle.addEventListener('click', () => {
+            isMuted = !isMuted;
+            if (isMuted) {
+              audioClickToggle.classList.add('muted');
+              audioClickToggle.innerHTML = '<i class="fa-solid fa-volume-xmark"></i> Tactile Sound: OFF';
+            } else {
+              audioClickToggle.classList.remove('muted');
+              audioClickToggle.innerHTML = '<i class="fa-solid fa-volume-high"></i> Tactile Sound: ON';
+              playTactileClick(800, 0.05);
+            }
+          });
+        }
+
+        // Braun mechanical slider
+        const braunSwitch = document.getElementById('braunPowerSwitch');
+        if (braunSwitch) {
+          let isOn = false;
+          braunSwitch.addEventListener('click', () => {
+            isOn = !isOn;
+            braunSwitch.style.transform = isOn ? 'translateX(20px)' : 'translateX(0)';
+            playTactileClick(isOn ? 900 : 350, 0.06);
+          });
+        }
+
+        // Audio toggle switch modules
+        const toggleModules = document.querySelectorAll('.toggle-switch-module');
+        toggleModules.forEach((mod) => {
+          mod.addEventListener('click', () => {
+            mod.classList.toggle('active');
+            const jewel = mod.querySelector('.jewel-indicator');
+            if (mod.classList.contains('active')) {
+              playTactileClick(750, 0.05);
+              if (jewel.classList.contains('on-amber')) jewel.style.boxShadow = '0 0 12px #ffab00, inset 0 1px 2px #fff';
+              if (jewel.classList.contains('on-green')) jewel.style.boxShadow = '0 0 12px #00e676, inset 0 1px 2px #fff';
+            } else {
+              playTactileClick(280, 0.05);
+              jewel.style.boxShadow = 'none';
+            }
+          });
+        });
+
+        // Knobs interactive rotation
+        const filterKnob = document.getElementById('filterKnob');
+        const levelKnob = document.getElementById('levelKnob');
+        let knobDeg1 = -30;
+        let knobDeg2 = 10;
+
+        if (filterKnob) {
+          filterKnob.addEventListener('click', () => {
+            knobDeg1 = (knobDeg1 + 45) % 180;
+            filterKnob.style.transform = `rotate(${knobDeg1}deg)`;
+            playTactileClick(500 + knobDeg1 * 2, 0.02);
+          });
+        }
+
+        if (levelKnob) {
+          levelKnob.addEventListener('click', () => {
+            knobDeg2 = (knobDeg2 + 40) % 180;
+            levelKnob.style.transform = `rotate(${knobDeg2}deg)`;
+            playTactileClick(400 + knobDeg2 * 2, 0.02);
+          });
+        }
+
+        // Needle wobble on move
+        const needle = document.getElementById('audioNeedle');
+        const vuBox = document.querySelector('.vu-meter-box');
+        if (vuBox && needle) {
+          vuBox.addEventListener('mousemove', (e) => {
+            const rect = vuBox.getBoundingClientRect();
+            const ratio = (e.clientX - rect.left) / rect.width;
+            const deg = -30 + ratio * 60;
+            needle.style.transform = `rotate(${deg}deg)`;
+          });
+          vuBox.addEventListener('mouseleave', () => {
+            needle.style.transform = 'rotate(-15deg)';
+          });
+        }
+
+        // Aqua Plink Water Drop Audio FX
+        function playAquaPlink() {
+          if (isMuted) return;
+          try {
+            initAudio();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(420, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(1350, audioCtx.currentTime + 0.08);
+
+            gain.gain.setValueAtTime(0.35, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.12);
+          } catch (e) {}
+        }
+
+        // Aqua Segmented Bar Switcher
+        const segItems = document.querySelectorAll('.aqua-seg-item');
+        segItems.forEach((item) => {
+          item.addEventListener('click', () => {
+            segItems.forEach((s) => s.classList.remove('active'));
+            item.classList.add('active');
+            playAquaPlink();
+          });
+        });
+
+        // Aqua Gel buttons play Aqua Plink
+        document.querySelectorAll('.aqua-gel-btn, .traffic-btn').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            playAquaPlink();
+          });
+        });
+
+        // Dock Play/Pause button
+        const playPauseBtn = document.querySelector('.play-pause-btn');
+        if (playPauseBtn) {
+          let isPlaying = false;
+          playPauseBtn.addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            playPauseBtn.innerHTML = isPlaying ? '<i class="fa-solid fa-pause"></i>' : '<i class="fa-solid fa-play"></i>';
+            playTactileClick(isPlaying ? 700 : 400, 0.04);
+          });
+        }
+
+        // General button clicks
+        document.querySelectorAll('.braun-btn, .dock-btn:not(.play-pause-btn)').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            playTactileClick(550, 0.03);
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>

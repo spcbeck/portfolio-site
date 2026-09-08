@@ -48,7 +48,20 @@
       <div class="sup-vec-cross"></div>
     </div>
     <main-container>
+      <div class="aqua-window-chrome" aria-hidden="true">
+        <div class="traffic-lights">
+          <span class="traffic-btn close" title="Close Window"></span>
+          <span class="traffic-btn min" title="Minimize Window"></span>
+          <span class="traffic-btn max" title="Zoom Window"></span>
+        </div>
+        <span class="window-title">Sean Beck — Software Engineer — Somerville, MA</span>
+        <div class="traffic-spacer"></div>
+      </div>
       <header>
+        <span class="brass-rivet tl" aria-hidden="true"></span>
+        <span class="brass-rivet tr" aria-hidden="true"></span>
+        <span class="brass-rivet bl" aria-hidden="true"></span>
+        <span class="brass-rivet br" aria-hidden="true"></span>
         <h1>Sean Beck</h1>
         <p class="profession">Software Engineer</p>
         <address>Somerville, Massachusetts</address>
@@ -59,6 +72,7 @@
             <option value="brutalist">01 // brutalist</option>
             <option value="supergraphics">02 // supergraphics (70s)</option>
             <option value="suprematism">03 // suprematism (1915)</option>
+            <option value="aqua">04 // cupertino aqua (2000s)</option>
           </select>
         </div>
       </header>
@@ -256,6 +270,16 @@
           <a href="mailto:spcbeck@gmail.com">spcbeck@gmail.com</a>
         </p>
       </section>
+      <div class="aqua-dock-footer" aria-hidden="true">
+        <div class="dock-transport">
+          <button class="dock-btn prev-track" title="Previous Track"><i class="fa-solid fa-backward-step"></i></button>
+          <button class="dock-btn play-pause-btn" title="Play / Pause"><i class="fa-solid fa-play"></i></button>
+          <button class="dock-btn next-track" title="Next Track"><i class="fa-solid fa-forward-step"></i></button>
+          <input type="range" min="0" max="100" value="70" class="dock-slider" title="Gain / Volume" />
+        </div>
+        <span class="dock-edition-text">Mac OS X &bull; Tiger 10.4 Edition</span>
+        <div class="window-resize-hatch" title="Resize handle"></div>
+      </div>
     </main-container>
     <script>
       (function () {
@@ -313,6 +337,47 @@
         }
 
         updateParallax();
+      })();
+
+      // Cupertino Aqua Web Audio Plink FX & Dock Controls
+      (function () {
+        let audioCtx = null;
+        function playAquaPlink() {
+          if (document.documentElement.getAttribute('data-theme') !== 'aqua') return;
+          try {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(420, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(1350, audioCtx.currentTime + 0.08);
+            gain.gain.setValueAtTime(0.22, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.12);
+          } catch(e) {}
+        }
+
+        document.addEventListener('click', function (e) {
+          if (document.documentElement.getAttribute('data-theme') !== 'aqua') return;
+          if (e.target.closest('a, button, select, .traffic-btn')) {
+            playAquaPlink();
+          }
+        });
+
+        document.addEventListener('click', function (e) {
+          const playBtn = e.target.closest('.play-pause-btn');
+          if (playBtn) {
+            const icon = playBtn.querySelector('i');
+            if (icon) {
+              icon.classList.toggle('fa-play');
+              icon.classList.toggle('fa-pause');
+            }
+          }
+        });
       })();
     </script>
   </body>

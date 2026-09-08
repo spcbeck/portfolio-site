@@ -101,6 +101,17 @@ select {
   --sup-yellow: #f6b800;
   --sup-border: #0d0d0d;
   --sup-muted: #666055;
+
+  /* Cupertino Aqua Design Tokens (Apple OS X 10.4 Tiger) */
+  --aqua-metal-light: #f0f2f5;
+  --aqua-metal-mid: #d5d9e0;
+  --aqua-metal-dark: #c8cdd6;
+  --aqua-metal-border: #8c929e;
+  --aqua-glass-blue: #1e88e5;
+  --aqua-glass-glow: #00b0ff;
+  --aqua-leather-top: #874f29;
+  --aqua-leather-bot: #583115;
+  --aqua-leather-gold: #f7d294;
 }
 
 /* Base states for theme-specific elements */
@@ -113,6 +124,18 @@ select {
 }
 
 .suprematist-canvas-vectors {
+  display: none;
+}
+
+.aqua-window-chrome {
+  display: none;
+}
+
+.aqua-dock-footer {
+  display: none;
+}
+
+.brass-rivet {
   display: none;
 }
 
@@ -1048,4 +1071,574 @@ html[data-theme="suprematism"] select {
   padding: 0.25rem 0.5rem;
   cursor: pointer;
   outline: none;
+}
+
+/* ==========================================================================
+   Cupertino Aqua Theme (Apple OS X 10.4 Tiger / QuickTime 7 Skeuomorphism)
+   ========================================================================== */
+
+html[data-theme="aqua"] {
+  background-color: #6d7889;
+}
+
+html[data-theme="aqua"] body {
+  background-color: #6d7889;
+  background-image: radial-gradient(ellipse at 50% 0%, #9ca7b8 0%, #545e6f 100%);
+  background-attachment: fixed;
+  color: #1a1d24;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Lucida Grande", "Segoe UI", Roboto, sans-serif;
+  margin: 0;
+  padding: 1.5rem 1rem 3rem;
+  min-height: 100vh;
+}
+
+/* Window Frame & Brushed Metal Chassis */
+html[data-theme="aqua"] main-container {
+  display: block;
+  max-width: 1060px;
+  margin: 1rem auto 3rem;
+  background:
+    repeating-linear-gradient(90deg, #d3d7de 0px, #e3e6ec 1px, #d3d7de 2px),
+    linear-gradient(180deg, #f0f2f5 0%, #c8cdd6 100%);
+  border-radius: 12px;
+  box-shadow:
+    0 35px 70px rgba(12, 17, 28, 0.55),
+    0 10px 25px rgba(0,0,0,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.95),
+    inset 0 -1px 0 rgba(0,0,0,0.2),
+    0 0 0 1px #8c929e;
+  overflow: hidden;
+  position: relative;
+  width: auto;
+  padding: 0;
+}
+
+/* Window Chrome Titlebar & Traffic Lights */
+html[data-theme="aqua"] .aqua-window-chrome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(180deg, #ededed 0%, #cacaca 100%);
+  border-bottom: 1px solid #999999;
+  padding: 0.85rem 1.25rem;
+  box-shadow: inset 0 1px 0 #ffffff;
+}
+
+html[data-theme="aqua"] .traffic-lights {
+  display: flex;
+  gap: 8px;
+  cursor: pointer;
+}
+
+html[data-theme="aqua"] .traffic-btn {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.85), 0 1px 2px rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, sans-serif;
+  font-size: 9px;
+  font-weight: 800;
+  line-height: 1;
+  transition: transform 0.05s ease;
+}
+
+html[data-theme="aqua"] .traffic-btn:active {
+  transform: scale(0.92);
+  filter: brightness(0.85);
+}
+
+html[data-theme="aqua"] .traffic-btn.close {
+  background: radial-gradient(circle at 35% 35%, #ff8585 0%, #ff5252 40%, #c41010 100%);
+  border: 1px solid #8e0a0a;
+}
+
+html[data-theme="aqua"] .traffic-btn.min {
+  background: radial-gradient(circle at 35% 35%, #ffe685 0%, #ffc629 40%, #c28400 100%);
+  border: 1px solid #946500;
+}
+
+html[data-theme="aqua"] .traffic-btn.max {
+  background: radial-gradient(circle at 35% 35%, #88ea88 0%, #29cf6e 40%, #118239 100%);
+  border: 1px solid #0e6b2e;
+}
+
+html[data-theme="aqua"] .traffic-lights:hover .traffic-btn.close::after {
+  content: '×';
+  color: #4a0000;
+}
+
+html[data-theme="aqua"] .traffic-lights:hover .traffic-btn.min::after {
+  content: '−';
+  color: #5c3b00;
+  margin-top: -1px;
+}
+
+html[data-theme="aqua"] .traffic-lights:hover .traffic-btn.max::after {
+  content: '+';
+  color: #054013;
+}
+
+html[data-theme="aqua"] .window-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #3b3d42;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.9);
+  letter-spacing: -0.01em;
+}
+
+html[data-theme="aqua"] .traffic-spacer {
+  width: 55px;
+}
+
+/* Stitched Saddle Leather Header Badge */
+html[data-theme="aqua"] header {
+  background:
+    radial-gradient(circle at 50% 30%, rgba(255,255,255,0.08) 0%, transparent 70%),
+    linear-gradient(180deg, var(--aqua-leather-top) 0%, var(--aqua-leather-bot) 100%);
+  border: 1px solid #3b1d0a;
+  border-radius: 12px;
+  padding: 2.25rem 3rem;
+  margin: 2.5rem auto 2.5rem;
+  max-width: 620px;
+  box-shadow:
+    0 8px 20px rgba(0,0,0,0.4),
+    inset 0 1px 1px rgba(255,255,255,0.35),
+    inset 0 -2px 6px rgba(0,0,0,0.6);
+  position: relative;
+  text-align: center;
+}
+
+html[data-theme="aqua"] header::before {
+  content: '';
+  position: absolute;
+  top: 7px;
+  bottom: 7px;
+  left: 7px;
+  right: 7px;
+  border: 1.5px dashed rgba(255, 222, 185, 0.5);
+  border-radius: 8px;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+  pointer-events: none;
+}
+
+/* Four Brass Screws on Leather Corners */
+html[data-theme="aqua"] .brass-rivet {
+  display: block;
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffe694 0%, #d4a034 60%, #754b08 100%);
+  border: 1px solid #4d3005;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.6), inset 0 1px 1px rgba(255,255,255,0.8);
+  pointer-events: none;
+}
+
+html[data-theme="aqua"] .brass-rivet::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  right: 3px;
+  height: 1.5px;
+  background: #382002;
+  transform: translateY(-50%) rotate(40deg);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.5);
+}
+
+html[data-theme="aqua"] .brass-rivet.tl { top: 11px; left: 11px; }
+html[data-theme="aqua"] .brass-rivet.tr { top: 11px; right: 11px; }
+html[data-theme="aqua"] .brass-rivet.bl { bottom: 11px; left: 11px; }
+html[data-theme="aqua"] .brass-rivet.br { bottom: 11px; right: 11px; }
+
+html[data-theme="aqua"] h1 {
+  font-family: 'Times New Roman', 'Baskerville', 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 5vw, 3.2rem);
+  font-weight: 700;
+  color: var(--aqua-leather-gold);
+  text-shadow:
+    0 2px 4px rgba(0,0,0,0.85),
+    0 -1px 0 rgba(255,255,255,0.25),
+    0 1px 0 #704018;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  padding: 0;
+  margin-bottom: 0.35rem;
+}
+
+html[data-theme="aqua"] .profession {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.95rem;
+  color: #e5b982;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.8), 0 1px 0 rgba(255,255,255,0.2);
+  margin-bottom: 0.25rem;
+}
+
+html[data-theme="aqua"] address {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-style: normal;
+  font-size: 0.85rem;
+  color: #ffd8b3;
+  letter-spacing: 0.05em;
+  opacity: 0.9;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.8);
+}
+
+/* Theme Selector Widget — Brushed Metal Segment Pill */
+html[data-theme="aqua"] .theme-selector {
+  position: fixed;
+  right: 2rem;
+  top: 1rem;
+  z-index: 10000;
+  background: linear-gradient(180deg, #b0b5be 0%, #c9ced7 100%);
+  border: 1px solid #757c8a;
+  border-radius: 8px;
+  padding: 0.4rem 0.75rem;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.85);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+html[data-theme="aqua"] .theme-stripe-indicator {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #00d2ff 0%, #0077e6 60%, #004499 100%);
+  border: 1px solid #003380;
+  box-shadow: inset 0 1px 1px #ffffff, 0 0 8px rgba(0, 180, 255, 0.75);
+}
+
+html[data-theme="aqua"] .theme-selector label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #3b404b;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+}
+
+html[data-theme="aqua"] select {
+  background: linear-gradient(180deg, #f2f4f7 0%, #d8dde6 100%);
+  color: #11141a;
+  border: 1px solid #838a97;
+  border-radius: 5px;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.18), inset 0 1px 0 #ffffff;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Sections & Pinstripe Inset Wells */
+html[data-theme="aqua"] section {
+  background: #f8f9fa;
+  background-image: repeating-linear-gradient(0deg, #f8f9fa 0px, #f8f9fa 2px, #edf0f5 2px, #edf0f5 4px);
+  border: 1px solid #b5bac4;
+  border-radius: 10px;
+  padding: 2.25rem;
+  margin: 0 2rem 2.25rem;
+  box-shadow:
+    inset 0 2px 6px rgba(0,0,0,0.12),
+    0 1px 0 #ffffff;
+  max-width: none;
+}
+
+html[data-theme="aqua"] section h2 {
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: #1f232b;
+  text-shadow: 0 1px 0 #ffffff;
+  border-bottom: 2px solid #b5bac4;
+  padding-bottom: 0.6rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+html[data-theme="aqua"] section h2::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #00d2ff 0%, #0077e6 60%, #004499 100%);
+  box-shadow: 0 0 6px rgba(0, 180, 255, 0.6);
+  flex-shrink: 0;
+}
+
+html[data-theme="aqua"] section.about > p {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: #333842;
+  margin-bottom: 1.75rem;
+}
+
+/* Three Column Grid inside Inset Card */
+html[data-theme="aqua"] .three-col-grid > div {
+  background: #f1f3f7;
+  border: 1px solid #c2c7d0;
+  border-radius: 8px;
+  padding: 1.35rem;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.08), 0 1px 0 #ffffff;
+}
+
+html[data-theme="aqua"] .three-col-grid p {
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #0277bd;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid #caced6;
+  padding-bottom: 0.35rem;
+}
+
+html[data-theme="aqua"] .three-col-grid ul {
+  list-style: none;
+  padding: 0;
+}
+
+html[data-theme="aqua"] .three-col-grid li {
+  padding: 0.35rem 0;
+  font-size: 0.9rem;
+  color: #333842;
+  border-bottom: 1px dashed #d5d9e0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+html[data-theme="aqua"] .three-col-grid li i {
+  color: #0277bd;
+}
+
+/* Work Experience Entries */
+html[data-theme="aqua"] section:nth-of-type(2) > div {
+  background: #ffffff;
+  border: 1px solid #c4c9d2;
+  border-radius: 8px;
+  padding: 1.75rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06), inset 0 1px 0 #ffffff;
+  position: relative;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+html[data-theme="aqua"] section:nth-of-type(2) > div:hover {
+  border-color: #8fa0b5;
+  box-shadow: 0 4px 14px rgba(2, 119, 189, 0.16), inset 0 1px 0 #ffffff;
+}
+
+html[data-theme="aqua"] h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #1a1d24;
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.01em;
+}
+
+html[data-theme="aqua"] h3 + p {
+  font-weight: 700;
+  color: #0277bd;
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+}
+
+html[data-theme="aqua"] h3 + p + p {
+  font-size: 0.85rem;
+  color: #636b78;
+  margin-bottom: 1rem;
+}
+
+html[data-theme="aqua"] hr {
+  display: none;
+}
+
+/* Activities Section */
+html[data-theme="aqua"] section:nth-of-type(3) ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+html[data-theme="aqua"] section:nth-of-type(3) li {
+  margin: 0;
+}
+
+/* Glossy Candy Aqua Gel Pill Buttons & Links */
+html[data-theme="aqua"] a {
+  background:
+    radial-gradient(ellipse at 50% 15%, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.3) 38%, transparent 40%),
+    linear-gradient(180deg,
+      rgba(255,255,255,0.6) 0%,
+      rgba(255,255,255,0.1) 48%,
+      rgba(0,140,255,0.2) 50%,
+      rgba(0,119,230,0.8) 100%),
+    var(--aqua-glass-blue);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.55rem 1.4rem;
+  border-radius: 30px;
+  border: 1px solid #0d47a1;
+  box-shadow:
+    0 4px 10px rgba(13, 71, 161, 0.4),
+    inset 0 1px 0 rgba(255,255,255,0.95),
+    inset 0 -2px 4px rgba(0,0,0,0.35);
+  text-shadow: 0 -1px 1px rgba(0, 30, 80, 0.75);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  margin-top: 0.5rem;
+}
+
+html[data-theme="aqua"] a:hover {
+  box-shadow:
+    0 6px 14px rgba(13, 71, 161, 0.55),
+    inset 0 1px 0 #ffffff;
+  transform: translateY(-1px);
+}
+
+html[data-theme="aqua"] a:active {
+  background:
+    linear-gradient(180deg,
+      rgba(0,80,180,0.7) 0%,
+      rgba(0,120,230,0.95) 100%);
+  box-shadow: inset 0 3px 6px rgba(0,0,0,0.55), 0 1px 2px rgba(0,0,0,0.2);
+  transform: translateY(1px);
+}
+
+/* Pulsating Default Aqua Glow for Contact Email */
+html[data-theme="aqua"] section:last-of-type a {
+  animation: aquaGlowPulse 2.4s infinite ease-in-out;
+}
+
+@keyframes aquaGlowPulse {
+  0%, 100% {
+    box-shadow:
+      0 4px 10px rgba(13, 71, 161, 0.4),
+      0 0 0 0 rgba(0, 180, 255, 0),
+      inset 0 1px 0 rgba(255,255,255,0.95),
+      inset 0 -2px 4px rgba(0,0,0,0.35);
+  }
+  50% {
+    box-shadow:
+      0 6px 18px rgba(0, 160, 255, 0.7),
+      0 0 14px 2px rgba(0, 190, 255, 0.55),
+      inset 0 1px 0 #ffffff,
+      inset 0 -2px 4px rgba(0,0,0,0.35);
+  }
+}
+
+/* QuickTime / Finder Transport Control Dock Footer */
+html[data-theme="aqua"] .aqua-dock-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(180deg, #d3d7de 0%, #b8bec9 100%);
+  border-top: 1px solid #949ba7;
+  padding: 0.85rem 1.75rem;
+  box-shadow: inset 0 1px 0 #ffffff;
+  border-radius: 0 0 12px 12px;
+}
+
+html[data-theme="aqua"] .dock-transport {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(180deg, #c0c5ce 0%, #abb1bd 100%);
+  border-radius: 20px;
+  padding: 4px 12px;
+  border: 1px solid #828a96;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.25), 0 1px 0 rgba(255,255,255,0.7);
+  gap: 0.85rem;
+}
+
+html[data-theme="aqua"] .dock-btn {
+  background: transparent;
+  border: none;
+  color: #3d434e;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 4px 6px;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+  transition: color 0.15s ease;
+}
+
+html[data-theme="aqua"] .dock-btn:hover {
+  color: #0277bd;
+}
+
+html[data-theme="aqua"] .dock-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 120px;
+  height: 6px;
+  background: #737b88;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.6);
+  outline: none;
+}
+
+html[data-theme="aqua"] .dock-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #b9bec7 60%, #767d8a 100%);
+  border: 1px solid #5a606d;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.35);
+  cursor: pointer;
+}
+
+html[data-theme="aqua"] .dock-edition-text {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #525a66;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+html[data-theme="aqua"] .window-resize-hatch {
+  width: 14px;
+  height: 14px;
+  background: repeating-linear-gradient(-45deg, #7b8390 0px, #7b8390 1.5px, transparent 1.5px, transparent 4px);
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  html[data-theme="aqua"] body {
+    padding: 0.5rem;
+  }
+
+  html[data-theme="aqua"] header {
+    padding: 1.5rem 1.25rem;
+    margin: 1.5rem auto 1.5rem;
+  }
+
+  html[data-theme="aqua"] section {
+    margin: 0 1rem 1.5rem;
+    padding: 1.5rem;
+  }
+
+  html[data-theme="aqua"] .dock-edition-text {
+    display: none;
+  }
 }
