@@ -76,3 +76,393 @@ select {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+/* ==========================================================================
+   Supergraphics Theme (1960s-1970s Environmental Modernism)
+   ========================================================================== */
+
+:root {
+  --sg-bg: #f7efe1;
+  --sg-ink: #25150e;
+  --sg-card-bg: #eddcc6;
+  --sg-card-border: #25150e;
+  --sg-muted: #785a49;
+  --sg-stripe-1: #eca827; /* Mustard Ochre */
+  --sg-stripe-2: #e05822; /* Tangerine */
+  --sg-stripe-3: #b9311f; /* Rust Vermilion */
+  --sg-stripe-4: #5a1e17; /* Mahogany */
+}
+
+/* Base states for theme-specific elements */
+.supergraphics-edge-ribbon {
+  display: none;
+}
+
+.theme-stripe-indicator {
+  display: none;
+}
+
+/* --- Active Supergraphics Theme --- */
+
+html[data-theme="supergraphics"] {
+  counter-reset: sg-section;
+}
+
+html[data-theme="supergraphics"] body {
+  background-color: var(--sg-bg);
+  color: var(--sg-ink);
+  font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  margin: 0;
+  padding: 0;
+}
+
+/* Viewport Edge Racing Stripe */
+html[data-theme="supergraphics"] .supergraphics-edge-ribbon {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 8px;
+  background: linear-gradient(
+    to right,
+    var(--sg-stripe-1) 0% 25%,
+    var(--sg-stripe-2) 25% 50%,
+    var(--sg-stripe-3) 50% 75%,
+    var(--sg-stripe-4) 75% 100%
+  );
+  z-index: 999;
+}
+
+@media (min-width: 768px) {
+  html[data-theme="supergraphics"] .supergraphics-edge-ribbon {
+    width: 18px;
+    height: 100vh;
+    background: linear-gradient(
+      to right,
+      var(--sg-stripe-1) 0% 25%,
+      var(--sg-stripe-2) 25% 50%,
+      var(--sg-stripe-3) 50% 75%,
+      var(--sg-stripe-4) 75% 100%
+    );
+  }
+}
+
+/* Header & Identity */
+html[data-theme="supergraphics"] header {
+  padding-top: 3.5rem;
+  position: relative;
+}
+
+html[data-theme="supergraphics"] h1 {
+  font-family: "Syne", sans-serif;
+  font-weight: 800;
+  font-size: clamp(3.2rem, 8vw, 6rem);
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  color: var(--sg-ink);
+  margin-bottom: 1rem;
+}
+
+html[data-theme="supergraphics"] .profession {
+  font-family: "Syne", sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sg-stripe-4);
+  display: inline-flex;
+  align-items: center;
+  background: var(--sg-card-bg);
+  padding: 0.4rem 1.25rem;
+  border: 2px solid var(--sg-ink);
+  border-radius: 999px;
+  box-shadow: 3px 3px 0 var(--sg-ink);
+  margin-bottom: 0.75rem;
+}
+
+html[data-theme="supergraphics"] address {
+  font-family: "Space Grotesk", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sg-muted);
+}
+
+/* Architectural Header Stripe Accent */
+html[data-theme="supergraphics"] header::after {
+  content: "";
+  display: block;
+  max-width: 520px;
+  height: 16px;
+  margin: 2.5rem auto 0;
+  background: linear-gradient(
+    to bottom,
+    var(--sg-stripe-1) 0% 25%,
+    var(--sg-stripe-2) 25% 50%,
+    var(--sg-stripe-3) 50% 75%,
+    var(--sg-stripe-4) 75% 100%
+  );
+  border-radius: 999px;
+  border: 2px solid var(--sg-ink);
+}
+
+/* Section Architecture & Giant Numerals */
+html[data-theme="supergraphics"] section h2 {
+  counter-increment: sg-section;
+  font-family: "Syne", sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  color: var(--sg-ink);
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 3px solid var(--sg-ink);
+}
+
+html[data-theme="supergraphics"] section h2::before {
+  content: "0" counter(sg-section);
+  font-family: "Syne", sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  line-height: 1;
+  color: var(--sg-stripe-2);
+  margin-right: 0.25rem;
+  flex-shrink: 0;
+}
+
+/* Multi-Stripe Divider */
+html[data-theme="supergraphics"] hr {
+  border: none;
+  height: 16px;
+  margin: 3.5rem 0;
+  background: linear-gradient(
+    to bottom,
+    var(--sg-stripe-1) 0% 25%,
+    var(--sg-stripe-2) 25% 50%,
+    var(--sg-stripe-3) 50% 75%,
+    var(--sg-stripe-4) 75% 100%
+  );
+  border-radius: 4px;
+  border: 1.5px solid var(--sg-ink);
+}
+
+/* Modular Three-Column Grid Cards */
+html[data-theme="supergraphics"] .three-col-grid > div {
+  background: var(--sg-card-bg);
+  border: 2px solid var(--sg-ink);
+  border-radius: 24px 0 24px 0;
+  padding: 1.75rem 1.5rem;
+  box-shadow: 4px 4px 0 var(--sg-ink);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+html[data-theme="supergraphics"] .three-col-grid > div:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--sg-ink);
+}
+
+html[data-theme="supergraphics"] .three-col-grid > div:nth-child(1) {
+  border-top: 6px solid var(--sg-stripe-1);
+}
+
+html[data-theme="supergraphics"] .three-col-grid > div:nth-child(2) {
+  border-top: 6px solid var(--sg-stripe-2);
+}
+
+html[data-theme="supergraphics"] .three-col-grid > div:nth-child(3) {
+  border-top: 6px solid var(--sg-stripe-3);
+}
+
+html[data-theme="supergraphics"] .three-col-grid > div > p {
+  font-family: "Syne", sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--sg-ink);
+  color: var(--sg-ink);
+}
+
+html[data-theme="supergraphics"] .three-col-grid ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+html[data-theme="supergraphics"] .three-col-grid li {
+  margin-bottom: 0.55rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+html[data-theme="supergraphics"] .three-col-grid li:not(:has(i))::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--sg-stripe-2);
+  margin-right: 0.5rem;
+  border-radius: 1px;
+  vertical-align: middle;
+}
+
+html[data-theme="supergraphics"] .three-col-grid li i {
+  color: var(--sg-stripe-3);
+  margin-right: 0.35rem;
+}
+
+/* Work Experience Cards */
+html[data-theme="supergraphics"] section:nth-of-type(2) > div {
+  background: var(--sg-card-bg);
+  border: 2px solid var(--sg-ink);
+  border-radius: 0 24px 0 24px;
+  padding: 2rem;
+  box-shadow: 4px 4px 0 var(--sg-ink);
+}
+
+html[data-theme="supergraphics"] h3 {
+  font-family: "Syne", sans-serif;
+  font-weight: 800;
+  font-size: 1.75rem;
+  letter-spacing: -0.02em;
+  color: var(--sg-ink);
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+html[data-theme="supergraphics"] h3 + p {
+  font-weight: 700;
+  color: var(--sg-stripe-4);
+  font-size: 1.05rem;
+  margin-bottom: 0.35rem;
+}
+
+html[data-theme="supergraphics"] h3 + p + p {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--sg-muted);
+  margin-bottom: 1.25rem;
+}
+
+html[data-theme="supergraphics"] section:nth-of-type(2) i {
+  color: var(--sg-stripe-2);
+}
+
+/* Other Activities & Contact Cards */
+html[data-theme="supergraphics"] section:nth-of-type(3) ul {
+  background: var(--sg-card-bg);
+  border: 2px solid var(--sg-ink);
+  border-radius: 24px 0 24px 0;
+  padding: 1.5rem 2rem;
+  box-shadow: 4px 4px 0 var(--sg-ink);
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin: 0;
+}
+
+html[data-theme="supergraphics"] section:nth-of-type(4) p {
+  background: var(--sg-card-bg);
+  border: 2px solid var(--sg-ink);
+  border-radius: 24px 0 24px 0;
+  padding: 1.5rem 2rem;
+  box-shadow: 4px 4px 0 var(--sg-ink);
+  font-size: 1.15rem;
+  margin: 0;
+}
+
+/* High-Contrast Interactive Links */
+html[data-theme="supergraphics"] a {
+  color: var(--sg-stripe-3);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  transition: all 0.15s ease;
+}
+
+html[data-theme="supergraphics"] a:hover,
+html[data-theme="supergraphics"] a:focus-visible {
+  background-color: var(--sg-stripe-2);
+  color: #ffffff;
+  text-decoration: none;
+  outline: none;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* 70s Hi-Fi Theme Selector */
+.theme-selector {
+  position: fixed;
+  right: 2rem;
+  top: 1rem;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+html[data-theme="supergraphics"] .theme-selector {
+  background: var(--sg-bg);
+  border: 2px solid var(--sg-ink);
+  border-radius: 20px 0 20px 0;
+  padding: 0.4rem 0.85rem;
+  box-shadow: 3px 3px 0 var(--sg-ink);
+}
+
+html[data-theme="supergraphics"] .theme-stripe-indicator {
+  display: inline-block;
+  width: 14px;
+  height: 18px;
+  background: linear-gradient(
+    to right,
+    var(--sg-stripe-1) 0% 25%,
+    var(--sg-stripe-2) 25% 50%,
+    var(--sg-stripe-3) 50% 75%,
+    var(--sg-stripe-4) 75% 100%
+  );
+  border-radius: 2px;
+  border: 1px solid var(--sg-ink);
+  flex-shrink: 0;
+}
+
+html[data-theme="supergraphics"] .theme-selector label {
+  font-family: "Syne", sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--sg-stripe-4);
+}
+
+html[data-theme="supergraphics"] select {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  background: transparent;
+  color: var(--sg-ink);
+  border: 1.5px solid var(--sg-ink);
+  border-radius: 6px;
+  padding: 0.35rem 0.6rem;
+  cursor: pointer;
+  outline: none;
+}
+
+html[data-theme="supergraphics"] select:focus-visible {
+  border-color: var(--sg-stripe-2);
+  box-shadow: 0 0 0 2px var(--sg-stripe-2);
+}
