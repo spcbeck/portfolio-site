@@ -130,15 +130,20 @@ export const initAquaAudio = initSkeuomorphicAudio;
 
 /**
  * Functionalist Style Mechanical Microswitch Audio & Hardware Switch
+ * The physical rocker switch acts as the master audio toggle for the functionalist theme.
  */
-export function initBraunSwitch() {
+export function initFunctionalistSwitch() {
   let audioCtx = null;
+
   function isFunctionalist() {
     const theme = document.documentElement.getAttribute('data-theme');
     return theme === 'functionalist' || theme === 'rams';
   }
 
-  function playBraunClick(freq = 620, duration = 0.032) {
+  // Master audio state: default is ON unless explicitly set to 'off'
+  let isAudioEnabled = localStorage.getItem('functionalist-audio') !== 'off';
+
+  function playMicroswitchClick(freq = 620, duration = 0.032) {
     if (!isFunctionalist()) return;
     try {
       if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -157,16 +162,21 @@ export function initBraunSwitch() {
     } catch (e) {}
   }
 
-  const braunSwitch = document.getElementById('braunPowerSwitch');
-  if (braunSwitch) {
-    let isOn = false;
+  const powerSwitch = document.getElementById('functionalistPowerSwitch');
+  if (powerSwitch) {
+    powerSwitch.classList.toggle('is-on', isAudioEnabled);
+    powerSwitch.setAttribute('aria-checked', String(isAudioEnabled));
+
     function toggleSwitch() {
-      isOn = !isOn;
-      braunSwitch.classList.toggle('is-on', isOn);
-      playBraunClick(isOn ? 880 : 360, 0.04);
+      isAudioEnabled = !isAudioEnabled;
+      powerSwitch.classList.toggle('is-on', isAudioEnabled);
+      powerSwitch.setAttribute('aria-checked', String(isAudioEnabled));
+      localStorage.setItem('functionalist-audio', isAudioEnabled ? 'on' : 'off');
+      playMicroswitchClick(isAudioEnabled ? 880 : 360, 0.04);
     }
-    braunSwitch.addEventListener('click', toggleSwitch);
-    braunSwitch.addEventListener('keydown', (e) => {
+
+    powerSwitch.addEventListener('click', toggleSwitch);
+    powerSwitch.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         toggleSwitch();
@@ -174,10 +184,12 @@ export function initBraunSwitch() {
     });
   }
 
+  // Tactile clicks on UI interaction: only fires when master switch is ON
   document.addEventListener('click', (e) => {
-    if (!isFunctionalist()) return;
-    if (e.target.closest('a, button, select, .three-col-grid > div, .braun-switch-tray')) {
-      playBraunClick(600, 0.03);
+    if (!isFunctionalist() || !isAudioEnabled) return;
+    if (e.target.closest('#functionalistPowerSwitch')) return;
+    if (e.target.closest('a, button, select, .three-col-grid > div, .functionalist-switch-tray')) {
+      playMicroswitchClick(600, 0.03);
     }
   });
 }
@@ -188,11 +200,11 @@ if (document.readyState === 'loading') {
     initTheme();
     initParallax();
     initAquaAudio();
-    initBraunSwitch();
+    initFunctionalistSwitch();
   });
 } else {
   initTheme();
   initParallax();
   initAquaAudio();
-  initBraunSwitch();
+  initFunctionalistSwitch();
 }

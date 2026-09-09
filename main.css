@@ -113,18 +113,18 @@ select {
   --aqua-leather-bot: #583115;
   --aqua-leather-gold: #f7d294;
 
-  /* Dieter Rams / Braun Industrial Modernist Design Tokens */
-  --rams-bg: #d8d4cb;
-  --rams-chassis: #ece8de;
-  --rams-chassis-border: #cfc9be;
-  --rams-card-bg: #f4f0e7;
-  --rams-card-border: #d4cebf;
-  --rams-tray-bg: #e3ded2;
-  --rams-tray-border: #cfc8ba;
-  --rams-ink: #161514;
-  --rams-muted: #635e55;
-  --rams-orange: #ff5722;
-  --rams-orange-deep: #e64a19;
+  /* Functionalist Style Design Tokens */
+  --functionalist-bg: #d8d4cb;
+  --functionalist-chassis: #ece8de;
+  --functionalist-chassis-border: #cfc9be;
+  --functionalist-card-bg: #f4f0e7;
+  --functionalist-card-border: #d4cebf;
+  --functionalist-tray-bg: #e3ded2;
+  --functionalist-tray-border: #cfc8ba;
+  --functionalist-ink: #161514;
+  --functionalist-muted: #635e55;
+  --functionalist-orange: #ff5722;
+  --functionalist-orange-deep: #e64a19;
 }
 
 /* Base states for theme-specific elements */
@@ -148,8 +148,8 @@ select {
   display: none;
 }
 
-.braun-speaker-grille,
-.braun-control-panel {
+.functionalist-speaker-grille,
+.functionalist-control-panel {
   display: none;
 }
 
@@ -1521,16 +1521,16 @@ html:is([data-theme="skeuomorphic"], [data-theme="aqua"]) section:last-of-type a
    ========================================================================== */
 
 html:is([data-theme="functionalist"], [data-theme="rams"]) {
-  counter-reset: rams-section;
-  background-color: var(--rams-bg);
+  counter-reset: functionalist-section;
+  background-color: var(--functionalist-bg);
 }
 
 html:is([data-theme="functionalist"], [data-theme="rams"]) body {
-  background-color: var(--rams-bg);
+  background-color: var(--functionalist-bg);
   background-image:
     radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.6) 0%, transparent 75%),
     repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.012) 0px, rgba(0, 0, 0, 0.012) 2px, transparent 2px, transparent 4px);
-  color: var(--rams-ink);
+  color: var(--functionalist-ink);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   margin: 0;
   padding: 1.5rem 1rem 5rem;
@@ -1542,7 +1542,7 @@ html:is([data-theme="functionalist"], [data-theme="rams"]) main-container {
   display: block;
   max-width: 1040px;
   margin: 1.5rem auto 3rem;
-  background: var(--rams-chassis);
+  background: var(--functionalist-chassis);
   border-radius: 28px;
   padding: 3rem;
   box-shadow:
@@ -1553,19 +1553,19 @@ html:is([data-theme="functionalist"], [data-theme="rams"]) main-container {
     inset 1px 0 2px rgba(255, 255, 255, 0.6),
     inset -1px 0 2px rgba(0, 0, 0, 0.08);
   position: relative;
-  border: 1px solid var(--rams-chassis-border);
+  border: 1px solid var(--functionalist-chassis-border);
   width: auto;
 }
 
 /* Acoustic Speaker Dot Perforation Matrix */
-html:is([data-theme="functionalist"], [data-theme="rams"]) .braun-speaker-grille {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .functionalist-speaker-grille {
   display: grid;
   grid-template-columns: repeat(18, 9px);
   gap: 8px;
   margin-bottom: 2.25rem;
 }
 
-html:is([data-theme="functionalist"], [data-theme="rams"]) .braun-dot {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .functionalist-dot {
   width: 9px;
   height: 9px;
   border-radius: 50%;
@@ -1616,7 +1616,7 @@ html:is([data-theme="functionalist"], [data-theme="rams"]) .profession::before {
   content: '';
   width: 10px;
   height: 10px;
-  background: var(--rams-orange);
+  background: var(--functionalist-orange);
   border-radius: 50%;
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(255, 255, 255, 0.8);
   flex-shrink: 0;
@@ -1625,19 +1625,19 @@ html:is([data-theme="functionalist"], [data-theme="rams"]) .profession::before {
 html:is([data-theme="functionalist"], [data-theme="rams"]) address {
   font-style: normal;
   font-size: 0.85rem;
-  color: var(--rams-muted);
+  color: var(--functionalist-muted);
   font-weight: 500;
   letter-spacing: 0.02em;
 }
 
 /* Mechanical Switch Panel */
-html:is([data-theme="functionalist"], [data-theme="rams"]) .braun-control-panel {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .functionalist-control-panel {
   display: flex;
   align-items: center;
   gap: 1.25rem;
 }
 
-html:is([data-theme="functionalist"], [data-theme="rams"]) .braun-model-badge {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .functionalist-model-badge {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.75rem;
   font-weight: 700;
@@ -1647,7 +1647,7 @@ html:is([data-theme="functionalist"], [data-theme="rams"]) .braun-model-badge {
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-html:is([data-theme="functionalist"], [data-theme="rams"]) .braun-switch-tray {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .functionalist-switch-tray {
   background: #ded9cd;
   border-radius: 30px;
   padding: 4px;
@@ -1659,7 +1659,7 @@ html:is([data-theme="functionalist"], [data-theme="rams"]) .braun-switch-tray {
   border: 1px solid #c4beaf;
 }
 
-html:is([data-theme="functionalist"], [data-theme="rams"]) .braun-switch-pill {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .functionalist-switch-pill {
   width: 44px;
   height: 24px;
   border-radius: 12px;
@@ -1676,11 +1676,11 @@ html:is([data-theme="functionalist"], [data-theme="rams"]) .braun-switch-pill {
   outline: none;
 }
 
-html:is([data-theme="functionalist"], [data-theme="rams"]) .braun-switch-pill:focus-visible {
-  box-shadow: 0 0 0 2px var(--rams-orange);
+html:is([data-theme="functionalist"], [data-theme="rams"]) .functionalist-switch-pill:focus-visible {
+  box-shadow: 0 0 0 2px var(--functionalist-orange);
 }
 
-html:is([data-theme="functionalist"], [data-theme="rams"]) .braun-switch-pill::after {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .functionalist-switch-pill::after {
   content: '';
   position: absolute;
   top: 5px;
@@ -1691,7 +1691,7 @@ html:is([data-theme="functionalist"], [data-theme="rams"]) .braun-switch-pill::a
   background: repeating-linear-gradient(90deg, #888277 0px, #888277 1px, transparent 1px, transparent 3px);
 }
 
-html:is([data-theme="functionalist"], [data-theme="rams"]) .braun-switch-pill.is-on {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .functionalist-switch-pill.is-on {
   transform: translateX(20px);
   background: linear-gradient(180deg, #ff7a45 0%, #e64a19 100%);
   border-color: #bf360c;
@@ -1700,7 +1700,7 @@ html:is([data-theme="functionalist"], [data-theme="rams"]) .braun-switch-pill.is
     inset 0 1px 1px rgba(255, 255, 255, 0.5);
 }
 
-html:is([data-theme="functionalist"], [data-theme="rams"]) .braun-switch-pill.is-on::after {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .functionalist-switch-pill.is-on::after {
   background: repeating-linear-gradient(90deg, #ffffff 0px, #ffffff 1px, transparent 1px, transparent 3px);
 }
 
@@ -1727,7 +1727,7 @@ html:is([data-theme="functionalist"], [data-theme="rams"]) .theme-stripe-indicat
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--rams-orange);
+  background: var(--functionalist-orange);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3), 0 0 6px rgba(255, 87, 34, 0.6);
 }
 
@@ -1754,16 +1754,16 @@ html:is([data-theme="functionalist"], [data-theme="rams"]) select {
 }
 
 html:is([data-theme="functionalist"], [data-theme="rams"]) select:focus-visible {
-  border-color: var(--rams-orange);
+  border-color: var(--functionalist-orange);
 }
 
 /* Recessed Section Cards */
 html:is([data-theme="functionalist"], [data-theme="rams"]) section {
-  background: var(--rams-card-bg);
+  background: var(--functionalist-card-bg);
   border-radius: 18px;
   padding: 2.25rem;
   margin-bottom: 2rem;
-  border: 1px solid var(--rams-card-border);
+  border: 1px solid var(--functionalist-card-border);
   box-shadow:
     inset 0 2px 4px rgba(0, 0, 0, 0.06),
     0 2px 5px rgba(0, 0, 0, 0.04),
@@ -1777,10 +1777,10 @@ html:is([data-theme="functionalist"], [data-theme="rams"]) section.about {
 
 /* Numbered Structural Section Headers */
 html:is([data-theme="functionalist"], [data-theme="rams"]) section h2 {
-  counter-increment: rams-section;
+  counter-increment: functionalist-section;
   font-size: 1.45rem;
   font-weight: 800;
-  color: var(--rams-ink);
+  color: var(--functionalist-ink);
   letter-spacing: -0.02em;
   margin-bottom: 1.5rem;
   display: flex;
@@ -1792,11 +1792,11 @@ html:is([data-theme="functionalist"], [data-theme="rams"]) section h2 {
 }
 
 html:is([data-theme="functionalist"], [data-theme="rams"]) section h2::before {
-  content: "0" counter(rams-section) " //";
+  content: "0" counter(functionalist-section) " //";
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.95rem;
   font-weight: 700;
-  color: var(--rams-orange);
+  color: var(--functionalist-orange);
   letter-spacing: 0.04em;
 }
 
@@ -1814,13 +1814,13 @@ html:is([data-theme="functionalist"], [data-theme="rams"]) .three-col-grid {
 }
 
 html:is([data-theme="functionalist"], [data-theme="rams"]) .three-col-grid > div {
-  background: var(--rams-tray-bg);
+  background: var(--functionalist-tray-bg);
   border-radius: 14px;
   padding: 1.35rem;
   box-shadow:
     inset 0 3px 6px rgba(0, 0, 0, 0.1),
     0 1px 1px rgba(255, 255, 255, 0.7);
-  border: 1px solid var(--rams-tray-border);
+  border: 1px solid var(--functionalist-tray-border);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
@@ -1837,7 +1837,7 @@ html:is([data-theme="functionalist"], [data-theme="rams"]) .three-col-grid > div
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--rams-muted);
+  color: var(--functionalist-muted);
   margin-bottom: 0.85rem;
   padding-bottom: 0.45rem;
   border-bottom: 1px solid #cfc8ba;
@@ -1869,7 +1869,7 @@ html:is([data-theme="functionalist"], [data-theme="rams"]) .three-col-grid li:no
 }
 
 html:is([data-theme="functionalist"], [data-theme="rams"]) .three-col-grid li i {
-  color: var(--rams-orange);
+  color: var(--functionalist-orange);
   width: 16px;
   text-align: center;
 }
@@ -1897,7 +1897,7 @@ html:is([data-theme="functionalist"], [data-theme="rams"]) section:nth-of-type(2
 html:is([data-theme="functionalist"], [data-theme="rams"]) h3 {
   font-size: 1.35rem;
   font-weight: 800;
-  color: var(--rams-ink);
+  color: var(--functionalist-ink);
   margin-bottom: 0.4rem;
   letter-spacing: -0.02em;
 }
@@ -1906,7 +1906,7 @@ html:is([data-theme="functionalist"], [data-theme="rams"]) h3 + p {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.85rem;
   font-weight: 700;
-  color: var(--rams-orange);
+  color: var(--functionalist-orange);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 0.25rem;
@@ -1918,7 +1918,7 @@ html:is([data-theme="functionalist"], [data-theme="rams"]) h3 + p {
 html:is([data-theme="functionalist"], [data-theme="rams"]) h3 + p + p {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.8rem;
-  color: var(--rams-muted);
+  color: var(--functionalist-muted);
   font-weight: 600;
   margin-bottom: 0.9rem;
   display: flex;
@@ -1977,7 +1977,7 @@ html:is([data-theme="functionalist"], [data-theme="rams"]) a:hover {
     0 2px 4px rgba(0, 0, 0, 0.1),
     inset 0 2px 2px #ffffff,
     inset 0 -2px 2px rgba(0, 0, 0, 0.1);
-  color: var(--rams-ink);
+  color: var(--functionalist-ink);
 }
 
 html:is([data-theme="functionalist"], [data-theme="rams"]) a:active {
@@ -2023,7 +2023,7 @@ html:is([data-theme="functionalist"], [data-theme="rams"]) section:last-of-type 
     margin: 1rem auto;
   }
 
-  html:is([data-theme="functionalist"], [data-theme="rams"]) .braun-speaker-grille {
+  html:is([data-theme="functionalist"], [data-theme="rams"]) .functionalist-speaker-grille {
     grid-template-columns: repeat(12, 7px);
     gap: 6px;
     margin-top: 1.5rem;
@@ -2035,7 +2035,7 @@ html:is([data-theme="functionalist"], [data-theme="rams"]) section:last-of-type 
     top: 0.75rem;
   }
 
-  html:is([data-theme="functionalist"], [data-theme="rams"]) .braun-dot {
+  html:is([data-theme="functionalist"], [data-theme="rams"]) .functionalist-dot {
     width: 7px;
     height: 7px;
   }
