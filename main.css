@@ -1516,16 +1516,16 @@ html[data-theme="aqua"] section:last-of-type a {
 }
 
 /* ==========================================================================
-   Dieter Rams / Braun Theme (Industrial Modernist Functionalism)
+   Functionalist Style Theme (Industrial Modernist Functionalism)
    Inspired by ET66 Calculator, T3 Pocket Radio, and Vitsoe Systems
    ========================================================================== */
 
-html[data-theme="rams"] {
+html:is([data-theme="functionalist"], [data-theme="rams"]) {
   counter-reset: rams-section;
   background-color: var(--rams-bg);
 }
 
-html[data-theme="rams"] body {
+html:is([data-theme="functionalist"], [data-theme="rams"]) body {
   background-color: var(--rams-bg);
   background-image:
     radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.6) 0%, transparent 75%),
@@ -1538,7 +1538,7 @@ html[data-theme="rams"] body {
 }
 
 /* Molded Ivory ABS Plastic Chassis */
-html[data-theme="rams"] main-container {
+html:is([data-theme="functionalist"], [data-theme="rams"]) main-container {
   display: block;
   max-width: 1040px;
   margin: 1.5rem auto 3rem;
@@ -1558,14 +1558,14 @@ html[data-theme="rams"] main-container {
 }
 
 /* Acoustic Speaker Dot Perforation Matrix */
-html[data-theme="rams"] .braun-speaker-grille {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .braun-speaker-grille {
   display: grid;
   grid-template-columns: repeat(18, 9px);
   gap: 8px;
   margin-bottom: 2.25rem;
 }
 
-html[data-theme="rams"] .braun-dot {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .braun-dot {
   width: 9px;
   height: 9px;
   border-radius: 50%;
@@ -1576,7 +1576,7 @@ html[data-theme="rams"] .braun-dot {
 }
 
 /* Hardware Header Unit */
-html[data-theme="rams"] header {
+html:is([data-theme="functionalist"], [data-theme="rams"]) header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -1589,7 +1589,7 @@ html[data-theme="rams"] header {
   text-align: left;
 }
 
-html[data-theme="rams"] h1 {
+html:is([data-theme="functionalist"], [data-theme="rams"]) h1 {
   font-size: clamp(2.5rem, 5vw, 3.4rem);
   font-weight: 800;
   letter-spacing: -0.04em;
@@ -1600,7 +1600,7 @@ html[data-theme="rams"] h1 {
   padding: 0;
 }
 
-html[data-theme="rams"] .profession {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .profession {
   font-size: 1.15rem;
   font-weight: 600;
   color: #4a4742;
@@ -1612,7 +1612,7 @@ html[data-theme="rams"] .profession {
   margin: 0 0 0.5rem;
 }
 
-html[data-theme="rams"] .profession::before {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .profession::before {
   content: '';
   width: 10px;
   height: 10px;
@@ -1622,7 +1622,7 @@ html[data-theme="rams"] .profession::before {
   flex-shrink: 0;
 }
 
-html[data-theme="rams"] address {
+html:is([data-theme="functionalist"], [data-theme="rams"]) address {
   font-style: normal;
   font-size: 0.85rem;
   color: var(--rams-muted);
@@ -1631,13 +1631,13 @@ html[data-theme="rams"] address {
 }
 
 /* Mechanical Switch Panel */
-html[data-theme="rams"] .braun-control-panel {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .braun-control-panel {
   display: flex;
   align-items: center;
   gap: 1.25rem;
 }
 
-html[data-theme="rams"] .braun-model-badge {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .braun-model-badge {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.75rem;
   font-weight: 700;
@@ -1647,7 +1647,7 @@ html[data-theme="rams"] .braun-model-badge {
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-html[data-theme="rams"] .braun-switch-tray {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .braun-switch-tray {
   background: #ded9cd;
   border-radius: 30px;
   padding: 4px;
@@ -1659,7 +1659,7 @@ html[data-theme="rams"] .braun-switch-tray {
   border: 1px solid #c4beaf;
 }
 
-html[data-theme="rams"] .braun-switch-pill {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .braun-switch-pill {
   width: 44px;
   height: 24px;
   border-radius: 12px;
@@ -1676,11 +1676,11 @@ html[data-theme="rams"] .braun-switch-pill {
   outline: none;
 }
 
-html[data-theme="rams"] .braun-switch-pill:focus-visible {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .braun-switch-pill:focus-visible {
   box-shadow: 0 0 0 2px var(--rams-orange);
 }
 
-html[data-theme="rams"] .braun-switch-pill::after {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .braun-switch-pill::after {
   content: '';
   position: absolute;
   top: 5px;
@@ -1691,7 +1691,7 @@ html[data-theme="rams"] .braun-switch-pill::after {
   background: repeating-linear-gradient(90deg, #888277 0px, #888277 1px, transparent 1px, transparent 3px);
 }
 
-html[data-theme="rams"] .braun-switch-pill.is-on {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .braun-switch-pill.is-on {
   transform: translateX(20px);
   background: linear-gradient(180deg, #ff7a45 0%, #e64a19 100%);
   border-color: #bf360c;
@@ -1700,12 +1700,12 @@ html[data-theme="rams"] .braun-switch-pill.is-on {
     inset 0 1px 1px rgba(255, 255, 255, 0.5);
 }
 
-html[data-theme="rams"] .braun-switch-pill.is-on::after {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .braun-switch-pill.is-on::after {
   background: repeating-linear-gradient(90deg, #ffffff 0px, #ffffff 1px, transparent 1px, transparent 3px);
 }
 
 /* Precision Theme Selector Control */
-html[data-theme="rams"] .theme-selector {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .theme-selector {
   position: fixed;
   right: 2rem;
   top: 1rem;
@@ -1722,7 +1722,7 @@ html[data-theme="rams"] .theme-selector {
   gap: 0.5rem;
 }
 
-html[data-theme="rams"] .theme-stripe-indicator {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .theme-stripe-indicator {
   display: inline-block;
   width: 10px;
   height: 10px;
@@ -1731,7 +1731,7 @@ html[data-theme="rams"] .theme-stripe-indicator {
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3), 0 0 6px rgba(255, 87, 34, 0.6);
 }
 
-html[data-theme="rams"] .theme-selector label {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .theme-selector label {
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -1740,7 +1740,7 @@ html[data-theme="rams"] .theme-selector label {
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
-html[data-theme="rams"] select {
+html:is([data-theme="functionalist"], [data-theme="rams"]) select {
   background: linear-gradient(180deg, #f9f7f2 0%, #e2ded4 100%);
   color: #161514;
   border: 1px solid #cfc9bd;
@@ -1753,12 +1753,12 @@ html[data-theme="rams"] select {
   outline: none;
 }
 
-html[data-theme="rams"] select:focus-visible {
+html:is([data-theme="functionalist"], [data-theme="rams"]) select:focus-visible {
   border-color: var(--rams-orange);
 }
 
 /* Recessed Section Cards */
-html[data-theme="rams"] section {
+html:is([data-theme="functionalist"], [data-theme="rams"]) section {
   background: var(--rams-card-bg);
   border-radius: 18px;
   padding: 2.25rem;
@@ -1771,12 +1771,12 @@ html[data-theme="rams"] section {
   max-width: none;
 }
 
-html[data-theme="rams"] section.about {
+html:is([data-theme="functionalist"], [data-theme="rams"]) section.about {
   padding-top: 2.25rem;
 }
 
 /* Numbered Structural Section Headers */
-html[data-theme="rams"] section h2 {
+html:is([data-theme="functionalist"], [data-theme="rams"]) section h2 {
   counter-increment: rams-section;
   font-size: 1.45rem;
   font-weight: 800;
@@ -1791,7 +1791,7 @@ html[data-theme="rams"] section h2 {
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-html[data-theme="rams"] section h2::before {
+html:is([data-theme="functionalist"], [data-theme="rams"]) section h2::before {
   content: "0" counter(rams-section) " //";
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.95rem;
@@ -1800,7 +1800,7 @@ html[data-theme="rams"] section h2::before {
   letter-spacing: 0.04em;
 }
 
-html[data-theme="rams"] section p {
+html:is([data-theme="functionalist"], [data-theme="rams"]) section p {
   font-size: 1.02rem;
   color: #383531;
   line-height: 1.65;
@@ -1808,12 +1808,12 @@ html[data-theme="rams"] section p {
 }
 
 /* Three-Column Modular Component Trays (Skills) */
-html[data-theme="rams"] .three-col-grid {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .three-col-grid {
   gap: 1.5rem;
   margin-top: 1.5rem;
 }
 
-html[data-theme="rams"] .three-col-grid > div {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .three-col-grid > div {
   background: var(--rams-tray-bg);
   border-radius: 14px;
   padding: 1.35rem;
@@ -1824,7 +1824,7 @@ html[data-theme="rams"] .three-col-grid > div {
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-html[data-theme="rams"] .three-col-grid > div:hover {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .three-col-grid > div:hover {
   transform: translateY(-2px);
   box-shadow:
     inset 0 2px 4px rgba(0, 0, 0, 0.08),
@@ -1832,7 +1832,7 @@ html[data-theme="rams"] .three-col-grid > div:hover {
     0 1px 1px rgba(255, 255, 255, 0.9);
 }
 
-html[data-theme="rams"] .three-col-grid > div > p {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .three-col-grid > div > p {
   font-size: 0.8rem;
   font-weight: 800;
   text-transform: uppercase;
@@ -1843,13 +1843,13 @@ html[data-theme="rams"] .three-col-grid > div > p {
   border-bottom: 1px solid #cfc8ba;
 }
 
-html[data-theme="rams"] .three-col-grid ul {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .three-col-grid ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-html[data-theme="rams"] .three-col-grid li {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .three-col-grid li {
   padding: 0.35rem 0;
   font-size: 0.92rem;
   color: #262422;
@@ -1859,7 +1859,7 @@ html[data-theme="rams"] .three-col-grid li {
   gap: 0.55rem;
 }
 
-html[data-theme="rams"] .three-col-grid li:not(:has(i))::before {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .three-col-grid li:not(:has(i))::before {
   content: '';
   width: 6px;
   height: 6px;
@@ -1868,14 +1868,14 @@ html[data-theme="rams"] .three-col-grid li:not(:has(i))::before {
   flex-shrink: 0;
 }
 
-html[data-theme="rams"] .three-col-grid li i {
+html:is([data-theme="functionalist"], [data-theme="rams"]) .three-col-grid li i {
   color: var(--rams-orange);
   width: 16px;
   text-align: center;
 }
 
 /* Work Experience Entries */
-html[data-theme="rams"] section:nth-of-type(2) > div {
+html:is([data-theme="functionalist"], [data-theme="rams"]) section:nth-of-type(2) > div {
   background: #ece8de;
   border: 1px solid #cfc9be;
   border-radius: 14px;
@@ -1887,14 +1887,14 @@ html[data-theme="rams"] section:nth-of-type(2) > div {
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-html[data-theme="rams"] section:nth-of-type(2) > div:hover {
+html:is([data-theme="functionalist"], [data-theme="rams"]) section:nth-of-type(2) > div:hover {
   border-color: #b0a99c;
   box-shadow:
     0 4px 14px rgba(45, 38, 30, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
-html[data-theme="rams"] h3 {
+html:is([data-theme="functionalist"], [data-theme="rams"]) h3 {
   font-size: 1.35rem;
   font-weight: 800;
   color: var(--rams-ink);
@@ -1902,7 +1902,7 @@ html[data-theme="rams"] h3 {
   letter-spacing: -0.02em;
 }
 
-html[data-theme="rams"] h3 + p {
+html:is([data-theme="functionalist"], [data-theme="rams"]) h3 + p {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.85rem;
   font-weight: 700;
@@ -1915,7 +1915,7 @@ html[data-theme="rams"] h3 + p {
   gap: 0.4rem;
 }
 
-html[data-theme="rams"] h3 + p + p {
+html:is([data-theme="functionalist"], [data-theme="rams"]) h3 + p + p {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.8rem;
   color: var(--rams-muted);
@@ -1926,12 +1926,12 @@ html[data-theme="rams"] h3 + p + p {
   gap: 0.4rem;
 }
 
-html[data-theme="rams"] hr {
+html:is([data-theme="functionalist"], [data-theme="rams"]) hr {
   display: none;
 }
 
 /* Activities Section */
-html[data-theme="rams"] section:nth-of-type(3) ul {
+html:is([data-theme="functionalist"], [data-theme="rams"]) section:nth-of-type(3) ul {
   list-style: none;
   padding: 0;
   display: flex;
@@ -1940,12 +1940,12 @@ html[data-theme="rams"] section:nth-of-type(3) ul {
   margin-top: 1rem;
 }
 
-html[data-theme="rams"] section:nth-of-type(3) li {
+html:is([data-theme="functionalist"], [data-theme="rams"]) section:nth-of-type(3) li {
   margin: 0;
 }
 
 /* ET66 Calculator Spherical Beveled Pill Buttons */
-html[data-theme="rams"] a {
+html:is([data-theme="functionalist"], [data-theme="rams"]) a {
   background: linear-gradient(180deg, #f5f2eb 0%, #ded9ce 100%);
   color: #161514;
   font-family: 'Inter', -apple-system, sans-serif;
@@ -1969,7 +1969,7 @@ html[data-theme="rams"] a {
   margin-top: 0.5rem;
 }
 
-html[data-theme="rams"] a:hover {
+html:is([data-theme="functionalist"], [data-theme="rams"]) a:hover {
   background: linear-gradient(180deg, #ffffff 0%, #e8e3d8 100%);
   transform: translateY(-1px);
   box-shadow:
@@ -1980,7 +1980,7 @@ html[data-theme="rams"] a:hover {
   color: var(--rams-ink);
 }
 
-html[data-theme="rams"] a:active {
+html:is([data-theme="functionalist"], [data-theme="rams"]) a:active {
   transform: translateY(2px);
   background: linear-gradient(180deg, #d3cec3 0%, #e2ddd2 100%);
   box-shadow:
@@ -1990,7 +1990,7 @@ html[data-theme="rams"] a:active {
 }
 
 /* Contact Button Signal Orange Accent */
-html[data-theme="rams"] section:last-of-type a {
+html:is([data-theme="functionalist"], [data-theme="rams"]) section:last-of-type a {
   background: linear-gradient(180deg, #ff7a45 0%, #e64a19 100%);
   color: #ffffff;
   border-color: #bf360c;
@@ -2001,51 +2001,51 @@ html[data-theme="rams"] section:last-of-type a {
     inset 0 -2px 3px rgba(0, 0, 0, 0.3);
 }
 
-html[data-theme="rams"] section:last-of-type a:hover {
+html:is([data-theme="functionalist"], [data-theme="rams"]) section:last-of-type a:hover {
   background: linear-gradient(180deg, #ff8a50 0%, #f4511e 100%);
   color: #ffffff;
 }
 
-html[data-theme="rams"] section:last-of-type a:active {
+html:is([data-theme="functionalist"], [data-theme="rams"]) section:last-of-type a:active {
   background: linear-gradient(180deg, #d84315 0%, #bf360c 100%);
   box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.45);
 }
 
 /* Responsive Scaling */
 @media (max-width: 768px) {
-  html[data-theme="rams"] body {
+  html:is([data-theme="functionalist"], [data-theme="rams"]) body {
     padding: 0.75rem 0.5rem 3rem;
   }
 
-  html[data-theme="rams"] main-container {
+  html:is([data-theme="functionalist"], [data-theme="rams"]) main-container {
     padding: 1.5rem 1.25rem;
     border-radius: 18px;
     margin: 1rem auto;
   }
 
-  html[data-theme="rams"] .braun-speaker-grille {
+  html:is([data-theme="functionalist"], [data-theme="rams"]) .braun-speaker-grille {
     grid-template-columns: repeat(12, 7px);
     gap: 6px;
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
   }
 
-  html[data-theme="rams"] .theme-selector {
+  html:is([data-theme="functionalist"], [data-theme="rams"]) .theme-selector {
     right: 1rem;
     top: 0.75rem;
   }
 
-  html[data-theme="rams"] .braun-dot {
+  html:is([data-theme="functionalist"], [data-theme="rams"]) .braun-dot {
     width: 7px;
     height: 7px;
   }
 
-  html[data-theme="rams"] section {
+  html:is([data-theme="functionalist"], [data-theme="rams"]) section {
     padding: 1.5rem 1.25rem;
     margin-bottom: 1.25rem;
   }
 
-  html[data-theme="rams"] header {
+  html:is([data-theme="functionalist"], [data-theme="rams"]) header {
     flex-direction: column;
     align-items: flex-start;
     gap: 1.25rem;

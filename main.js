@@ -1,11 +1,15 @@
 /**
  * Main application module for Sean Beck's portfolio site.
  * Handles theme persistence, Suprematist kinetic parallax, Cupertino Aqua audio FX,
- * and Dieter Rams / Braun mechanical microswitch audio & hardware switch interactions.
+ * and Functionalist Style mechanical microswitch audio & hardware switch interactions.
  */
 
-// Apply saved theme immediately to mitigate FOUT
-const initialTheme = localStorage.getItem('theme') || 'brutalist';
+// Migrate legacy 'rams' theme key to 'functionalist' and apply saved theme
+let initialTheme = localStorage.getItem('theme') || 'brutalist';
+if (initialTheme === 'rams') {
+  initialTheme = 'functionalist';
+  localStorage.setItem('theme', 'functionalist');
+}
 document.documentElement.setAttribute('data-theme', initialTheme);
 
 /**
@@ -14,7 +18,11 @@ document.documentElement.setAttribute('data-theme', initialTheme);
 export function initTheme() {
   const themeSelect = document.getElementById('theme');
   if (themeSelect) {
-    const currentTheme = localStorage.getItem('theme') || 'brutalist';
+    let currentTheme = localStorage.getItem('theme') || 'brutalist';
+    if (currentTheme === 'rams') {
+      currentTheme = 'functionalist';
+      localStorage.setItem('theme', 'functionalist');
+    }
     themeSelect.value = currentTheme;
     themeSelect.addEventListener('change', (e) => {
       const newTheme = e.target.value;
@@ -107,12 +115,17 @@ export function initAquaAudio() {
 }
 
 /**
- * Dieter Rams / Braun Mechanical Microswitch Audio & Hardware Switch
+ * Functionalist Style Mechanical Microswitch Audio & Hardware Switch
  */
 export function initBraunSwitch() {
   let audioCtx = null;
+  function isFunctionalist() {
+    const theme = document.documentElement.getAttribute('data-theme');
+    return theme === 'functionalist' || theme === 'rams';
+  }
+
   function playBraunClick(freq = 620, duration = 0.032) {
-    if (document.documentElement.getAttribute('data-theme') !== 'rams') return;
+    if (!isFunctionalist()) return;
     try {
       if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -148,7 +161,7 @@ export function initBraunSwitch() {
   }
 
   document.addEventListener('click', (e) => {
-    if (document.documentElement.getAttribute('data-theme') !== 'rams') return;
+    if (!isFunctionalist()) return;
     if (e.target.closest('a, button, select, .three-col-grid > div, .braun-switch-tray')) {
       playBraunClick(600, 0.03);
     }
