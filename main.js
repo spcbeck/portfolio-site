@@ -1,14 +1,18 @@
 /**
  * Main application module for Sean Beck's portfolio site.
- * Handles theme persistence, Suprematist kinetic parallax, Cupertino Aqua audio FX,
+ * Handles theme persistence, Suprematist kinetic parallax, Skeuomorphic audio FX,
  * and Functionalist Style mechanical microswitch audio & hardware switch interactions.
  */
 
-// Migrate legacy 'rams' theme key to 'functionalist' and apply saved theme
+// Migrate legacy 'rams' and 'aqua' theme keys and apply saved theme
 let initialTheme = localStorage.getItem('theme') || 'brutalist';
 if (initialTheme === 'rams') {
   initialTheme = 'functionalist';
   localStorage.setItem('theme', 'functionalist');
+}
+if (initialTheme === 'aqua' || initialTheme === 'skeuemorphic') {
+  initialTheme = 'skeuomorphic';
+  localStorage.setItem('theme', 'skeuomorphic');
 }
 document.documentElement.setAttribute('data-theme', initialTheme);
 
@@ -22,6 +26,10 @@ export function initTheme() {
     if (currentTheme === 'rams') {
       currentTheme = 'functionalist';
       localStorage.setItem('theme', 'functionalist');
+    }
+    if (currentTheme === 'aqua' || currentTheme === 'skeuemorphic') {
+      currentTheme = 'skeuomorphic';
+      localStorage.setItem('theme', 'skeuomorphic');
     }
     themeSelect.value = currentTheme;
     themeSelect.addEventListener('change', (e) => {
@@ -83,12 +91,17 @@ export function initParallax() {
 }
 
 /**
- * Cupertino Aqua Web Audio Plink FX
+ * Skeuomorphic Web Audio Plink FX
  */
-export function initAquaAudio() {
+export function initSkeuomorphicAudio() {
   let audioCtx = null;
+  function isSkeuomorphic() {
+    const theme = document.documentElement.getAttribute('data-theme');
+    return theme === 'skeuomorphic' || theme === 'skeuemorphic' || theme === 'aqua';
+  }
+
   function playAquaPlink() {
-    if (document.documentElement.getAttribute('data-theme') !== 'aqua') return;
+    if (!isSkeuomorphic()) return;
     try {
       if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -107,12 +120,13 @@ export function initAquaAudio() {
   }
 
   document.addEventListener('click', (e) => {
-    if (document.documentElement.getAttribute('data-theme') !== 'aqua') return;
+    if (!isSkeuomorphic()) return;
     if (e.target.closest('a, button, select')) {
       playAquaPlink();
     }
   });
 }
+export const initAquaAudio = initSkeuomorphicAudio;
 
 /**
  * Functionalist Style Mechanical Microswitch Audio & Hardware Switch
