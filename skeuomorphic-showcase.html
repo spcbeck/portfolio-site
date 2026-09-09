@@ -934,73 +934,16 @@
         overflow: hidden;
       }
 
-      /* Mac Titlebar with Traffic Lights & Realistic Glyphs */
+      /* Mac Titlebar */
       .mac-titlebar {
         background: linear-gradient(180deg, #ededed 0%, #cacaca 100%);
         border-bottom: 1px solid #999999;
         padding: 0.85rem 1.25rem;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
         box-shadow: inset 0 1px 0 #ffffff;
         cursor: grab;
-      }
-
-      .traffic-lights {
-        display: flex;
-        gap: 8px;
-      }
-
-      .traffic-btn {
-        width: 13px;
-        height: 13px;
-        border-radius: 50%;
-        box-shadow: inset 0 1px 1px rgba(255,255,255,0.85), 0 1px 2px rgba(0,0,0,0.35);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: -apple-system, sans-serif;
-        font-size: 9px;
-        font-weight: 800;
-        cursor: pointer;
-        line-height: 1;
-        transition: transform 0.05s ease;
-      }
-
-      .traffic-btn:active {
-        transform: scale(0.92);
-        filter: brightness(0.85);
-      }
-
-      .traffic-btn.close {
-        background: radial-gradient(circle at 35% 35%, #ff8585 0%, #ff5252 40%, #c41010 100%);
-        border: 1px solid #8e0a0a;
-      }
-
-      .traffic-btn.min {
-        background: radial-gradient(circle at 35% 35%, #ffe685 0%, #ffc629 40%, #c28400 100%);
-        border: 1px solid #946500;
-      }
-
-      .traffic-btn.max {
-        background: radial-gradient(circle at 35% 35%, #88ea88 0%, #29cf6e 40%, #118239 100%);
-        border: 1px solid #0e6b2e;
-      }
-
-      .traffic-lights:hover .traffic-btn.close::after {
-        content: '×';
-        color: #4a0000;
-      }
-
-      .traffic-lights:hover .traffic-btn.min::after {
-        content: '−';
-        color: #5c3b00;
-        margin-top: -1px;
-      }
-
-      .traffic-lights:hover .traffic-btn.max::after {
-        content: '+';
-        color: #054013;
       }
 
       .window-title {
@@ -1634,7 +1577,7 @@
         <div class="banner-info">
           <h2>Archetype 03: Cupertino Aqua & Brushed Metal (Peak 2000s OS X)</h2>
           <p>
-            Golden-era Apple skeuomorphism. Brushed silver aluminum casing, liquid glossy Aqua pill buttons, stitched leather emblem, traffic light controls, and subtle pinstriped canvas backing.
+            Golden-era Apple skeuomorphism. Brushed silver aluminum casing, liquid glossy Aqua pill buttons, stitched leather emblem, and subtle pinstriped canvas backing.
           </p>
         </div>
         <div class="banner-tags">
@@ -1645,15 +1588,9 @@
       </div>
 
       <div class="aqua-window">
-        <!-- Aqua Titlebar with Traffic Lights -->
+        <!-- Aqua Titlebar -->
         <div class="mac-titlebar">
-          <div class="traffic-lights">
-            <div class="traffic-btn close" title="Close Window"></div>
-            <div class="traffic-btn min" title="Minimize Window"></div>
-            <div class="traffic-btn max" title="Zoom Window"></div>
-          </div>
           <span class="window-title">Sean Beck — Software Engineer — Somerville, MA</span>
-          <div style="width: 52px;"></div>
         </div>
 
         <div class="aqua-body">
@@ -1898,7 +1835,7 @@
         });
 
         // Aqua Gel buttons play Aqua Plink
-        document.querySelectorAll('.aqua-gel-btn, .traffic-btn').forEach((btn) => {
+        document.querySelectorAll('.aqua-gel-btn').forEach((btn) => {
           btn.addEventListener('click', () => {
             playAquaPlink();
           });

@@ -100,7 +100,7 @@ export function initAquaAudio() {
 
   document.addEventListener('click', (e) => {
     if (document.documentElement.getAttribute('data-theme') !== 'aqua') return;
-    if (e.target.closest('a, button, select, .traffic-btn')) {
+    if (e.target.closest('a, button, select')) {
       playAquaPlink();
     }
   });
